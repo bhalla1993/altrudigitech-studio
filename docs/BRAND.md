@@ -20,7 +20,7 @@
 - Altruism  
 - Altruism Digital Studio  
 
-The git repo may still be named `altruism` until renamed to `altrudigitech-studio`; that is not a public brand.
+Canonical git repo: **`bhalla1993/altrudigitech-studio`**. Legacy **`altruism`** remains for GitHub Pages until cutover (see `docs/REPOS.md`). Repo folder names are not public brand.
 
 ## Usage rules
 

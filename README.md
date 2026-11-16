@@ -62,9 +62,18 @@ After cutover, disable GitHub Pages deployment to avoid duplicate indexing (see 
 
 `public/_redirects` serves the React app for deep links on Cloudflare Pages.
 
+## Git remotes
+
+| Remote | Repo |
+|--------|------|
+| **origin** | `bhalla1993/altrudigitech-studio` — canonical; push here |
+| **legacy** | `bhalla1993/altruism` — GitHub Pages staging until CF cutover |
+
+Details: **[docs/REPOS.md](docs/REPOS.md)**.
+
 ## Legacy GitHub Pages
 
-`npm run deploy` (gh-pages) is retained for optional staging only. Production is **altrudigitech.com** on Cloudflare Pages.
+`npm run deploy` (gh-pages) is retained for optional staging on **legacy**. Production is **altrudigitech.com** on Cloudflare Pages.
 
 ## Notes
 
