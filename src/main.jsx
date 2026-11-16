@@ -22,7 +22,7 @@ function ThemedApp() {
 
 // Run locally: npm run dev
 // Build for production: npm run build
-// Deploy to GitHub Pages: npm run deploy (see README for one-time config)
+// Production: Cloudflare Pages — see README and docs/STUDIO_PLAN.md
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

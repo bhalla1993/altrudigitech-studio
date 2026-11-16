@@ -1,12 +1,12 @@
 {
-  "name": "altruism",
+  "name": "altrudigitech-studio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://bhalla1993.github.io/altruism",
+  "homepage": "https://altrudigitech.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/copy-client-sites.mjs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

@@ -107,8 +107,14 @@ function AnimatedBrand({ reduceMotion }) {
         },
       }}
     >
-      <Box component="span" className="brand-shell brand-text" sx={gradientStyle}>
-        {business.name}
+      <Box
+        component="span"
+        className="brand-shell brand-text"
+        sx={gradientStyle}
+        title={business.name}
+        aria-label={business.name}
+      >
+        {business.shortName || business.name}
       </Box>
     </Box>
   )
@@ -188,7 +194,7 @@ function Header() {
             >
               {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
-            <Button component={RouterLink} to="/contact" variant="contained">
+            <Button component={RouterLink} to="/contact#intake" variant="contained">
               Start Project
             </Button>
           </Stack>

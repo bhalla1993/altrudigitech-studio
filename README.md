@@ -1,11 +1,10 @@
-# Altruism Digital Studio Web App
+# AltruDigiTech Digital Studio
 
-Production-ready React application for a small business offering:
+Production-ready React marketing site for **AltruDigiTech** — affordable single-page sites for local businesses and students.
 
-- Website development services
-- Online resumes and portfolio creation
-- Professional software development
-- Future pre-built digital services/products
+See **[docs/STUDIO_PLAN.md](docs/STUDIO_PLAN.md)** for the locked product, infrastructure, and implementation plan.
+
+Brand names and usage: **[docs/BRAND.md](docs/BRAND.md)** (`src/utils/siteData.js` → `brand`, `pageSeo`).
 
 ## Tech Stack
 
@@ -18,16 +17,13 @@ Production-ready React application for a small business offering:
 
 ## Project Structure
 
-src/
-	components/
-		cards/
-		common/
-		forms/
-		layout/
-	pages/
-	routes/
-	styles/
-	utils/
+```text
+src/              Studio React app
+public/           Static assets + SPA template demos
+clients/{slug}/   Client static sites → dist/sites/{slug}/
+scripts/          Build helpers
+docs/             STUDIO_PLAN.md
+```
 
 ## Local Development
 
@@ -43,24 +39,35 @@ npm run build
 npm run preview
 ```
 
-## GitHub Pages Deployment
+The build runs `vite build` then copies `clients/*` into `dist/sites/`.
 
-1. Update `homepage` in `package.json` with your GitHub username.
-2. If your repository name is not `altruism`, update `base` in `vite.config.js`.
-3. Deploy using one of the two options below.
+Verify sandbox output: `dist/sites/internal-demo/index.html`
 
-### Option A: CLI deployment with gh-pages
+## Cloudflare Pages (production)
 
-```bash
-npm run deploy
-```
+Connect this repository in the Cloudflare dashboard (**Workers & Pages** → **Create** → **Connect to Git**).
 
-### Option B: GitHub Actions deployment
+| Setting | Value |
+|---------|--------|
+| Production branch | `main` |
+| Build command | `npm ci && npm run build` |
+| Build output directory | `dist` |
+| Root directory | `/` |
 
-Push to `main`, then enable GitHub Pages source as `GitHub Actions` in repository settings.
+Add custom domain **`altrudigitech.com`**. Configure **`www` → apex** 301 in Cloudflare Bulk Redirects.
+
+After cutover, disable GitHub Pages deployment to avoid duplicate indexing (see plan §9-E).
+
+### SPA routing
+
+`public/_redirects` serves the React app for deep links on Cloudflare Pages.
+
+## Legacy GitHub Pages
+
+`npm run deploy` (gh-pages) is retained for optional staging only. Production is **altrudigitech.com** on Cloudflare Pages.
 
 ## Notes
 
-- Router uses `BrowserRouter` with basename from `import.meta.env.BASE_URL`.
-- Images use Pexels CDN links (no attribution required, attribution line included in footer).
-- Theme is dark by default and can be switched to light by changing one variable in `src/styles/theme.js`.
+- Router uses `BrowserRouter` with `basename` from `import.meta.env.BASE_URL` (`/` at apex).
+- Images use Pexels CDN links (attribution in footer where applicable).
+- Theme is dark by default; switch in `src/styles/theme.js`.

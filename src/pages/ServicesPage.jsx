@@ -1,45 +1,45 @@
-import CodeIcon from '@mui/icons-material/Code'
 import DeviceHubIcon from '@mui/icons-material/DeviceHub'
 import DomainIcon from '@mui/icons-material/Domain'
+import HandymanIcon from '@mui/icons-material/Handyman'
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions'
 import PaletteIcon from '@mui/icons-material/Palette'
-import PersonIcon from '@mui/icons-material/Person'
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import { Box, Button, Card, CardContent, Grid, Stack, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 import Seo from '../components/common/Seo'
-import { business } from '../utils/siteData'
+import { brand, business, pageSeo, starterPackage, pricingFootnote } from '../utils/siteData'
 
 const services = [
   {
-    title: 'SPA Resume Creation',
-    description: 'Modern single-page resume SPAs designed to be shared as a professional link.',
-    icon: PersonIcon,
-  },
-  {
-    title: 'SPA Portfolio Creation',
-    description: 'Portfolio SPAs for freelancers and creators with polished project presentation.',
-    icon: WorkOutlineIcon,
-  },
-  {
-    title: 'Custom SPA Development',
-    description: 'Tailored single-page applications built around your exact personal or business goals.',
-    icon: CodeIcon,
+    title: 'Starter from Template',
+    description: `Pick a design from our gallery—we load your worksheet content and launch on ${brand.subdomainExample}.`,
+    icon: RocketLaunchIcon,
   },
   {
     title: 'Template Customization',
-    description: 'We adapt any template style, layout, and section structure to match your profile.',
+    description: 'Swap colors, sections, and service copy within the Starter scope. Bigger changes are billed as micro-tasks.',
     icon: PaletteIcon,
   },
   {
-    title: 'Code Ownership Package',
-    description: 'Get complete source code with deployment guidance for full long-term independence.',
+    title: 'Custom Domain ($49)',
+    description: 'We add your .ca or .com to our Cloudflare account with SSL. You point nameservers; we handle DNS.',
+    icon: DomainIcon,
+  },
+  {
+    title: 'Code & Asset Handover ($129)',
+    description: 'Receive a zip of your live site plus deployment notes when you want to self-host.',
     icon: IntegrationInstructionsIcon,
   },
   {
-    title: 'Domain Setup & Form Integration',
-    description: 'Optional custom domain setup and contact form integrations (Google Forms and others).',
+    title: 'Site Expansions (from $199)',
+    description: 'Multi-page sites, galleries, and richer quote forms when you outgrow the single-page Starter.',
+    icon: HandymanIcon,
+  },
+  {
+    title: 'LocalTopSpot — Durham bundle',
+    description:
+      'Homeowners browse who to call by city and trade; eligible Durham Starter contractors can be featured on localtopspot.ca so locals can contact you—we confirm fit and list you with us.',
     icon: DomainIcon,
   },
 ]
@@ -49,18 +49,34 @@ function ServicesPage() {
     <>
       <Seo
         title="Services"
-        description="Explore our SPA resume, portfolio, template customization, and custom web application development services."
+        description={pageSeo.services}
         path="/services"
       />
 
       <Box component="section" aria-labelledby="services-page-title">
         <Stack spacing={3}>
           <Typography id="services-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
-            Services Built for Modern Profiles
+            Services for Local Businesses & Students
           </Typography>
           <Typography color="text.secondary" sx={{ maxWidth: 840 }}>
-            At {business.name}, we build your online presence—simple, fast, and affordable. We focus on practical single-page experiences that launch fast, look polished, and stay simple to manage.
+            {business.shortDescription}
           </Typography>
+
+          <Card sx={{ border: '1px solid', borderColor: 'primary.main' }}>
+            <CardContent>
+              <Stack spacing={1}>
+                <Typography variant="h6">
+                  {starterPackage.name}: {starterPackage.price} {starterPackage.priceNote}
+                </Typography>
+                <Typography color="text.secondary" variant="body2">
+                  {starterPackage.audience} {pricingFootnote}
+                </Typography>
+                <Button component={RouterLink} to="/pricing" variant="outlined" sx={{ alignSelf: 'flex-start' }}>
+                  Full pricing & add-ons
+                </Button>
+              </Stack>
+            </CardContent>
+          </Card>
 
           <Grid container spacing={2.4}>
             {services.map((service, index) => {
@@ -101,23 +117,14 @@ function ServicesPage() {
               <Stack spacing={1.2}>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <DeviceHubIcon color="primary" />
-                  <Typography variant="h5">
-                    Custom Web Applications & Software (CRM, Dashboards, Tools, and More)
-                  </Typography>
+                  <Typography variant="h5">Custom Web Applications & CRM</Typography>
                 </Stack>
                 <Typography color="text.secondary">
-                  We build tailored web applications based on your exact business requirements. This includes CRM systems,
-                  dashboards, internal tools, booking systems, and automation tools designed with modern technologies and
-                  scalable architecture.
-                </Typography>
-                <Typography color="text.secondary">
-                  Pricing for custom software is not fixed and depends on features, complexity, integrations, and timeline.
-                </Typography>
-                <Typography color="text.secondary" sx={{ fontStyle: 'italic' }}>
-                  Pricing for custom applications is provided after a detailed requirement discussion.
+                  Dashboards, CRM systems, and internal tools are scoped separately from the $99 Starter. We quote after a discovery call.
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
-                  <Button component={RouterLink} to="/contact" variant="contained">Contact Us for a Quote</Button>
+                  <Button component={RouterLink} to="/contact" variant="contained">Request a Quote</Button>
+                  <Button component={RouterLink} to="/pricing" variant="outlined">View Starter pricing</Button>
                 </Stack>
               </Stack>
             </CardContent>
@@ -125,7 +132,7 @@ function ServicesPage() {
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
             <Button component={RouterLink} to="/templates" variant="contained">Browse Templates</Button>
-            <Button component={RouterLink} to="/contact" variant="outlined">Start Your Project</Button>
+            <Button component={RouterLink} to="/pricing" variant="outlined">Get Starter — $99</Button>
           </Stack>
         </Stack>
       </Box>

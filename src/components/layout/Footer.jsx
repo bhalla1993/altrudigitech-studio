@@ -19,10 +19,11 @@ import { business } from '../../utils/siteData'
 
 const quickLinks = [
   { label: 'Home', path: '/' },
+  { label: 'Pricing', path: '/pricing' },
   { label: 'Services', path: '/services' },
   { label: 'Templates', path: '/templates' },
-  { label: 'External Templates', path: '/templates#external-templates-title' },
-  { label: 'Portfolio', path: '/portfolio' },
+  { label: 'Live Projects', path: '/live-projects' },
+  { label: 'About', path: '/about' },
   { label: 'Contact', path: '/contact' },
 ]
 
@@ -59,6 +60,16 @@ function Footer() {
               <Typography variant="h6" sx={{ fontFamily: 'Space Grotesk, Sora, sans-serif' }}>
                 {business.name}
               </Typography>
+              <Link
+                href={business.siteUrl}
+                underline="hover"
+                color="text.secondary"
+                variant="body2"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {business.domain}
+              </Link>
               <Typography variant="body2" sx={{ color: 'primary.main', fontWeight: 600 }}>
                 {business.tagline}
               </Typography>
@@ -66,10 +77,10 @@ function Footer() {
                 variant="overline"
                 sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: 1.1, lineHeight: 1.5 }}
               >
-                Made in Ontario, Canada
+                {business.originBadge}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                We build websites, resume portfolios, and software systems that help professionals and small businesses ship confidently.
+                {business.shortDescription}
               </Typography>
               <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
                 {techBadges.map((badge) => (
@@ -176,7 +187,7 @@ function Footer() {
               color="text.secondary"
               sx={{ opacity: 0.82, maxWidth: { xs: '100%', md: 420 }, textWrap: 'balance' }}
             >
-              Serving clients across Canada, specializing in the Greater Toronto Area (GTA).
+              {business.serviceAreaLine}
             </Typography>
           </Stack>
         </Stack>

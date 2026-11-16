@@ -15,15 +15,24 @@ import { Link as RouterLink } from 'react-router-dom'
 import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
 import ServiceCard from '../components/cards/ServiceCard'
+import IntakeFormEmbed from '../components/forms/IntakeFormEmbed'
 import TemplatePreviewCard from '../components/templates/TemplatePreviewCard'
-import { business, serviceItems } from '../utils/siteData'
+import {
+  brand,
+  business,
+  capacityBadge,
+  pageSeo,
+  pricingFootnote,
+  serviceItems,
+  starterPackage,
+} from '../utils/siteData'
 import { templates } from '../utils/templatesData'
 
 const approachItems = [
-  'SPAs deployed on GitHub Pages with zero hosting fees.',
-  'Optional custom domains at an additional cost.',
-  'Full code ownership available for complete independence.',
-  'Optional form integrations via Google Forms or other providers.',
+  `Starter sites at ${brand.subdomainExample} with no monthly hosting fees.`,
+  'Custom .ca or .com domains available as a $49 add-on.',
+  `Code & asset handover ($129) when you want to self-host.`,
+  'Template-first delivery so you launch quickly after intake and payment.',
 ]
 
 const socialItems = [
@@ -33,9 +42,9 @@ const socialItems = [
 ]
 
 const heroTrustItems = [
-  'Starting at $99',
-  'Flat pricing, no hidden fees',
-  'Delivered in 48 hours',
+  '$99 Starter — one-time',
+  'No monthly site fees',
+  'Launch after intake & payment',
 ]
 
 function HomePage() {
@@ -43,7 +52,7 @@ function HomePage() {
     <>
       <Seo
         title="Home"
-        description="Altruism Digital Studio builds websites, online resumes, portfolios, and professional software for growing businesses."
+        description={pageSeo.home}
         path="/"
       />
 
@@ -66,14 +75,14 @@ function HomePage() {
                     lineHeight: 1.35,
                   }}
                 >
-                  Modern Single-Page Websites for Students, Creators & Small Businesses - Delivered Fast & Affordably
+                  $99 single-page sites for local trades, shops & students — pick a template, we personalize and launch on your studio subdomain.
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
-                  <Button component={RouterLink} to="/contact" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
-                    Book a Discovery Call
+                  <Button component={RouterLink} to="/pricing" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
+                    View $99 Starter
                   </Button>
-                  <Button component={RouterLink} to="/services" variant="outlined" size="large">
-                    Explore Services
+                  <Button component={RouterLink} to="/templates" variant="outlined" size="large">
+                    Browse Templates
                   </Button>
                 </Stack>
                 <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 0.5 }}>
@@ -108,12 +117,52 @@ function HomePage() {
         </AnimatedSection>
       </Box>
 
+      {/* ── Starter pricing teaser ──────────────────────────────────── */}
+      <Box component="section" aria-labelledby="home-pricing-teaser" sx={{ mb: 8 }}>
+        <AnimatedSection delay={0.06}>
+          <Card
+            sx={{
+              border: '1px solid',
+              borderColor: 'primary.main',
+              background: (theme) => `linear-gradient(120deg, ${theme.palette.primary.main}10, transparent)`,
+            }}
+          >
+            <CardContent>
+              <Stack spacing={2}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }} spacing={1.5}>
+                  <Stack spacing={0.5}>
+                    <Typography id="home-pricing-teaser" variant="h2" sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
+                      {starterPackage.name} — {starterPackage.price} {starterPackage.priceNote}
+                    </Typography>
+                    <Typography color="text.secondary" sx={{ maxWidth: 640 }}>
+                      {starterPackage.audience}
+                    </Typography>
+                  </Stack>
+                  <Chip label={capacityBadge} color="primary" variant="outlined" sx={{ fontWeight: 600 }} />
+                </Stack>
+                <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
+                  {pricingFootnote}
+                </Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
+                  <Button component={RouterLink} to="/pricing" variant="contained">
+                    See what&apos;s included
+                  </Button>
+                  <Button component={RouterLink} to="/contact#intake" variant="outlined">
+                    Start intake
+                  </Button>
+                </Stack>
+              </Stack>
+            </CardContent>
+          </Card>
+        </AnimatedSection>
+      </Box>
+
       {/* ── Featured Services ───────────────────────────────────────── */}
       <Box component="section" aria-labelledby="featured-services-title">
         <AnimatedSection delay={0.08}>
           <Stack spacing={3}>
             <Typography id="featured-services-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
-              Featured Services
+              How We Help You Launch
             </Typography>
             <Grid container spacing={3}>
               {serviceItems.slice(0, 3).map((service) => (
@@ -134,9 +183,14 @@ function HomePage() {
               <Typography id="starter-templates-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
                 Starter Templates
               </Typography>
-              <Button component={RouterLink} to="/templates" variant="outlined">
-                Browse All Templates
-              </Button>
+              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                <Button component={RouterLink} to="/templates" variant="outlined">
+                  Browse All Templates
+                </Button>
+                <Button component={RouterLink} to="/pricing" variant="text" size="small">
+                  Get any design — $99 Starter
+                </Button>
+              </Stack>
             </Stack>
             <Grid container spacing={3}>
               {templates.slice(0, 3).map((template, index) => (
@@ -155,7 +209,7 @@ function HomePage() {
           <Stack spacing={4}>
             <Stack spacing={1.2}>
               <Typography id="home-about-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.6rem' } }}>
-                About {business.name}
+                About {business.shortName}
               </Typography>
               <Typography color="text.secondary" sx={{ maxWidth: 820 }}>
                 We help professionals build modern, link-based online presence with single-page experiences that are fast, polished, and practical.
@@ -172,7 +226,7 @@ function HomePage() {
                         <Typography variant="h6">Who We Are</Typography>
                       </Stack>
                       <Typography color="text.secondary">
-                        A focused digital studio helping students, job seekers, and freelancers launch professional resume and portfolio SPAs without technical overhead. We blend design clarity, frontend engineering, and practical content strategy.
+                        {business.whoWeAreBlurb}
                       </Typography>
                     </Stack>
                   </CardContent>
@@ -188,7 +242,8 @@ function HomePage() {
                         <Typography variant="h6">What We Do</Typography>
                       </Stack>
                       <Typography color="text.secondary">
-                        We build modern single-page resumes, portfolios, and business websites optimized for sharing and strong first impressions — deployed instantly with no hosting fees. We also build custom web apps for small businesses.
+                        We build modern single-page sites for contractors, shops, and students—live on {brand.subdomainExample} with
+                        no monthly hosting fees. Custom software and CRM projects are quoted separately.
                       </Typography>
                     </Stack>
                   </CardContent>
@@ -267,44 +322,14 @@ function HomePage() {
                 Let&apos;s Build Your Next Digital Product
               </Typography>
               <Typography color="text.secondary" sx={{ maxWidth: 720 }}>
-                Tell us what you are trying to launch. We usually respond within one business day.
+                Complete intake below—Starter, questions, custom apps, or student pricing. We usually respond within one business
+                day.
               </Typography>
             </Stack>
 
             <Grid container spacing={3}>
               <Grid item xs={12} md={8}>
-                <Box
-                  sx={{
-                    width: '100%',
-                    borderRadius: 3,
-                    overflow: 'hidden',
-                    border: '1px solid',
-                    borderColor: 'divider',
-                    boxShadow: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? '0 14px 32px rgba(0,0,0,0.35)'
-                        : '0 12px 28px rgba(15,23,42,0.10)',
-                  }}
-                >
-                  <Box
-                    component="iframe"
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSeZv_icELxEe9nB4n6NU4JeAT0R1eW9XfvO2eXYwFCC16sIZA/viewform?embedded=true"
-                    title="Contact Form"
-                    frameBorder="0"
-                    marginHeight="0"
-                    marginWidth="0"
-                    loading="lazy"
-                    sx={{
-                      width: '100%',
-                      minHeight: { xs: 1120, sm: 1040, md: 992 },
-                      border: 0,
-                      display: 'block',
-                      backgroundColor: 'background.default',
-                    }}
-                  >
-                    Loading…
-                  </Box>
-                </Box>
+                <IntakeFormEmbed title="Contact and project intake" />
               </Grid>
 
               <Grid item xs={12} md={4}>
@@ -331,9 +356,21 @@ function HomePage() {
                       <Stack spacing={1.4}>
                         <Typography variant="h6">Connect With Us</Typography>
                         <Typography color="text.secondary" variant="body2">
-                          Follow us on social media for updates and quick project inquiries.
+                          Email us or connect on social for updates and quick project inquiries.
                         </Typography>
-                        <Stack direction="row" spacing={1}>
+                        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                          <IconButton
+                            component="a"
+                            href={`mailto:${business.email}`}
+                            aria-label={`Email ${business.email}`}
+                            sx={{
+                              color: 'text.secondary',
+                              transition: 'color 200ms ease, transform 200ms ease',
+                              '&:hover': { color: 'primary.main', transform: 'translateY(-2px)' },
+                            }}
+                          >
+                            <EmailOutlinedIcon />
+                          </IconButton>
                           {socialItems.map(({ label, href, Icon }) => (
                             <IconButton
                               key={label}
@@ -356,7 +393,7 @@ function HomePage() {
                     </CardContent>
                   </Card>
 
-                  <Button component={RouterLink} to="/contact" variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>
+                  <Button component={RouterLink} to="/contact#intake" variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>
                     Full Contact Page
                   </Button>
                 </Stack>

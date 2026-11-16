@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
 import LiveProjectCard from '../components/cards/LiveProjectCard'
+import { pageSeo } from '../utils/siteData'
 import { liveProjects } from '../utils/liveProjectsData'
 
 function LiveProjectsPage() {
@@ -11,7 +12,7 @@ function LiveProjectsPage() {
     <>
       <Seo
         title="Live Projects"
-        description="Explore real single-page resumes, portfolios, and websites we have built for clients."
+        description={pageSeo.liveProjects}
         path="/live-projects"
       />
 
@@ -26,7 +27,7 @@ function LiveProjectsPage() {
                 </Typography>
               </Stack>
               <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
-                Explore real single-page resumes, portfolios, and websites we&apos;ve built for clients.
+                Client sites and Studio Lab products you can open today—photography, trades, profiles, and our Durham directory.
               </Typography>
             </Stack>
 
@@ -47,7 +48,7 @@ function LiveProjectsPage() {
               justifyContent="space-between"
             >
               <Typography color="text.secondary" sx={{ maxWidth: 620, lineHeight: 1.7 }}>
-                Want your own single-page resume or website? Explore our templates or contact us for a custom project.
+                Want your own site? Pick a template and start with our $99 Starter—or contact us for custom software.
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} flexShrink={0}>
                 <Button component={RouterLink} to="/templates" variant="outlined" size="small">

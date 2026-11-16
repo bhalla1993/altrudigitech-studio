@@ -1,4 +1,5 @@
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
+import HubOutlinedIcon from '@mui/icons-material/HubOutlined'
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined'
 import { Box, Button, Card, CardContent, Chip, Link, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { motion, useReducedMotion } from 'framer-motion'
@@ -8,6 +9,14 @@ function LiveProjectCard({ project, index = 0 }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const reduceMotion = useReducedMotion()
   const disableMotion = reduceMotion || isMobile
+  const isStudioLab = project.badge === 'Studio Lab'
+  const BadgeIcon = isStudioLab ? HubOutlinedIcon : WorkspacePremiumOutlinedIcon
+  const thumbnailHeight = project.thumbnailHeight ?? { xs: 210, md: 220 }
+  const thumbnailObjectPosition = project.thumbnailObjectPosition ?? 'center'
+  const thumbnailOverlay =
+    project.thumbnailOverlay === 'light'
+      ? 'linear-gradient(to top, rgba(0,0,0,0.22) 0%, transparent 45%)'
+      : 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%)'
 
   const card = (
     <Card
@@ -45,8 +54,9 @@ function LiveProjectCard({ project, index = 0 }) {
             decoding="async"
             sx={{
               width: '100%',
-              height: { xs: 210, md: 220 },
+              height: thumbnailHeight,
               objectFit: 'cover',
+              objectPosition: thumbnailObjectPosition,
               display: 'block',
               transition: 'transform 420ms ease',
             }}
@@ -55,7 +65,7 @@ function LiveProjectCard({ project, index = 0 }) {
             sx={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%)',
+              background: thumbnailOverlay,
               pointerEvents: 'none',
             }}
           />
@@ -63,8 +73,14 @@ function LiveProjectCard({ project, index = 0 }) {
 
         <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 1.2 }}>
           <Stack direction="row" spacing={1} alignItems="center">
-            <WorkspacePremiumOutlinedIcon sx={{ fontSize: 16, color: 'primary.main' }} />
-            <Chip label={project.badge || 'Live Project'} size="small" color="success" sx={{ fontWeight: 600 }} />
+            <BadgeIcon sx={{ fontSize: 16, color: 'primary.main' }} />
+            <Chip
+              label={project.badge || 'Live Project'}
+              size="small"
+              color={isStudioLab ? 'primary' : 'success'}
+              variant={isStudioLab ? 'outlined' : 'filled'}
+              sx={{ fontWeight: 600 }}
+            />
           </Stack>
 
           <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1.3 }}>

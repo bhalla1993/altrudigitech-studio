@@ -12,13 +12,13 @@ import { Box, Button, Card, CardContent, Divider, Grid, Stack, Typography } from
 import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 import Seo from '../components/common/Seo'
-import { business } from '../utils/siteData'
+import { brand, business, pageSeo } from '../utils/siteData'
 
 const approachItems = [
-  'We deploy SPAs on GitHub Pages for free.',
-  'We offer optional custom domains at an additional cost.',
-  'We offer full code ownership for clients who want complete independence.',
-  'We provide optional form integrations (Google Forms or other providers).',
+  `We host Starter sites at ${brand.subdomainExample} with no monthly hosting fees.`,
+  'Custom domains are a $49 add-on with DNS managed in our Cloudflare zone.',
+  'Code & Asset Handover ($129) when clients want a portable zip and self-hosting.',
+  'We launch after intake worksheet and payment—not open-ended “free previews.”',
 ]
 
 function AnimatedBlock({ children, delay = 0 }) {
@@ -39,7 +39,7 @@ function AboutPage() {
     <>
       <Seo
         title="About"
-        description="Learn why Altruism exists and how we build affordable, high-quality SPAs for resumes, portfolios, and professional online presence."
+        description={pageSeo.about}
         path="/about"
       />
 
@@ -54,7 +54,7 @@ function AboutPage() {
                 {business.tagline}
               </Typography>
               <Typography color="text.secondary" sx={{ maxWidth: 900 }}>
-                We help professionals build modern, link-based online presence with single-page experiences that are fast, polished, and practical.
+                We help contractors, shop owners, and students launch a single professional link—fast, affordable, and free of monthly builder subscriptions.
               </Typography>
             </Stack>
           </AnimatedBlock>
@@ -73,10 +73,10 @@ function AboutPage() {
                         <Grid item xs={12} md={6}>
                           <Stack spacing={1.15} sx={{ pr: { md: 3.5 }, pb: { xs: 2.5, md: 0 } }}>
                             <Typography color="text.secondary">
-                              We are a focused digital studio helping students, job seekers, and freelancers launch professional resume and portfolio SPAs without technical overhead.
+                              {business.whoWeAreBlurb}
                             </Typography>
                             <Typography color="text.secondary">
-                              Our team blends design clarity, frontend engineering, and practical content strategy so every launch feels polished, personal, and easy to share.
+                              You bring the worksheet and payment; we handle design assembly, hosting on your studio subdomain, and a clear upgrade path when you need a custom domain or more pages.
                             </Typography>
                           </Stack>
                         </Grid>
@@ -99,7 +99,7 @@ function AboutPage() {
                               </Typography>
                             </Stack>
                             <Typography color="text.secondary">
-                              We support fresh graduates, experienced professionals, consultants, and small teams who need a credible online presence that opens doors quickly.
+                              We support owner-operators, side hustles, and career starters who need one credible link for Google, referrals, and job applications.
                             </Typography>
                           </Stack>
                         </Grid>
@@ -125,11 +125,12 @@ function AboutPage() {
                             <Stack direction="row" spacing={1} alignItems="center">
                               <PersonOutlineOutlinedIcon sx={{ color: 'primary.main', fontSize: 20 }} />
                               <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: 0.4 }}>
-                                Personal SPAs &amp; Portfolios
+                                Starter Sites &amp; Portfolios
                               </Typography>
                             </Stack>
                             <Typography color="text.secondary">
-                              We build modern, single-page resumes, portfolios, and personal websites optimized for sharing, clarity, and strong first impressions — deployed instantly with no hosting fees.
+                              Our $99 Starter is a single scrolling page—Hero, Services, About, Contact—hosted on{' '}
+                              {brand.subdomainExample} with ongoing free subdomain hosting.
                             </Typography>
                           </Stack>
                         </Grid>
@@ -209,7 +210,8 @@ function AboutPage() {
                         <Typography variant="h5">How We Work</Typography>
                       </Stack>
                       <Typography color="text.secondary">
-                        We keep delivery fast and transparent: clarify scope, build in iterations, share previews early, and launch with practical guidance so you can update content confidently.
+                        Intake worksheet and payment come first. You receive one preview cycle, we launch on your subdomain, and you
+                        get three months of small included text updates via {brand.updatesEmail}.
                       </Typography>
                     </Stack>
                   </CardContent>
@@ -227,7 +229,7 @@ function AboutPage() {
                         <Typography variant="h5">What You Get</Typography>
                       </Stack>
                       <Typography color="text.secondary">
-                        Every project includes responsive design, clean deployment, and a share-ready URL so your profile, portfolio, or business presence looks professional on any screen.
+                        Every Starter includes mobile layout, one lead form, stock imagery until you send photos, and a share-ready URL you can put on cards, email signatures, and Google Business Profile.
                       </Typography>
                     </Stack>
                   </CardContent>
@@ -268,17 +270,17 @@ function AboutPage() {
               <CardContent>
                 <Stack spacing={1.1} alignItems={{ xs: 'flex-start', md: 'center' }} textAlign={{ xs: 'left', md: 'center' }}>
                   <Typography variant="h4" sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' } }}>
-                    Start Your Online Resume Today
+                    Launch your $99 Starter site
                   </Typography>
                   <Typography color="text.secondary" sx={{ maxWidth: 780 }}>
-                    Choose a ready template or request a customized SPA and launch your professional profile with confidence.
+                    Pick a template, complete intake, and go live on your studio subdomain—or contact us for custom software beyond the Starter scope.
                   </Typography>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.1}>
-                    <Button component={RouterLink} to="/templates" variant="contained">
-                      View Templates
+                    <Button component={RouterLink} to="/pricing" variant="contained">
+                      View pricing
                     </Button>
-                    <Button component={RouterLink} to="/contact" variant="outlined">
-                      Have a project in mind? Let’s talk.
+                    <Button component={RouterLink} to="/templates" variant="outlined">
+                      Browse templates
                     </Button>
                   </Stack>
                 </Stack>

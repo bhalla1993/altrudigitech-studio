@@ -1,155 +1,196 @@
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
-import { Box, Button, Card, CardContent, Grid, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Grid,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 import Seo from '../components/common/Seo'
-import { business } from '../utils/siteData'
-
-const tiers = [
-  {
-    name: 'Student Resume SPA',
-    price: '$99',
-    audience: 'Perfect for students and new graduates',
-    features: [
-      'Single-page online resume',
-      'Mobile-friendly design',
-      'Hosted on GitHub Pages (free)',
-      'Subdomain under our website (free)',
-    ],
-  },
-  {
-    name: 'Professional Resume/Portfolio SPA',
-    price: '$149',
-    audience: 'Ideal for job seekers and freelancers',
-    features: [
-      'Single-page professional resume or portfolio',
-      'Customizable sections',
-      'Hosted on GitHub Pages (free)',
-      'Subdomain under our website (free)',
-    ],
-  },
-  {
-    name: 'Full Code Ownership Package',
-    price: '$199',
-    audience: 'For complete independence and portability',
-    features: [
-      'Complete SPA source code delivered to the client',
-      'No dependency on our company',
-      'Client can host anywhere',
-      'Includes deployment instructions',
-    ],
-  },
-]
-
-const comparisonRows = [
-  {
-    label: 'Single-page SPA',
-    student: 'Included',
-    professional: 'Included',
-    ownership: 'Included',
-  },
-  {
-    label: 'Hosted on GitHub Pages',
-    student: 'Included',
-    professional: 'Included',
-    ownership: 'Optional (self-host)',
-  },
-  {
-    label: 'Subdomain under our website',
-    student: 'Included',
-    professional: 'Included',
-    ownership: 'Optional',
-  },
-  {
-    label: 'Source code delivery',
-    student: 'No',
-    professional: 'No',
-    ownership: 'Included',
-  },
-  {
-    label: 'Deployment instructions',
-    student: 'Basic',
-    professional: 'Basic',
-    ownership: 'Detailed',
-  },
-]
-
-const faqs = [
-  {
-    q: 'Why is GitHub Pages free?',
-    a: 'GitHub Pages provides static hosting for public repositories, which makes SPA hosting affordable and reliable.',
-  },
-  {
-    q: 'Why are SPAs fast and easy to maintain?',
-    a: 'SPAs load as one optimized app shell and then render sections quickly, reducing maintenance complexity and long-term costs.',
-  },
-  {
-    q: 'Why is code ownership beneficial?',
-    a: 'Owning your code means you can host anywhere, modify anytime, and avoid platform lock-in.',
-  },
-  {
-    q: 'How do custom domains work?',
-    a: 'We can connect your purchased domain to GitHub Pages and configure DNS and SSL as an optional add-on.',
-  },
-]
+import {
+  brand,
+  capacityBadge,
+  pageSeo,
+  pricingAddOns,
+  pricingAddOnsFooter,
+  pricingFaqs,
+  pricingFootnote,
+  starterIncluded,
+  starterNotIncluded,
+  starterPackage,
+  studentPromoNote,
+} from '../utils/siteData'
 
 function PricingPage() {
   return (
     <>
       <Seo
         title="Pricing"
-        description="Simple and transparent SPA pricing plus quote-based pricing for custom web applications and CRM solutions."
+        description={pageSeo.pricing}
         path="/pricing"
       />
 
       <Box component="section" aria-labelledby="pricing-page-title">
         <Stack spacing={3.1}>
-          <Typography id="pricing-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
-            Simple, Transparent Pricing
-          </Typography>
-          <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
-            {business.name} keeps pricing clear and accessible. Choose a package based on your current goals, then scale only when needed.
-          </Typography>
+          <Stack spacing={1.2}>
+            <Typography id="pricing-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
+              Simple, Transparent Pricing
+            </Typography>
+            <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
+              One flat Starter package for local businesses and students. Pay once for your site on{' '}
+              <strong>{brand.subdomainExample.replace('yourname', '{slug}')}</strong>—add upgrades only when you need them.
+            </Typography>
+            <Chip label={capacityBadge} color="primary" variant="outlined" sx={{ width: 'fit-content', fontWeight: 600 }} />
+            <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
+              {pricingFootnote}
+            </Typography>
+          </Stack>
 
           <Grid container spacing={2.4}>
-            {tiers.map((tier, index) => (
-              <Grid key={tier.name} item xs={12} md={4}>
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.35, delay: index * 0.05 }}
+            <Grid item xs={12} lg={7}>
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.35 }}
+              >
+                <Card
+                  sx={{
+                    height: '100%',
+                    border: '1px solid',
+                    borderColor: 'primary.main',
+                    background: (theme) => `linear-gradient(120deg, ${theme.palette.primary.main}12, transparent)`,
+                  }}
                 >
-                  <Card sx={{ height: '100%', border: index === 1 ? '1px solid' : 'none', borderColor: index === 1 ? 'primary.main' : 'transparent' }}>
-                    <CardContent>
-                      <Stack spacing={1.1}>
-                        <Typography variant="h5" sx={{ fontSize: '1.2rem' }}>{tier.name}</Typography>
-                        <Typography variant="h4" color="primary.main">{tier.price}</Typography>
-                        <Typography color="text.secondary">{tier.audience}</Typography>
-                        <Stack spacing={0.7}>
-                          {tier.features.map((feature) => (
-                            <Stack key={feature} direction="row" spacing={0.7} alignItems="flex-start">
-                              <CheckCircleOutlineIcon sx={{ color: 'primary.main', fontSize: 18, mt: 0.15 }} />
-                              <Typography color="text.secondary">{feature}</Typography>
-                            </Stack>
-                          ))}
-                        </Stack>
+                  <CardContent>
+                    <Stack spacing={1.4}>
+                      <Typography variant="h5" sx={{ fontSize: '1.35rem' }}>
+                        {starterPackage.name}
+                      </Typography>
+                      <Stack direction="row" spacing={1} alignItems="baseline" flexWrap="wrap" useFlexGap>
+                        <Typography variant="h3" color="primary.main">
+                          {starterPackage.price}
+                        </Typography>
+                        <Typography color="text.secondary" fontWeight={600}>
+                          {starterPackage.priceNote}
+                        </Typography>
                       </Stack>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
+                      <Typography color="text.secondary">{starterPackage.audience}</Typography>
+                      <Stack spacing={0.7}>
+                        {starterPackage.features.map((feature) => (
+                          <Stack key={feature} direction="row" spacing={0.7} alignItems="flex-start">
+                            <CheckCircleOutlineIcon sx={{ color: 'primary.main', fontSize: 18, mt: 0.15 }} />
+                            <Typography color="text.secondary">{feature}</Typography>
+                          </Stack>
+                        ))}
+                      </Stack>
+                      <Button component={RouterLink} to="/contact#intake" variant="contained" sx={{ alignSelf: 'flex-start', mt: 0.5 }}>
+                        Start intake — $99
+                      </Button>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </Grid>
+
+            <Grid item xs={12} lg={5}>
+              <Stack spacing={2}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      Included
+                    </Typography>
+                    <Stack spacing={0.6}>
+                      {starterIncluded.map((item) => (
+                        <Stack key={item} direction="row" spacing={0.7} alignItems="flex-start">
+                          <CheckCircleOutlineIcon sx={{ color: 'primary.main', fontSize: 18, mt: 0.1 }} />
+                          <Typography variant="body2" color="text.secondary">
+                            {item}
+                          </Typography>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </CardContent>
+                </Card>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      Not included
+                    </Typography>
+                    <Stack spacing={0.6}>
+                      {starterNotIncluded.map((item) => (
+                        <Stack key={item} direction="row" spacing={0.7} alignItems="flex-start">
+                          <CancelOutlinedIcon sx={{ color: 'text.disabled', fontSize: 18, mt: 0.1 }} />
+                          <Typography variant="body2" color="text.secondary">
+                            {item}
+                          </Typography>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Stack>
+            </Grid>
           </Grid>
 
           <Card>
             <CardContent>
+              <Stack spacing={1.5}>
+                <Typography variant="h5">Add-ons</Typography>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Add-on</TableCell>
+                      <TableCell>Price</TableCell>
+                      <TableCell>Notes</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {pricingAddOns.map((row) => (
+                      <TableRow key={row.name}>
+                        <TableCell>{row.name}</TableCell>
+                        <TableCell sx={{ fontWeight: 600, whiteSpace: 'nowrap' }}>{row.price}</TableCell>
+                        <TableCell sx={{ color: 'text.secondary' }}>{row.detail}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                <Typography variant="body2" color="text.secondary">
+                  {pricingAddOnsFooter}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {studentPromoNote}
+                </Typography>
+              </Stack>
+            </CardContent>
+          </Card>
+
+          <Card
+            sx={{
+              border: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <CardContent>
               <Stack spacing={1}>
-                <Typography variant="h5">Optional Add-Ons (Extra Charge)</Typography>
-                <Typography color="text.secondary">Custom domain setup</Typography>
-                <Typography color="text.secondary">Integrated contact form (Google Forms or other providers)</Typography>
-                <Typography color="text.secondary">Additional sections or custom design changes</Typography>
+                <Typography variant="h6">Scope boundaries</Typography>
+                <Typography color="text.secondary" variant="body2">
+                  Intake worksheet and payment are required before we build your preview. One free slug rename before launch; changes
+                  after launch are $25 micro-tasks. Monthly tweaks (months 1–3): email{' '}
+                  <strong>{brand.updatesEmail}</strong> by the 25th—unused updates do not roll over.
+                </Typography>
               </Stack>
             </CardContent>
           </Card>
@@ -163,59 +204,33 @@ function PricingPage() {
           >
             <CardContent>
               <Stack spacing={1.2}>
-                <Typography variant="h5">Custom Web Applications & CRM Solutions</Typography>
+                <Typography variant="h5">Custom Web Applications & CRM</Typography>
                 <Typography color="text.secondary">
-                  Custom web applications, CRM systems, dashboards, and business tools are priced based on requirements.
+                  Dashboards, internal tools, CRM systems, and automation projects are quoted after a discovery call—not part of the
+                  $99 Starter.
                 </Typography>
-                <Typography color="text.secondary">
-                  Please contact us to discuss your project and receive a personalized quote.
-                </Typography>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
-                  <Button component={RouterLink} to="/contact" variant="contained">Request a Quote</Button>
-                </Stack>
-              </Stack>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent>
-              <Stack spacing={1.2}>
-                <Typography variant="h5">Pricing Comparison</Typography>
-                <Table size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Feature</TableCell>
-                      <TableCell>Student ($99)</TableCell>
-                      <TableCell>Professional ($149)</TableCell>
-                      <TableCell>Code Ownership ($199)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {comparisonRows.map((row) => (
-                      <TableRow key={row.label}>
-                        <TableCell>{row.label}</TableCell>
-                        <TableCell>{row.student}</TableCell>
-                        <TableCell>{row.professional}</TableCell>
-                        <TableCell>{row.ownership}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                <Button component={RouterLink} to="/contact#intake" variant="contained" sx={{ alignSelf: 'flex-start' }}>
+                  Request a Quote
+                </Button>
               </Stack>
             </CardContent>
           </Card>
 
           <Stack spacing={1.1}>
-            <Typography variant="h4" sx={{ fontSize: { xs: '1.4rem', md: '1.8rem' } }}>FAQ</Typography>
+            <Typography variant="h4" sx={{ fontSize: { xs: '1.4rem', md: '1.8rem' } }}>
+              FAQ
+            </Typography>
             <Grid container spacing={2}>
-              {faqs.map((faq) => (
+              {pricingFaqs.map((faq) => (
                 <Grid key={faq.q} item xs={12} md={6}>
                   <Card sx={{ height: '100%' }}>
                     <CardContent>
                       <Stack spacing={0.7}>
                         <Stack direction="row" spacing={0.7} alignItems="center">
                           <HelpOutlineIcon color="primary" sx={{ fontSize: 18 }} />
-                          <Typography variant="h6" sx={{ fontSize: '1rem' }}>{faq.q}</Typography>
+                          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+                            {faq.q}
+                          </Typography>
                         </Stack>
                         <Typography color="text.secondary">{faq.a}</Typography>
                       </Stack>
@@ -227,8 +242,12 @@ function PricingPage() {
           </Stack>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
-            <Button component={RouterLink} to="/contact" variant="contained">Get Started</Button>
-            <Button component={RouterLink} to="/templates" variant="outlined">View Templates</Button>
+            <Button component={RouterLink} to="/contact#intake" variant="contained">
+              Start intake
+            </Button>
+            <Button component={RouterLink} to="/templates" variant="outlined">
+              View Templates
+            </Button>
           </Stack>
         </Stack>
       </Box>

@@ -19,6 +19,7 @@ import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
 import LiveProjectCard from '../components/cards/LiveProjectCard'
 import TemplatePreviewCard from '../components/templates/TemplatePreviewCard'
+import { pageSeo } from '../utils/siteData'
 import { liveProjects } from '../utils/liveProjectsData'
 import { templateFilters, templateSortOptions, templates } from '../utils/templatesData'
 
@@ -55,7 +56,7 @@ function TemplatesPage() {
     <>
       <Seo
         title="Templates"
-        description="Browse customizable resume and portfolio SPA templates, then explore real deployed work in our live projects showcase."
+        description={pageSeo.templates}
         path="/templates"
       />
 
@@ -66,7 +67,7 @@ function TemplatesPage() {
               Resume and Portfolio Templates
             </Typography>
             <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
-              Browse customizable SPA templates for resumes and portfolios. These are design starting points that we tailor to your profile.
+              Browse customizable templates for trades, shops, and resumes. Each design is a starting point for our $99 Starter—we tailor content to your business after intake and payment.
             </Typography>
 
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={1.2} alignItems={{ xs: 'flex-start', md: 'center' }}>

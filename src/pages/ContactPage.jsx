@@ -1,10 +1,15 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Box, Card, CardContent, Grid, IconButton, Link, Stack, Typography } from '@mui/material'
+import OpenInNewIcon from '@mui/icons-material/OpenInNew'
+import { Box, Button, Card, CardContent, Grid, IconButton, Link, Stack, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 import Seo from '../components/common/Seo'
-import { business } from '../utils/siteData'
+import IntakeFormEmbed from '../components/forms/IntakeFormEmbed'
+import { business, pageSeo } from '../utils/siteData'
 
 const socialItems = [
   {
@@ -25,11 +30,19 @@ const socialItems = [
 ]
 
 function ContactPage() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (hash !== '#intake') return
+    const el = document.getElementById('intake')
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [hash])
+
   return (
     <>
       <Seo
         title="Contact"
-        description="Contact Altruism Digital Studio to discuss your website, resume portfolio, or software development project."
+        description={pageSeo.contact}
         path="/contact"
       />
 
@@ -38,45 +51,27 @@ function ContactPage() {
           <Grid item xs={12} md={7}>
             <Stack spacing={2.2}>
               <Typography id="contact-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
-                Let&apos;s Build Your Next Digital Product
+                Start your $99 Starter or ask a question
               </Typography>
               <Typography color="text.secondary">
-                Tell us what you are trying to launch. We usually respond within one business day.
+                One intake form—choose Starter, a quick question, custom software, or student pricing. We respond within one
+                business day.
               </Typography>
 
-              <Box
-                sx={{
-                  width: '100%',
-                  maxWidth: '100%',
-                  borderRadius: 3,
-                  overflow: 'hidden',
-                  border: '1px solid',
-                  borderColor: 'divider',
-                  boxShadow: (theme) =>
-                    theme.palette.mode === 'dark'
-                      ? '0 14px 32px rgba(0, 0, 0, 0.35)'
-                      : '0 12px 28px rgba(15, 23, 42, 0.12)',
-                }}
+              <Button
+                component={Link}
+                href={business.intakeFormViewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="text"
+                size="small"
+                endIcon={<OpenInNewIcon sx={{ fontSize: 16 }} />}
+                sx={{ alignSelf: 'flex-start', px: 0 }}
               >
-                <Box
-                  component="iframe"
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSeZv_icELxEe9nB4n6NU4JeAT0R1eW9XfvO2eXYwFCC16sIZA/viewform?embedded=true"
-                  title="Contact Form"
-                  frameBorder="0"
-                  marginHeight="0"
-                  marginWidth="0"
-                  loading="lazy"
-                  sx={{
-                    width: '100%',
-                    minHeight: { xs: 1120, sm: 1040, md: 992 },
-                    border: 0,
-                    display: 'block',
-                    backgroundColor: 'background.default',
-                  }}
-                >
-                  Loading...
-                </Box>
-              </Box>
+                Open form in a new tab
+              </Button>
+
+              <IntakeFormEmbed id="intake" title="Contact and project intake" />
             </Stack>
           </Grid>
 
@@ -87,7 +82,7 @@ function ContactPage() {
                   <Stack spacing={1.2}>
                     <Typography variant="h5">Contact Details</Typography>
                     <Typography color="text.secondary">Email: {business.email}</Typography>
-                    <Typography color="text.secondary">Location: {business.location}</Typography>
+                    <Typography color="text.secondary">{business.location}</Typography>
                   </Stack>
                 </CardContent>
               </Card>
@@ -103,9 +98,36 @@ function ContactPage() {
                   <Stack spacing={1.4}>
                     <Typography variant="h5">Connect With Us</Typography>
                     <Typography color="text.secondary">
-                      Follow and message us on social media for updates, quick conversations, and project inquiries.
+                      Email us or connect on social for updates, quick conversations, and project inquiries.
                     </Typography>
-                    <Stack direction="row" spacing={1.2}>
+                    <Stack direction="row" spacing={1.2} flexWrap="wrap" useFlexGap>
+                      <Box
+                        component={motion.div}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.28 }}
+                      >
+                        <IconButton
+                          component={Link}
+                          href={`mailto:${business.email}`}
+                          aria-label={`Email ${business.email}`}
+                          sx={{
+                            border: '1px solid',
+                            borderColor: 'divider',
+                            color: 'text.primary',
+                            '&:hover': {
+                              color: 'primary.main',
+                              borderColor: 'primary.main',
+                              transform: 'translateY(-2px)',
+                              boxShadow: '0 10px 24px rgba(45, 212, 191, 0.2)',
+                            },
+                            transition: 'all 220ms ease',
+                          }}
+                        >
+                          <EmailOutlinedIcon />
+                        </IconButton>
+                      </Box>
                       {socialItems.map((item, index) => {
                         const Icon = item.icon
                         return (
@@ -115,7 +137,7 @@ function ContactPage() {
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.28, delay: 0.06 * index }}
+                            transition={{ duration: 0.28, delay: 0.06 * (index + 1) }}
                           >
                             <IconButton
                               component={Link}

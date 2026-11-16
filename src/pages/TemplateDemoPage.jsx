@@ -9,6 +9,7 @@ import {
 import { useMemo } from 'react'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import Seo from '../components/common/Seo'
+import { brand } from '../utils/siteData'
 import { getTemplateById } from '../utils/templatesData'
 
 function TemplateDemoPage() {
@@ -32,7 +33,7 @@ function TemplateDemoPage() {
     <>
       <Seo
         title={`${template.title} Demo`}
-        description={`Live demo for ${template.title}. A single-page web template showcasing real-world design and functionality.`}
+        description={`${template.title} demo template for the ${brand.shortName} $99 Starter—preview design before intake.`}
         path={`/templates/${template.id}`}
       />
 

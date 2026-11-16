@@ -1,40 +1,34 @@
-import ConstructionIcon from '@mui/icons-material/Construction'
-import { Alert, Box, Grid, Stack, Typography } from '@mui/material'
-import AnimatedSection from '../components/common/AnimatedSection'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import { Box, Button, Stack, Typography } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import Seo from '../components/common/Seo'
-import PortfolioItem from '../components/cards/PortfolioItem'
-import { portfolioItems } from '../utils/siteData'
+import { brand, pageSeo } from '../utils/siteData'
 
 function PortfolioPage() {
   return (
     <>
       <Seo
         title="Portfolio"
-        description="Preview project case studies and upcoming digital product launches from Altruism Digital Studio."
+        description={pageSeo.portfolio}
         path="/portfolio"
       />
 
-      <Box component="section" aria-labelledby="portfolio-page-title">
-        <AnimatedSection>
-          <Stack spacing={3}>
-            <Typography id="portfolio-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
-              Portfolio and Case Studies
-            </Typography>
-            <Typography color="text.secondary" sx={{ maxWidth: 820 }}>
-              Here are representative projects showing how we help businesses ship web products faster. This section is structured to scale with future case studies.
-            </Typography>
-            <Grid container spacing={3}>
-              {portfolioItems.map((project) => (
-                <Grid key={project.title} item xs={12} md={4}>
-                  <PortfolioItem project={project} />
-                </Grid>
-              ))}
-            </Grid>
-            <Alert icon={<ConstructionIcon fontSize="inherit" />} severity="info">
-              A dedicated gallery for pre-built digital products will be added soon.
-            </Alert>
-          </Stack>
-        </AnimatedSection>
+      <Box component="section" aria-labelledby="portfolio-redirect-title">
+        <Stack spacing={2.5} sx={{ maxWidth: 640 }}>
+          <Typography id="portfolio-redirect-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '2.75rem' } }}>
+            Live client work moved
+          </Typography>
+          <Typography color="text.secondary">
+            We showcase real deployed sites—not stock case studies—on Live Projects. You will find client builds like SparkShots
+            plus template-based launches from {brand.shortName}.
+          </Typography>
+          <Button component={RouterLink} to="/live-projects" variant="contained" endIcon={<ArrowForwardIcon />} sx={{ alignSelf: 'flex-start' }}>
+            View Live Projects
+          </Button>
+          <Button component={RouterLink} to="/pricing" variant="text" sx={{ alignSelf: 'flex-start' }}>
+            Get your own $99 Starter site
+          </Button>
+        </Stack>
       </Box>
     </>
   )

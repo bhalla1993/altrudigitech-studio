@@ -4,9 +4,8 @@
     <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script>
-      // Redirect unknown GitHub Pages paths to index while preserving SPA route.
-      // pathSegmentsToKeep = 1 for /altruism/ repository pages.
-      var pathSegmentsToKeep = 1
+      // Legacy GitHub Pages SPA fallback (production uses Cloudflare _redirects).
+      var pathSegmentsToKeep = 0
       var l = window.location
       l.replace(
         l.protocol +
