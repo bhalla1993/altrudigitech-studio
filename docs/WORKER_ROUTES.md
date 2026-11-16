@@ -46,6 +46,8 @@ Cloudflare dashboard → **altrudigitech.com** → **DNS** → **Records** → *
 
 This sends **all subdomains** through Cloudflare so the Worker route can run. Apex and `www` stay on their existing records (`altrudigitech.com` / `www` → Pages). Unknown subdomains hit the Worker → **404** if not in `config/hosts.json`.
 
+**Confirmed layout:** apex + `www` CNAMEs to Pages, wildcard `*` CNAME to `@` (proxied) — correct for Slice B+.
+
 **Alternative (minimal, one slug only):** skip `*` and add only:
 
 | Type | Name | Target | Proxy |

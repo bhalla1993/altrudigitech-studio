@@ -12,6 +12,11 @@ export function pagesSitePath(slug, pathname) {
     return `/sites/${slug}${path}`
   }
 
+  // Pages serves `/sites/{slug}/` with 200; bare `index.html` often 308 → breaks subdomain clients.
+  if (path === '/' || path === '') {
+    return `/sites/${slug}/`
+  }
+
   return `/sites/${slug}/index.html`
 }
 

@@ -63,10 +63,16 @@ Google Form intake stays through Phase 3.
 
 ### Slice B exit
 
-- [ ] Worker deployed with `*.altrudigitech.com/*` route
-- [ ] Wildcard (or `internal-demo`) DNS proxied
-- [ ] `https://internal-demo.altrudigitech.com/` → 200
-- [ ] Unknown subdomain → 404; apex Pages unchanged
+- [x] Worker deployed with `*.altrudigitech.com/*` route
+- [x] Wildcard DNS: CNAME `*` → `@` (proxied)
+- [x] `https://internal-demo.altrudigitech.com/` → 200 (after worker fix)
+- [x] Unknown subdomain → 404; apex Pages unchanged
+
+### Slice C exit
+
+- [ ] `https://shiva-bhalla.altrudigitech.com/` → 200 (not 308 to `/sites/...`)
+- [ ] Deep assets under `/assets/vendor/...` → 200
+- [ ] `npm run verify:subdomains` passes
 
 ---
 

@@ -83,7 +83,7 @@ async function proxyFromPages(request, env, sitePath) {
   const init = {
     method: request.method,
     headers,
-    redirect: 'manual',
+    redirect: 'follow',
   }
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     init.body = request.body
