@@ -1,0 +1,10 @@
+# Studio router + lead API (Phase 2–3). Deploy separately from Pages root wrangler.toml.
+# Slice A: local dev only — no production routes until Slice B/D.
+
+name = "altrudigitech-studio-worker"
+main = "src/index.js"
+compatibility_date = "2024-11-16"
+
+[vars]
+PAGES_ORIGIN = "https://altrudigitech.com"
+RESEND_FROM = "AltruDigiTech <hello@altrudigitech.com>"

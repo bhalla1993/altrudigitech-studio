@@ -34,6 +34,10 @@ export const templates = [
     shortDescription: 'Clean, modern single-page resume for students and recent graduates.',
     thumbnail: imgStudentResume,
     demoUrl: `${BASE}templates/spa/student-resume.html`,
+    /** Marketing SPA demo; production client example uses iPortfolio-style layout */
+    clientExampleSlug: 'shiva-bhalla',
+    clientExampleUrl: 'https://altrudigitech.com/sites/shiva-bhalla/',
+    referencePortfolioUrl: 'https://bhalla1993.github.io/shivabhallaportfolio.github.io',
     type: 'spa-html',
     popularity: 91,
     createdAt: '2026-04-18',

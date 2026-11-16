@@ -1,0 +1,6 @@
+# Cloudflare Pages — studio marketing site + static client sites in dist/
+# Phase 2+: add Worker routing in this file or a sibling worker package.
+
+name = "altrudigitech-studio"
+compatibility_date = "2024-11-16"
+pages_build_output_dir = "./dist"

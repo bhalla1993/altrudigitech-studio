@@ -58,9 +58,19 @@ Add custom domain **`altrudigitech.com`**. Configure **`www` → apex** 301 in C
 
 After cutover, disable GitHub Pages deployment to avoid duplicate indexing (see plan §9-E).
 
+### Deploy from your machine (Wrangler)
+
+One-time: `npx wrangler login`. Then:
+
+```bash
+npm run deploy:cf
+```
+
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** — or ask Agent mode to deploy to Cloudflare.
+
 ### SPA routing
 
-`public/_redirects` serves the React app for deep links on Cloudflare Pages.
+`public/_redirects` serves the React app for deep links on Cloudflare Pages. Do **not** add a root `404.html` (it disables Pages SPA mode and breaks `/pricing`, etc.).
 
 ## Git remotes
 

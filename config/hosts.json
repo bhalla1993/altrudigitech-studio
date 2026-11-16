@@ -1,0 +1,15 @@
+{
+  "_comment": "Phase 2+ Worker: FQDN keys. Phase 5 custom domains use the same lookup.",
+  "hosts": {
+    "internal-demo.altrudigitech.com": {
+      "slug": "internal-demo",
+      "client_id": "internal-demo",
+      "lead_email": ""
+    },
+    "shiva-bhalla.altrudigitech.com": {
+      "slug": "shiva-bhalla",
+      "client_id": "shiva-bhalla",
+      "lead_email": ""
+    }
+  }
+}

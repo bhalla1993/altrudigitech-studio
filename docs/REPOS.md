@@ -30,6 +30,14 @@ git push legacy main
 
 For project-site URLs, you may need `base: '/altruism/'` on a legacy-only deploy branch; production uses `base: '/'` on Cloudflare (see `docs/STUDIO_PLAN.md`).
 
+## Deploy (Wrangler)
+
+```bash
+npm run deploy:cf
+```
+
+Details: **[DEPLOY.md](./DEPLOY.md)**.
+
 ## After Cloudflare cutover
 
 1. Connect **Cloudflare Pages** to **`altrudigitech-studio`** (`main`, build `npm ci && npm run build`, output `dist`).

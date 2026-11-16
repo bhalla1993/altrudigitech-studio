@@ -18,8 +18,11 @@ if (!fs.existsSync(path.join(root, 'dist'))) {
 
 fs.mkdirSync(sitesOut, { recursive: true })
 
+const skipDirNames = new Set(['.github', 'node_modules'])
+
 for (const slug of fs.readdirSync(clientsDir)) {
   if (slug.startsWith('_') || slug.startsWith('.')) continue
+  if (skipDirNames.has(slug)) continue
 
   const src = path.join(clientsDir, slug)
   if (!fs.statSync(src).isDirectory()) continue

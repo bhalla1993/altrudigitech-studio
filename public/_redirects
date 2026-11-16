@@ -1,2 +1,3 @@
 # Cloudflare Pages — SPA fallback (studio React app at apex)
-/*    /index.html   200
+# Do not add top-level 404.html; it disables Pages SPA mode and breaks deep links.
+/* /index.html 200

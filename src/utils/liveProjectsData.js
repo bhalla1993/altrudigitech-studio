@@ -7,12 +7,13 @@ const localTopSpotLab = studioLabs.find((lab) => lab.title === 'LocalTopSpot')
 
 export const liveProjects = [
   {
-    id: 'single-page-resume-example',
-    title: 'Single-Page Resume Example',
-    description: 'A clean, modern single-page resume built for students and professionals.',
+    id: 'shiva-bhalla-portfolio',
+    title: 'Shiva Bhalla — Portfolio',
+    description:
+      'Professional resume site (student-resume family). Live on the studio at /sites/shiva-bhalla/ after deploy; legacy mirror on GitHub Pages.',
     badge: 'Live Project',
-    ctaLabel: 'View Live Demo',
-    url: 'https://bhalla1993.github.io/shivabhallaportfolio.github.io',
+    ctaLabel: 'View on studio',
+    url: 'https://altrudigitech.com/sites/shiva-bhalla/',
     thumbnail: resumeThumbnail,
   },
   {
