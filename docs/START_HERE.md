@@ -1,0 +1,113 @@
+# Start here — AltruDigiTech Digital Studio repo
+
+**Canonical repo:** [bhalla1993/altrudigitech-studio](https://github.com/bhalla1993/altrudigitech-studio)  
+**Production:** [https://altrudigitech.com](https://altrudigitech.com)  
+**Status (2026):** Phase 1–3 infra live (Pages + Worker + `/api/lead`). Selling phase (Phase 4+) — see [NEXT_STEPS.md](./NEXT_STEPS.md).
+
+New chat or fresh machine? Point the agent at **this file** plus [STUDIO_PLAN.md](./STUDIO_PLAN.md).
+
+---
+
+## Documentation map
+
+| Doc | When to read |
+|-----|----------------|
+| **[START_HERE.md](./START_HERE.md)** | Clone, secrets, commands (this file) |
+| **[STUDIO_PLAN.md](./STUDIO_PLAN.md)** | Product, pricing, phases 0–5, legal/ops |
+| **[PHASE_2_3_PLAN.md](./PHASE_2_3_PLAN.md)** | Worker slices A–E (routing + API) — mostly complete |
+| **[CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md)** | Retire GitHub Pages, social, live URL checks |
+| **[NEXT_STEPS.md](./NEXT_STEPS.md)** | First paid client (Phase 4), promote, optional polish |
+| **[DEPLOY.md](./DEPLOY.md)** | Pages deploy overview |
+| **[PAGES_GIT.md](./PAGES_GIT.md)** | Cloudflare Pages ↔ GitHub builds |
+| **[WORKER_ROUTES.md](./WORKER_ROUTES.md)** | Wildcard DNS, Worker routes, `/api/lead` |
+| **[EMAIL_ROUTING.md](./EMAIL_ROUTING.md)** | `hello@` / `updates@` → Gmail |
+| **[BRAND.md](./BRAND.md)** | Names, emails, repo naming |
+| **[REPOS.md](./REPOS.md)** | `origin` vs legacy `altruism` remote |
+
+---
+
+## Fresh clone & local setup
+
+```bash
+git clone https://github.com/bhalla1993/altrudigitech-studio.git
+cd altrudigitech-studio
+npm install
+```
+
+Folder name can be anything (`altrudigitech-studio` is clearer than legacy `altruism`).
+
+### Secrets (never commit)
+
+1. Copy **[`.env.example`](../.env.example)** → **`.dev.vars`** at repo root (gitignored).
+2. Fill values below.
+3. For **local Vite** Contact form Turnstile widget, also set **`VITE_TURNSTILE_SITE_KEY`** in **`.env.local`** (same value as site key), or rely on deploy builds that export it from `.dev.vars`.
+
+| Variable | Where used | Required for |
+|----------|------------|--------------|
+| `CLOUDFLARE_API_TOKEN` | `deploy:cf`, `deploy:worker` | Wrangler deploy from laptop |
+| `CLOUDFLARE_ACCOUNT_ID` | same | Wrangler deploy |
+| `PAGES_ORIGIN` | Worker | `https://altrudigitech.com` (default in wrangler) |
+| `RESEND_API_KEY` | Worker | `/api/lead` email send |
+| `TURNSTILE_SECRET_KEY` | Worker | Turnstile verify |
+| `TURNSTILE_SITE_KEY` | build (`sync-lead-config`) | Client static forms |
+| `VITE_TURNSTILE_SITE_KEY` | Vite build | Studio Contact quick message (or mirrored in Pages env) |
+| `STUDIO_LEAD_EMAIL` | Worker secret | Inbox for `client_id: studio` |
+| `RESEND_TEST_TO` | local script | `npm run test:resend` |
+| `RESEND_FROM` | Worker | optional; default hello@ in wrangler |
+| `ALLOW_DEV_ROUTES` | local Worker only | `true` for `/api/_test/resend`; never in prod |
+
+**Cloudflare Pages (Git):** set `TURNSTILE_SITE_KEY` + `VITE_TURNSTILE_SITE_KEY` in the dashboard — see [PAGES_GIT.md](./PAGES_GIT.md). Do **not** put Worker API secrets on Pages.
+
+**Worker production secrets:** `npm run deploy:worker` syncs `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `STUDIO_LEAD_EMAIL` from `.dev.vars` when set.
+
+---
+
+## Common commands
+
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Studio Vite app (localhost:5173) |
+| `npm run build` | `dist/` + `dist/sites/*` + lead-config sync |
+| `npm run deploy:cf` | Manual Pages deploy (optional if Git connected) |
+| `npm run deploy:worker` | Worker + routes + API |
+| `npm run dev:worker` | Local Worker (8787) |
+| `npm run verify:subdomains` | curl smoke test for subdomains |
+| `npm run test:resend` | Resend API test |
+
+After **`config/hosts.json`** or Worker code changes → **deploy Worker**. After studio/client static changes → **push `main`** (Git) or **`deploy:cf`**.
+
+---
+
+## Architecture (30-second)
+
+- **Marketing app:** Cloudflare **Pages** at `altrudigitech.com`.
+- **Client subdomains:** **Worker** `*.altrudigitech.com` → fetches `/sites/{slug}/` on Pages origin.
+- **Leads:** **Worker** `POST /api/lead` on `altrudigitech.com/api/*` (Turnstile + Resend).
+- **Intake CRM:** Google Form on Contact (unchanged through Phase 3).
+- **Config:** `config/hosts.json` (FQDN keys) bundled in Worker.
+
+---
+
+## Verify production quickly
+
+| URL | Expected |
+|-----|----------|
+| `/` `/pricing` `/contact` | 200 |
+| `internal-demo.altrudigitech.com` | Sandbox + test form |
+| `shiva-bhalla.altrudigitech.com` | Showcase site |
+| `not-a-client.altrudigitech.com` | 404 |
+
+See [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) for full list.
+
+---
+
+## For AI / new Cursor sessions
+
+Suggested prompt:
+
+```text
+Read docs/START_HERE.md, docs/STUDIO_PLAN.md, docs/PHASE_2_3_PLAN.md, and docs/NEXT_STEPS.md.
+Production: altrudigitech.com on Cloudflare Pages + altrudigitech-studio-worker.
+```
+
+Do not commit `.dev.vars`. Rotate `CLOUDFLARE_API_TOKEN` if it was ever exposed.

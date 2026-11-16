@@ -1,7 +1,7 @@
 # Phase 2 & 3 implementation plan (locked)
 
 **Status:** Slice E · **Approved:** 2026-03-16  
-**References:** [STUDIO_PLAN.md](./STUDIO_PLAN.md), [DEPLOY.md](./DEPLOY.md), `config/hosts.json`
+**References:** [START_HERE.md](./START_HERE.md), [STUDIO_PLAN.md](./STUDIO_PLAN.md), [DEPLOY.md](./DEPLOY.md), `config/hosts.json`
 
 ---
 

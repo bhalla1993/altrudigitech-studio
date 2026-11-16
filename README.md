@@ -2,9 +2,18 @@
 
 Production-ready React marketing site for **AltruDigiTech** — affordable single-page sites for local businesses and students.
 
-See **[docs/STUDIO_PLAN.md](docs/STUDIO_PLAN.md)** for the locked product, infrastructure, and implementation plan.
+**Production:** [altrudigitech.com](https://altrudigitech.com)
 
-Brand names and usage: **[docs/BRAND.md](docs/BRAND.md)** (`src/utils/siteData.js` → `brand`, `pageSeo`).
+### Docs (start here)
+
+| Doc | Purpose |
+|-----|---------|
+| **[docs/START_HERE.md](docs/START_HERE.md)** | Clone, secrets, commands, doc index (new machine / new chat) |
+| **[docs/CUTOVER_CHECKLIST.md](docs/CUTOVER_CHECKLIST.md)** | Retire GitHub Pages, social URLs, live checks |
+| **[docs/NEXT_STEPS.md](docs/NEXT_STEPS.md)** | Promote, Phase 4 first client onboarding |
+| **[docs/STUDIO_PLAN.md](docs/STUDIO_PLAN.md)** | Locked product, pricing, phases 0–5 |
+
+Brand: **[docs/BRAND.md](docs/BRAND.md)** (`src/utils/siteData.js`).
 
 ## Tech Stack
 
@@ -22,7 +31,7 @@ src/              Studio React app
 public/           Static assets + SPA template demos
 clients/{slug}/   Client static sites → dist/sites/{slug}/
 scripts/          Build helpers
-docs/             STUDIO_PLAN.md
+docs/             START_HERE, STUDIO_PLAN, deploy, worker, email
 ```
 
 ## Local Development
