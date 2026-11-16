@@ -10,3 +10,12 @@ export function lookupHost(hostname) {
 export function knownHostnames() {
   return Object.keys(HOSTS)
 }
+
+export function resolveLeadEmailByClientId(clientId) {
+  for (const entry of Object.values(HOSTS)) {
+    if (entry.client_id === clientId && entry.lead_email) {
+      return entry.lead_email
+    }
+  }
+  return ''
+}

@@ -1,6 +1,6 @@
 # Phase 2 & 3 implementation plan (locked)
 
-**Status:** Slice B in progress · **Approved:** 2026-03-16  
+**Status:** Slice D in progress · **Approved:** 2026-03-16  
 **References:** [STUDIO_PLAN.md](./STUDIO_PLAN.md), [DEPLOY.md](./DEPLOY.md), `config/hosts.json`
 
 ---
@@ -70,9 +70,16 @@ Google Form intake stays through Phase 3.
 
 ### Slice C exit
 
-- [ ] `https://shiva-bhalla.altrudigitech.com/` → 200 (not 308 to `/sites/...`)
-- [ ] Deep assets under `/assets/vendor/...` → 200
-- [ ] `npm run verify:subdomains` passes
+- [x] `https://shiva-bhalla.altrudigitech.com/` → 200 (not 308 to `/sites/...`)
+- [x] Deep assets under `/assets/vendor/...` → 200
+- [x] `npm run verify:subdomains` (curl-based)
+
+### Slice D exit
+
+- [ ] Route `altrudigitech.com/api/*` deployed
+- [ ] Secrets: `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `STUDIO_LEAD_EMAIL`
+- [ ] OPTIONS + POST `/api/lead` from apex origin with valid Turnstile → email
+- [ ] Google Form intake unchanged on Contact page
 
 ---
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /**
- * Slice C smoke test — client subdomains via Worker.
- * Usage: node scripts/verify-subdomains.mjs
+ * Slice C smoke test — client subdomains via Worker (uses curl for reliable DNS).
+ * Usage: npm run verify:subdomains
  */
+
+import { execFileSync } from 'child_process'
 
 const checks = [
   { url: 'https://internal-demo.altrudigitech.com/', expect: [200] },
@@ -16,15 +18,24 @@ const checks = [
   { url: 'https://altrudigitech.com/', expect: [200] },
 ]
 
+function statusFor(url) {
+  const out = execFileSync(
+    'curl',
+    ['-sS', '-o', '/dev/null', '-w', '%{http_code}', '-L', '--max-time', '25', url],
+    { encoding: 'utf8' },
+  )
+  return Number(out.trim())
+}
+
 let failed = 0
 
 for (const { url, expect } of checks) {
   try {
-    const res = await fetch(url, { redirect: 'follow' })
-    const ok = expect.includes(res.status)
+    const status = statusFor(url)
+    const ok = expect.includes(status)
     const mark = ok ? 'OK' : 'FAIL'
     if (!ok) failed += 1
-    console.log(`${mark} ${res.status} ${url}`)
+    console.log(`${mark} ${status} ${url}`)
   } catch (err) {
     failed += 1
     console.log(`FAIL ERR ${url} (${err.message})`)

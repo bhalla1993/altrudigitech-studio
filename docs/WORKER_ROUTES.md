@@ -82,6 +82,38 @@ Add clients by redeploying the Worker after updating `hosts.json`.
 | `https://altrudigitech.com/sites/internal-demo/` | 200 (apex path still works) |
 | `https://www.altrudigitech.com/` | 301 to apex (Worker if `www` hits wildcard; or your existing redirect rule) |
 
-## 6. Slice D (later)
+## 6. Slice D — `/api/lead` (live)
 
-Add route **`altrudigitech.com/api/*`** (same Worker) for `/api/lead` — **do not** put full apex on the Worker.
+**Route:** `altrudigitech.com/api/*` (apex HTML still on Pages).
+
+**Secrets** (in `.dev.vars` locally; `deploy:worker` syncs when set):
+
+- `RESEND_API_KEY`
+- `TURNSTILE_SECRET_KEY`
+- `STUDIO_LEAD_EMAIL` — inbox for `client_id: "studio"`
+
+**CORS (Slice D):** `https://altrudigitech.com` + local Vite (`http://localhost:5173`). Client subdomains in Slice E.
+
+**POST** `https://altrudigitech.com/api/lead` body (JSON):
+
+```json
+{
+  "name": "Test",
+  "email": "you@example.com",
+  "message": "Hello",
+  "turnstileToken": "<token from Turnstile widget>",
+  "client_id": "studio"
+}
+```
+
+**Test CORS preflight:**
+
+```bash
+curl -sI -X OPTIONS "https://altrudigitech.com/api/lead" \
+  -H "Origin: https://altrudigitech.com" \
+  -H "Access-Control-Request-Method: POST"
+```
+
+Expect `204` and `access-control-allow-origin: https://altrudigitech.com`.
+
+Google Form intake stays until you wire a Turnstile form on Contact (Slice D+ UI optional).

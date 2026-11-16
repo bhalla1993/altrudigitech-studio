@@ -4,6 +4,7 @@
  */
 
 import { lookupHost } from './hosts.js'
+import { handleLeadApi } from './lead-api.js'
 import { pagesOriginUrl, pagesSitePath } from './routing.js'
 
 const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' }
@@ -122,7 +123,7 @@ export default {
       return json({
         ok: true,
         worker: 'altrudigitech-studio-worker',
-        slice: 'B',
+        slice: 'D',
         pagesOrigin: env.PAGES_ORIGIN || null,
       })
     }
@@ -132,10 +133,13 @@ export default {
     }
 
     if (hostname === APEX_HOST) {
-      return json(
-        { error: 'Apex is served by Pages only; this worker handles client subdomains.' },
-        501,
-      )
+      if (path === '/api/lead') {
+        return handleLeadApi(request, env)
+      }
+      if (path.startsWith('/api/')) {
+        return json({ error: 'Not found' }, 404)
+      }
+      return json({ error: 'Apex HTML is served by Pages only' }, 404)
     }
 
     if (hostname === `www.${APEX_HOST}`) {
