@@ -10,8 +10,8 @@
 | **Legal / full name** | AltruDigiTech Digital Studio | Browser titles (`Seo`), footer ©, invoices, contracts |
 | **Short name** | AltruDigiTech | Header logo, in-app copy, client credits |
 | **Domain** | altrudigitech.com | Hosting, canonical URLs, email (`updates@`) |
-| **Public contact (pre-domain mail)** | altrudigitech.studio@gmail.com | Site `mailto` until `hello@` Email Routing is live |
-| **Planned public contact (post-CF)** | hello@altrudigitech.com | Forwards to brand Gmail via Email Routing |
+| **Public contact (Gmail fallback)** | altrudigitech.studio@gmail.com | Destination for Email Routing; not shown on site |
+| **Public contact (site)** | hello@altrudigitech.com | `business.email` / `mailto` — set up in [EMAIL_ROUTING.md](./EMAIL_ROUTING.md) |
 | **Subdomain pattern** | `{slug}.altrudigitech.com` | Starter client URLs |
 | **Client footer credit** | AltruDigiTech → altrudigitech.com | HTML template footers |
 

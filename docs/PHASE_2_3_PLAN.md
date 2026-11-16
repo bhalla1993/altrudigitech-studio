@@ -78,14 +78,14 @@ Google Form intake stays through Phase 3.
 
 - [x] Route `altrudigitech.com/api/*` deployed
 - [x] Secrets: `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `STUDIO_LEAD_EMAIL`
-- [ ] OPTIONS + POST `/api/lead` from apex origin with valid Turnstile → email
+- [x] OPTIONS + POST `/api/lead` from apex origin with valid Turnstile → email (Contact quick message)
 - [x] Google Form intake unchanged on Contact page
 
 ### Slice E exit
 
 - [x] CORS: client FQDNs from `hosts.json`
 - [x] `internal-demo` static form + Turnstile → `/api/lead`
-- [ ] Test submit from `https://internal-demo.altrudigitech.com/` → `lead_email`
+- [x] Test submit from `https://internal-demo.altrudigitech.com/` → `lead_email`
 - [ ] `shiva-bhalla`: form optional (portfolio still uses Google Form iframe)
 
 ---

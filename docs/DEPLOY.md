@@ -2,6 +2,8 @@
 
 Production target: **`https://altrudigitech.com`** (Pages project **`altrudigitech-studio`**).
 
+**Git auto-deploy:** see **[PAGES_GIT.md](./PAGES_GIT.md)**. **Email Routing:** **[EMAIL_ROUTING.md](./EMAIL_ROUTING.md)**.
+
 ## One-time setup
 
 1. **Login** (browser):

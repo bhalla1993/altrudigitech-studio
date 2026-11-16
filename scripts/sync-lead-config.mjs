@@ -37,7 +37,7 @@ function loadDevVars(filePath) {
 }
 
 const env = loadDevVars(devVarsPath)
-const siteKey = env.TURNSTILE_SITE_KEY || ''
+const siteKey = env.TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || ''
 
 for (const { slug, clientId } of CLIENTS) {
   const assetsDir = path.join(root, 'clients', slug, 'assets', 'lead-form')

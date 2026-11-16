@@ -9,6 +9,7 @@ import { Box, Button, Card, CardContent, Grid, IconButton, Link, Stack, Typograp
 import { motion } from 'framer-motion'
 import Seo from '../components/common/Seo'
 import IntakeFormEmbed from '../components/forms/IntakeFormEmbed'
+import StudioLeadForm from '../components/forms/StudioLeadForm'
 import { business, pageSeo } from '../utils/siteData'
 
 const socialItems = [
@@ -77,6 +78,12 @@ function ContactPage() {
 
           <Grid item xs={12} md={5}>
             <Stack spacing={2.2}>
+              <Card>
+                <CardContent>
+                  <StudioLeadForm />
+                </CardContent>
+              </Card>
+
               <Card>
                 <CardContent>
                   <Stack spacing={1.2}>

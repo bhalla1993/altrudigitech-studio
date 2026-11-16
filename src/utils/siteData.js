@@ -10,8 +10,9 @@ export const brand = {
   subdomainExample: 'yourname.altrudigitech.com',
   clientSiteCredit: 'AltruDigiTech',
   updatesEmail: 'updates@altrudigitech.com',
-  /** Public studio inbox until hello@ is enabled via Cloudflare Email Routing */
+  /** Legacy Gmail — fallback if hello@ routing is not ready */
   publicContactEmail: 'altrudigitech.studio@gmail.com',
+  /** Public studio inbox (Cloudflare Email Routing → Gmail). See docs/EMAIL_ROUTING.md */
   helloEmail: 'hello@altrudigitech.com',
   deprecatedNames: ['Altruism', 'Altruism Digital Studio'],
 }
@@ -25,7 +26,7 @@ export const business = {
   shortDescription: `$99 one-time single-page sites for local trades, small shops, and students—live on ${brand.subdomainExample} with transparent add-ons.`,
   defaultMetaDescription:
     'AltruDigiTech Digital Studio builds $99 single-page websites for trades, shops, and students in Ontario and across Canada. No monthly builder fees.',
-  email: brand.publicContactEmail,
+  email: brand.helloEmail,
   /** Pin / contact card — remote studio, no street address */
   location: 'Based in Ontario, Canada',
   originBadge: 'Canadian-owned studio',

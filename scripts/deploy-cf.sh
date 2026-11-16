@@ -9,5 +9,9 @@ if [[ -f .dev.vars ]]; then
   set +a
 fi
 
+if [[ -n "${TURNSTILE_SITE_KEY:-}" ]]; then
+  export VITE_TURNSTILE_SITE_KEY="${TURNSTILE_SITE_KEY}"
+fi
+
 npm run build
 wrangler pages deploy dist --project-name=altrudigitech-studio --commit-dirty=true

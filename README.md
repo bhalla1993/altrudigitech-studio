@@ -66,7 +66,7 @@ One-time: `npx wrangler login`. Then:
 npm run deploy:cf
 ```
 
-See **[docs/DEPLOY.md](docs/DEPLOY.md)** — or ask Agent mode to deploy to Cloudflare.
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** · Git builds: **[docs/PAGES_GIT.md](docs/PAGES_GIT.md)** · Email: **[docs/EMAIL_ROUTING.md](docs/EMAIL_ROUTING.md)**.
 
 ### SPA routing
 
