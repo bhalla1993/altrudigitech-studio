@@ -56,7 +56,7 @@ npm run dev:worker   # http://localhost:8787/health
 npm run test:resend  # requires .dev.vars — see .env.example
 ```
 
-Plan: **[PHASE_2_3_PLAN.md](./PHASE_2_3_PLAN.md)**. No production Worker deploy or wildcard DNS in Slice A.
+Plan: **[PHASE_2_3_PLAN.md](./PHASE_2_3_PLAN.md)**. Production Worker: **[WORKER_ROUTES.md](./WORKER_ROUTES.md)** (`npm run deploy:worker`).
 
 ## Do not use
 

@@ -8,3 +8,8 @@ compatibility_date = "2024-11-16"
 [vars]
 PAGES_ORIGIN = "https://altrudigitech.com"
 RESEND_FROM = "AltruDigiTech <hello@altrudigitech.com>"
+
+# Client subdomains only — apex stays on Pages (no route on altrudigitech.com).
+[[routes]]
+pattern = "*.altrudigitech.com/*"
+zone_name = "altrudigitech.com"

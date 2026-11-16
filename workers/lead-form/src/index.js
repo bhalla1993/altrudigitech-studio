@@ -1,9 +1,13 @@
 /**
- * Phase 2–3: client subdomain routing + POST /api/lead.
- * Slice A: /health and dev-only Resend ping.
+ * Phase 2–3: client subdomain routing + POST /api/lead (Slice D+).
+ * Slice B: known *.altrudigitech.com → fetch PAGES_ORIGIN /sites/{slug}/...
  */
 
+import { lookupHost } from './hosts.js'
+import { pagesOriginUrl, pagesSitePath } from './routing.js'
+
 const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' }
+const APEX_HOST = 'altrudigitech.com'
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: JSON_HEADERS })
@@ -58,16 +62,67 @@ async function handleResendTest(env) {
   return json({ ok: true, resend: parsed })
 }
 
+function notFoundHtml(host) {
+  return new Response(
+    `<!doctype html><html><head><meta charset="utf-8"><title>Not found</title></head><body><h1>404</h1><p>No site configured for ${host}.</p></body></html>`,
+    { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } },
+  )
+}
+
+async function proxyFromPages(request, env, sitePath) {
+  const origin = (env.PAGES_ORIGIN || 'https://altrudigitech.com').replace(/\/$/, '')
+  const target = pagesOriginUrl(origin, sitePath)
+
+  const headers = new Headers()
+  const pass = ['accept', 'accept-encoding', 'accept-language', 'if-none-match', 'if-modified-since', 'range']
+  for (const name of pass) {
+    const val = request.headers.get(name)
+    if (val) headers.set(name, val)
+  }
+
+  const init = {
+    method: request.method,
+    headers,
+    redirect: 'manual',
+  }
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    init.body = request.body
+  }
+
+  const upstream = await fetch(target.toString(), init)
+
+  const responseHeaders = new Headers(upstream.headers)
+  responseHeaders.delete('transfer-encoding')
+
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers: responseHeaders,
+  })
+}
+
+async function handleClientHost(request, env, hostname) {
+  const entry = lookupHost(hostname)
+  if (!entry?.slug) {
+    return notFoundHtml(hostname)
+  }
+
+  const url = new URL(request.url)
+  const sitePath = pagesSitePath(entry.slug, url.pathname)
+  return proxyFromPages(request, env, sitePath)
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
     const path = url.pathname
+    const hostname = url.hostname
 
     if (path === '/health' && request.method === 'GET') {
       return json({
         ok: true,
         worker: 'altrudigitech-studio-worker',
-        slice: 'A',
+        slice: 'B',
         pagesOrigin: env.PAGES_ORIGIN || null,
       })
     }
@@ -76,6 +131,26 @@ export default {
       return handleResendTest(env)
     }
 
-    return json({ error: 'Not found' }, 404)
+    if (hostname === APEX_HOST) {
+      return json(
+        { error: 'Apex is served by Pages only; this worker handles client subdomains.' },
+        501,
+      )
+    }
+
+    if (hostname === `www.${APEX_HOST}`) {
+      const dest = new URL(url.pathname + url.search, `https://${APEX_HOST}`)
+      return Response.redirect(dest.toString(), 301)
+    }
+
+    if (!hostname.endsWith(`.${APEX_HOST}`)) {
+      return json({ error: 'Not found' }, 404)
+    }
+
+    if (request.method !== 'GET' && request.method !== 'HEAD') {
+      return json({ error: 'Method not allowed' }, 405)
+    }
+
+    return handleClientHost(request, env, hostname)
   },
 }

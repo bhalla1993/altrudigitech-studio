@@ -1,6 +1,6 @@
 # Phase 2 & 3 implementation plan (locked)
 
-**Status:** Slice A in progress · **Approved:** 2026-03-16  
+**Status:** Slice B in progress · **Approved:** 2026-03-16  
 **References:** [STUDIO_PLAN.md](./STUDIO_PLAN.md), [DEPLOY.md](./DEPLOY.md), `config/hosts.json`
 
 ---
@@ -56,10 +56,17 @@ Google Form intake stays through Phase 3.
 
 ### Slice A exit
 
-- [ ] Resend domain verified
-- [ ] Turnstile widget (apex + `*.altrudigitech.com`)
-- [ ] `wrangler dev` + `/health` + Resend test
-- [ ] Repo pushed to `origin/main`
+- [x] Resend domain verified
+- [x] Turnstile widget (apex + subdomains on widget)
+- [x] `wrangler dev` + `/health` + Resend test
+- [x] Repo pushed to `origin/main`
+
+### Slice B exit
+
+- [ ] Worker deployed with `*.altrudigitech.com/*` route
+- [ ] Wildcard (or `internal-demo`) DNS proxied
+- [ ] `https://internal-demo.altrudigitech.com/` → 200
+- [ ] Unknown subdomain → 404; apex Pages unchanged
 
 ---
 

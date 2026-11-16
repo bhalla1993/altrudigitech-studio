@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d dist",
     "deploy:cf": "bash scripts/deploy-cf.sh",
     "dev:worker": "wrangler dev --config workers/lead-form/wrangler.toml",
+    "deploy:worker": "bash scripts/deploy-worker.sh",
     "test:resend": "node scripts/test-resend.mjs",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
