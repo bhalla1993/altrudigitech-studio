@@ -116,4 +116,14 @@ curl -sI -X OPTIONS "https://altrudigitech.com/api/lead" \
 
 Expect `204` and `access-control-allow-origin: https://altrudigitech.com`.
 
-Google Form intake stays until you wire a Turnstile form on Contact (Slice D+ UI optional).
+Google Form intake stays on studio Contact (Slice D+).
+
+## 7. Slice E — client subdomain forms
+
+- **`config/hosts.json`:** set `lead_email` per FQDN (sandbox uses studio Gmail).
+- **Build:** `TURNSTILE_SITE_KEY` in `.dev.vars` → `npm run build` runs `sync-lead-config.mjs` → `clients/{slug}/assets/lead-form/lead-config.js` (gitignored).
+- **Demo form:** `https://internal-demo.altrudigitech.com/` → “Send test lead”.
+- **CORS:** POST from `https://{host in hosts.json}`; Worker binds `client_id` from origin (not spoofable).
+- **Shared script:** `clients/_shared/lead-form/altru-lead.js`
+
+Redeploy after host map changes: `npm run deploy:worker` then `npm run deploy:cf`.

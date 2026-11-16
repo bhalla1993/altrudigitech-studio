@@ -24,4 +24,6 @@ put_secret RESEND_API_KEY "${RESEND_API_KEY:-}"
 put_secret TURNSTILE_SECRET_KEY "${TURNSTILE_SECRET_KEY:-}"
 put_secret STUDIO_LEAD_EMAIL "${STUDIO_LEAD_EMAIL:-}"
 
+node scripts/sync-lead-config.mjs 2>/dev/null || true
+
 wrangler deploy --config "${CONFIG}"

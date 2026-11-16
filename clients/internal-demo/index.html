@@ -13,15 +13,13 @@
       body {
         margin: 0;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
         background: #0f172a;
         color: #e2e8f0;
         padding: 1.5rem;
       }
       main {
-        max-width: 32rem;
-        text-align: center;
+        max-width: 28rem;
+        margin: 0 auto;
       }
       h1 {
         font-size: 1.35rem;
@@ -39,13 +37,67 @@
       a {
         color: #60a5fa;
       }
+      form {
+        margin-top: 1.5rem;
+        display: grid;
+        gap: 0.75rem;
+        text-align: left;
+      }
+      label {
+        display: grid;
+        gap: 0.25rem;
+        font-size: 0.85rem;
+        color: #cbd5e1;
+      }
+      input,
+      textarea {
+        font: inherit;
+        padding: 0.5rem 0.65rem;
+        border-radius: 6px;
+        border: 1px solid #334155;
+        background: #1e293b;
+        color: #f8fafc;
+      }
+      textarea {
+        min-height: 5rem;
+        resize: vertical;
+      }
+      button[type='submit'] {
+        font: inherit;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        border: none;
+        background: #2563eb;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button[type='submit']:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      .privacy {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin: 0;
+      }
+      [data-altru-lead-status] {
+        font-size: 0.9rem;
+      }
     </style>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+      onload="document.dispatchEvent(new Event('turnstile-loaded'))"
+    ></script>
+    <script src="assets/lead-form/lead-config.js"></script>
   </head>
   <body>
     <main>
       <h1>AltruDigiTech internal routing sandbox</h1>
       <p>
-        Slug: <code>internal-demo</code>. Used for Phase 2–3 Worker and subdomain tests — not a public client site.
+        Slug: <code>internal-demo</code>. Slice E lead form test — not a public client site.
       </p>
       <p>
         Phase 1 path:
@@ -53,6 +105,28 @@
         on
         <a href="https://altrudigitech.com">altrudigitech.com</a>.
       </p>
+
+      <form data-altru-lead data-turnstile-theme="dark" method="post" action="#">
+        <label>
+          Name
+          <input name="name" type="text" autocomplete="name" />
+        </label>
+        <label>
+          Email
+          <input name="email" type="email" required autocomplete="email" />
+        </label>
+        <label>
+          Message
+          <textarea name="message" required></textarea>
+        </label>
+        <p class="privacy">
+          Your inquiry is securely transmitted directly to Internal demo (sandbox) via AltruDigiTech.
+        </p>
+        <div data-turnstile></div>
+        <button type="submit">Send test lead</button>
+        <p data-altru-lead-status hidden role="status"></p>
+      </form>
     </main>
+    <script src="assets/lead-form/altru-lead.js"></script>
   </body>
 </html>

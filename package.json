@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/copy-client-sites.mjs",
+    "build": "node scripts/sync-lead-config.mjs && vite build && node scripts/copy-client-sites.mjs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "deploy:cf": "bash scripts/deploy-cf.sh",

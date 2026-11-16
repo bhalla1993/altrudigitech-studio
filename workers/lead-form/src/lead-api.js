@@ -1,4 +1,4 @@
-import { knownHostnames, resolveLeadEmailByClientId } from './hosts.js'
+import { knownHostnames, lookupHost, resolveLeadEmailByClientId } from './hosts.js'
 import { allowedOrigins, corsHeaders, withCors } from './cors.js'
 
 const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' }
@@ -7,7 +7,23 @@ function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: JSON_HEADERS })
 }
 
-function resolveLeadEmail(clientId, env) {
+const APEX_ORIGIN = 'https://altrudigitech.com'
+
+function clientFromOrigin(origin) {
+  if (!origin) return null
+  try {
+    const host = new URL(origin).hostname
+    if (host === 'altrudigitech.com') return { client_id: 'studio', hostEntry: null }
+    const hostEntry = lookupHost(host)
+    if (hostEntry?.client_id) return { client_id: hostEntry.client_id, hostEntry }
+    return null
+  } catch {
+    return null
+  }
+}
+
+function resolveLeadEmail(clientId, env, hostEntry) {
+  if (hostEntry?.lead_email) return hostEntry.lead_email
   if (clientId === 'studio') {
     return env.STUDIO_LEAD_EMAIL || env.RESEND_TEST_TO || ''
   }
@@ -125,7 +141,7 @@ function parseLeadBody(raw) {
  * POST /api/lead and OPTIONS preflight (Slice D: studio CORS).
  */
 export async function handleLeadApi(request, env) {
-  const corsSet = allowedOrigins({ ...env, _corsHosts: knownHostnames() }, 'studio')
+  const corsSet = allowedOrigins({ ...env, _corsHosts: knownHostnames() }, 'clients')
   const { headers: cors, allowed } = corsHeaders(request, corsSet)
 
   if (request.method === 'OPTIONS') {
@@ -149,7 +165,17 @@ export async function handleLeadApi(request, env) {
     return withCors(json({ error: parsed.error }, 400), cors)
   }
 
-  const { name, email, message, turnstileToken, clientId } = parsed
+  let { name, email, message, turnstileToken, clientId } = parsed
+
+  const requestOrigin = request.headers.get('Origin') || ''
+  const fromOrigin = clientFromOrigin(requestOrigin)
+  if (fromOrigin?.hostEntry) {
+    clientId = fromOrigin.client_id
+  } else if (requestOrigin === APEX_ORIGIN || requestOrigin.startsWith('http://localhost')) {
+    clientId = parsed.clientId || 'studio'
+  } else if (requestOrigin && !fromOrigin) {
+    return withCors(json({ error: 'CORS origin not allowed' }, 403), cors)
+  }
 
   const cfConnecting = request.headers.get('CF-Connecting-IP')
   const ts = await verifyTurnstile(turnstileToken, env, cfConnecting)
@@ -157,7 +183,8 @@ export async function handleLeadApi(request, env) {
     return withCors(json({ error: ts.error, detail: ts.detail }, 403), cors)
   }
 
-  const leadEmail = resolveLeadEmail(clientId, env)
+  const hostEntry = fromOrigin?.hostEntry ?? null
+  const leadEmail = resolveLeadEmail(clientId, env, hostEntry)
   if (!leadEmail) {
     return withCors(json({ error: 'No lead_email configured for client', client_id: clientId }, 500), cors)
   }

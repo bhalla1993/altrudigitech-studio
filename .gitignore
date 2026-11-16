@@ -31,4 +31,4 @@ dist-ssr
 .env
 .env.*
 !.env.example
-.dev.vars
+clients/*/assets/lead-form/lead-config.js

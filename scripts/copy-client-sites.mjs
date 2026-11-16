@@ -30,5 +30,17 @@ for (const slug of fs.readdirSync(clientsDir)) {
   const dest = path.join(sitesOut, slug)
   fs.rmSync(dest, { recursive: true, force: true })
   fs.cpSync(src, dest, { recursive: true })
+
+  const sharedLead = path.join(clientsDir, '_shared', 'lead-form', 'altru-lead.js')
+  if (fs.existsSync(sharedLead)) {
+    const leadDestDir = path.join(dest, 'assets', 'lead-form')
+    fs.mkdirSync(leadDestDir, { recursive: true })
+    fs.copyFileSync(sharedLead, path.join(leadDestDir, 'altru-lead.js'))
+    const cfgSrc = path.join(src, 'assets', 'lead-form', 'lead-config.js')
+    if (fs.existsSync(cfgSrc)) {
+      fs.copyFileSync(cfgSrc, path.join(leadDestDir, 'lead-config.js'))
+    }
+  }
+
   console.log(`copy-client-sites: ${slug} → dist/sites/${slug}/`)
 }
