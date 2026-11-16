@@ -8,7 +8,7 @@
 
 | Priority | Action |
 |----------|--------|
-| 1 | Finish [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) (GHP off, social URLs, email) |
+| 1 | [CUTOVER §4](CUTOVER_CHECKLIST.md#4-social--listings-point-to-cloudflare-not-github) — set Facebook / Instagram / LinkedIn / GBP **website** to `https://altrudigitech.com` (only cutover item left). |
 | 2 | **Promote:** local trades, students, GTA/Ontario — link `/pricing`, `/contact#intake` |
 | 3 | **Capacity:** honest cap on Pricing if you use it (“3 builds this week”) |
 | 4 | **Intake + payment** before custom build ([STUDIO_PLAN.md](./STUDIO_PLAN.md) §9-B, §12) |

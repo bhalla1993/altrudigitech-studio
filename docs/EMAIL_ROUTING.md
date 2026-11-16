@@ -68,6 +68,8 @@ Sending **from** `hello@altrudigitech.com` via Resend is fine once the domain is
 
 ## 6. Verify
 
+**Production:** verified **2026-11-16** — MX on zone (`route*.mx.cloudflare.net`), `hello@` rule → Gmail, inbound test from external address.
+
 1. From an external account, email **hello@altrudigitech.com**
 2. Message arrives in Gmail within a few minutes
 3. On site, `mailto:hello@altrudigitech.com` opens compose to that address

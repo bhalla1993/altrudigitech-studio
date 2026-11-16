@@ -1,9 +1,8 @@
-# Git remotes — two-repo layout
+# Git remotes — canonical repo
 
 | Remote | Repository | Purpose |
 |--------|------------|---------|
-| **`origin`** | [bhalla1993/altrudigitech-studio](https://github.com/bhalla1993/altrudigitech-studio) | **Canonical** source. Cloudflare Pages Git integration (when live). Day-to-day `git push`. |
-| **`legacy`** | [bhalla1993/altruism](https://github.com/bhalla1993/altruism) | Legacy **GitHub Pages** staging until `altrudigitech.com` is on Cloudflare. Not retired yet. |
+| **`origin`** | [bhalla1993/altrudigitech-studio](https://github.com/bhalla1993/altrudigitech-studio) | **Canonical** source. Cloudflare Pages Git on `main`. All day-to-day work happens here. |
 
 ## Daily workflow
 
@@ -13,32 +12,21 @@ git pull origin main
 git push origin main
 ```
 
-## Refresh legacy GitHub Pages (optional)
+Production traffic: **[https://altrudigitech.com](https://altrudigitech.com)** (Cloudflare Pages + Worker). Push to `main` triggers Pages when Git is connected; see [PAGES_GIT.md](./PAGES_GIT.md).
 
-When you still host a preview on `bhalla1993.github.io/altruism/`:
+## Legacy GitHub repo (`bhalla1993/altruism`)
 
-```bash
-npm run build
-npm run deploy    # gh-pages branch on legacy remote — configure gh-pages to push to legacy if needed
-```
+**Retired for hosting** (GitHub Pages off; `https://bhalla1993.github.io/altruism/` returns 404). Do not use `npm run deploy` (gh-pages) for production.
 
-Or mirror source to `legacy` after a release:
+Cleanup **done** (2026-11-16): **`altruism`** GitHub README points to **altrudigitech.com**; local **`altruism`** clone and **`legacy`** remote removed. See [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) §1.3–1.5.
 
-```bash
-git push legacy main
-```
-
-For project-site URLs, you may need `base: '/altruism/'` on a legacy-only deploy branch; production uses `base: '/'` on Cloudflare (see `docs/STUDIO_PLAN.md`).
+The **`legacy`** remote and gh-pages flow are no longer part of the studio workflow.
 
 ## Deploy (Wrangler)
 
 ```bash
-npm run deploy:cf
+npm run deploy:worker   # hosts.json, /api/lead, routes
+npm run deploy:cf         # optional manual Pages upload — prefer git push
 ```
 
 Details: **[DEPLOY.md](./DEPLOY.md)**.
-
-## After Cloudflare cutover
-
-1. Connect **Cloudflare Pages** to **`altrudigitech-studio`** (`main`, build `npm ci && npm run build`, output `dist`).
-2. Disable GitHub Pages deploy on **`altruism`** to avoid duplicate SEO (plan §9-E).

@@ -65,7 +65,7 @@ Connect this repository in the Cloudflare dashboard (**Workers & Pages** → **C
 
 Add custom domain **`altrudigitech.com`**. Configure **`www` → apex** 301 in Cloudflare Bulk Redirects.
 
-After cutover, disable GitHub Pages deployment to avoid duplicate indexing (see plan §9-E).
+GitHub Pages on the old **`altruism`** repo is retired; production is **altrudigitech.com** only (see [docs/CUTOVER_CHECKLIST.md](docs/CUTOVER_CHECKLIST.md)).
 
 ### Deploy from your machine (Wrangler)
 
@@ -81,18 +81,13 @@ See **[docs/DEPLOY.md](docs/DEPLOY.md)** · Git builds: **[docs/PAGES_GIT.md](do
 
 `public/_redirects` serves the React app for deep links on Cloudflare Pages. Do **not** add a root `404.html` (it disables Pages SPA mode and breaks `/pricing`, etc.).
 
-## Git remotes
+## Git remote
 
 | Remote | Repo |
 |--------|------|
 | **origin** | `bhalla1993/altrudigitech-studio` — canonical; push here |
-| **legacy** | `bhalla1993/altruism` — GitHub Pages staging until CF cutover |
 
-Details: **[docs/REPOS.md](docs/REPOS.md)**.
-
-## Legacy GitHub Pages
-
-`npm run deploy` (gh-pages) is retained for optional staging on **legacy**. Production is **altrudigitech.com** on Cloudflare Pages.
+Details: **[docs/REPOS.md](docs/REPOS.md)**. Do **not** use `npm run deploy` (gh-pages) for production.
 
 ## Notes
 

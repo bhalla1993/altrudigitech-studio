@@ -2,7 +2,7 @@
 
 **Canonical repo:** [bhalla1993/altrudigitech-studio](https://github.com/bhalla1993/altrudigitech-studio)  
 **Production:** [https://altrudigitech.com](https://altrudigitech.com)  
-**Status (2026):** Phase 1–3 infra live (Pages + Worker + `/api/lead`). Selling phase (Phase 4+) — see [NEXT_STEPS.md](./NEXT_STEPS.md).
+**Status (2026):** Phase 1–3 live on Cloudflare; cutover complete except [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) **§4** (social/listing website URLs). Phase 4+ selling: [NEXT_STEPS.md](./NEXT_STEPS.md).
 
 New chat or fresh machine? Point the agent at **this file** plus [STUDIO_PLAN.md](./STUDIO_PLAN.md).
 
@@ -22,7 +22,7 @@ New chat or fresh machine? Point the agent at **this file** plus [STUDIO_PLAN.md
 | **[WORKER_ROUTES.md](./WORKER_ROUTES.md)** | Wildcard DNS, Worker routes, `/api/lead` |
 | **[EMAIL_ROUTING.md](./EMAIL_ROUTING.md)** | `hello@` / `updates@` → Gmail |
 | **[BRAND.md](./BRAND.md)** | Names, emails, repo naming |
-| **[REPOS.md](./REPOS.md)** | `origin` vs legacy `altruism` remote |
+| **[REPOS.md](./REPOS.md)** | Canonical `origin`; retired `altruism` GitHub Pages |
 
 ---
 

@@ -62,7 +62,7 @@ Plan: **[PHASE_2_3_PLAN.md](./PHASE_2_3_PLAN.md)**. Production Worker: **[WORKER
 
 ## Do not use
 
-- `npm run deploy` — **gh-pages** to GitHub (`legacy` repo), not Cloudflare.
+- `npm run deploy` — legacy **gh-pages** to the retired `altruism` repo. Production is Cloudflare Pages only (`git push origin main` or `npm run deploy:cf`).
 
 ## LocalTopSpot
 

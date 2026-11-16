@@ -20,7 +20,7 @@
 - Altruism  
 - Altruism Digital Studio  
 
-Canonical git repo: **`bhalla1993/altrudigitech-studio`**. Legacy **`altruism`** remains for GitHub Pages until cutover (see `docs/REPOS.md`). Repo folder names are not public brand.
+Canonical git repo: **`bhalla1993/altrudigitech-studio`**. Legacy **`altruism`** GitHub Pages is retired — public URLs use **`altrudigitech.com`** (see `docs/REPOS.md`). Repo folder names are not public brand.
 
 ## Usage rules
 
