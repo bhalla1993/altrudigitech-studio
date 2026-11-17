@@ -56,7 +56,7 @@ async function verifyTurnstile(token, env, remoteip) {
   return { ok: true }
 }
 
-async function sendLeadEmail({ env, to, clientId, name, email, message, originHost }) {
+async function sendLeadEmail({ env, to, clientId, name, email, message, originHost, intent }) {
   const apiKey = env.RESEND_API_KEY
   const from = env.RESEND_FROM || 'AltruDigiTech <hello@altrudigitech.com>'
   if (!apiKey) {
@@ -65,7 +65,7 @@ async function sendLeadEmail({ env, to, clientId, name, email, message, originHo
 
   const subject =
     clientId === 'studio'
-      ? `[Studio] Contact from ${name || 'Unknown'}`
+      ? `[Studio] ${intent ? String(intent).slice(0, 80) : 'Contact'} — ${name || email || 'Unknown'}`
       : `[${clientId}] New lead from ${name || 'Unknown'}`
 
   const text = [
@@ -126,6 +126,7 @@ function parseLeadBody(raw) {
   const message = String(data.message ?? '').trim()
   const turnstileToken = String(data.turnstileToken ?? data['cf-turnstile-response'] ?? '').trim()
   const clientId = String(data.client_id ?? data.clientId ?? 'studio').trim()
+  const intent = String(data.intent ?? '').trim()
 
   if (!email || !message) {
     return { error: 'email and message are required' }
@@ -134,7 +135,7 @@ function parseLeadBody(raw) {
     return { error: 'invalid email' }
   }
 
-  return { name, email, message, turnstileToken, clientId }
+  return { name, email, message, turnstileToken, clientId, intent }
 }
 
 /**
@@ -165,7 +166,7 @@ export async function handleLeadApi(request, env) {
     return withCors(json({ error: parsed.error }, 400), cors)
   }
 
-  let { name, email, message, turnstileToken, clientId } = parsed
+  let { name, email, message, turnstileToken, clientId, intent } = parsed
 
   const requestOrigin = request.headers.get('Origin') || ''
   const fromOrigin = clientFromOrigin(requestOrigin)
@@ -197,6 +198,7 @@ export async function handleLeadApi(request, env) {
       name,
       email,
       message,
+      intent,
       originHost: request.headers.get('Origin') || new URL(request.url).hostname,
     })
     return withCors(json({ ok: true, id: resend.id }, 201), cors)

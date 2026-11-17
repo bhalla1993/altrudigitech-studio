@@ -4,12 +4,10 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew'
-import { Box, Button, Card, CardContent, Grid, IconButton, Link, Stack, Typography } from '@mui/material'
+import { Box, Card, CardContent, Grid, IconButton, Link, Stack, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 import Seo from '../components/common/Seo'
-import IntakeFormEmbed from '../components/forms/IntakeFormEmbed'
-import StudioLeadForm from '../components/forms/StudioLeadForm'
+import StudioIntakeForm from '../components/forms/StudioIntakeForm'
 import { business, pageSeo } from '../utils/siteData'
 
 const socialItems = [
@@ -41,49 +39,30 @@ function ContactPage() {
 
   return (
     <>
-      <Seo
-        title="Contact"
-        description={pageSeo.contact}
-        path="/contact"
-      />
+      <Seo title="Contact" description={pageSeo.contact} path="/contact" />
 
       <Box component="section" aria-labelledby="contact-page-title">
         <Grid container spacing={3.2}>
-          <Grid item xs={12} md={7}>
+          <Grid item xs={12} lg={8}>
             <Stack spacing={2.2}>
               <Typography id="contact-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
                 Start your $99 Starter or ask a question
               </Typography>
               <Typography color="text.secondary">
-                One intake form—choose Starter, a quick question, custom software, or student pricing. We respond within one
+                One intake form — choose Starter, a quick question, custom software, or student pricing. We respond within one
                 business day.
               </Typography>
 
-              <Button
-                component={Link}
-                href={business.intakeFormViewUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="text"
-                size="small"
-                endIcon={<OpenInNewIcon sx={{ fontSize: 16 }} />}
-                sx={{ alignSelf: 'flex-start', px: 0 }}
-              >
-                Open form in a new tab
-              </Button>
-
-              <IntakeFormEmbed id="intake" title="Contact and project intake" />
+              <Card>
+                <CardContent>
+                  <StudioIntakeForm id="intake" />
+                </CardContent>
+              </Card>
             </Stack>
           </Grid>
 
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} lg={4}>
             <Stack spacing={2.2}>
-              <Card>
-                <CardContent>
-                  <StudioLeadForm />
-                </CardContent>
-              </Card>
-
               <Card>
                 <CardContent>
                   <Stack spacing={1.2}>

@@ -15,7 +15,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
 import ServiceCard from '../components/cards/ServiceCard'
-import IntakeFormEmbed from '../components/forms/IntakeFormEmbed'
+import StudioIntakeForm from '../components/forms/StudioIntakeForm'
 import TemplatePreviewCard from '../components/templates/TemplatePreviewCard'
 import {
   brand,
@@ -329,7 +329,11 @@ function HomePage() {
 
             <Grid container spacing={3}>
               <Grid item xs={12} md={8}>
-                <IntakeFormEmbed title="Contact and project intake" />
+                <Card>
+                  <CardContent>
+                    <StudioIntakeForm />
+                  </CardContent>
+                </Card>
               </Grid>
 
               <Grid item xs={12} md={4}>
