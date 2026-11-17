@@ -81,12 +81,15 @@ function loadTurnstileScript() {
   })
 }
 
+/** Shown before an intent is picked so the progress bar isn’t a single step. */
+const INTAKE_STEPPER_PLACEHOLDER = ['Your details', 'Review & submit']
+
 function stepLabelsForIntent(intentId) {
   if (intentId === 'starter') return ['Your business', 'Content & design', 'Confirm & payment']
   if (intentId === 'student') return ['About you', 'Project details']
   if (intentId === 'custom') return ['Contact', 'Project scope']
   if (intentId === 'general') return ['Your question']
-  return []
+  return INTAKE_STEPPER_PLACEHOLDER
 }
 
 function emailValid(email) {
@@ -111,6 +114,7 @@ export default function StudioIntakeForm({ id = 'intake' }) {
   const totalSteps = 1 + branchSteps.length
 
   const stepperLabels = useMemo(() => ['Purpose', ...branchSteps], [branchSteps])
+  const progressStepCount = stepperLabels.length
 
   function patchFields(partial) {
     setFields((prev) => ({ ...prev, ...partial }))
@@ -702,21 +706,30 @@ export default function StudioIntakeForm({ id = 'intake' }) {
   return (
     <Box id={id} component="form" onSubmit={handleSubmit} noValidate>
       <Stack spacing={2}>
-        <Typography variant="h5">Contact and project intake</Typography>
-        <Typography variant="body2" color="text.secondary">
-          Choose your purpose — we only ask for fields that apply. Submissions go to {business.email} via AltruDigiTech.
-        </Typography>
-
-        <Stepper activeStep={step} alternativeLabel sx={{ display: { xs: 'none', sm: 'flex' } }}>
-          {stepperLabels.slice(0, totalSteps).map((label) => (
-            <Step key={label}>
+        <Stepper
+          activeStep={Math.min(step, progressStepCount - 1)}
+          alternativeLabel
+          sx={{
+            pt: 0.5,
+            pb: 1,
+            '& .MuiStepLabel-label': { typography: { xs: 'caption', sm: 'body2' } },
+          }}
+        >
+          {stepperLabels.map((label, index) => (
+            <Step key={`${label}-${index}`} completed={step > index}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
 
+        <Typography variant="h5">Contact and project intake</Typography>
+        <Typography variant="body2" color="text.secondary">
+          Choose your purpose — we only ask for fields that apply. Submissions go to {business.email} via AltruDigiTech.
+        </Typography>
+
         <Typography variant="caption" color="text.secondary">
-          Step {step + 1} of {totalSteps}
+          Step {step + 1} of {intentId ? totalSteps : progressStepCount}
+          {!intentId && step === 0 ? ' — pick an option below to tailor the next steps' : ''}
         </Typography>
 
         {onIntentStep ? renderIntentStep() : renderBranchStep()}
