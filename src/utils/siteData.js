@@ -121,7 +121,7 @@ export const starterPackage = {
   features: [
     'Single-page site: Hero, Services, About, Contact',
     'Template-based design with your name, colors, and text',
-    `Hosted at {slug}.${brand.domain} (free ongoing)`,
+    `Hosted at ${brand.subdomainExample} (free ongoing)`,
     'Stock photos until you provide your own (with attribution)',
     'One contact/quote form on your live site',
     'One pre-launch revision round',
@@ -189,7 +189,7 @@ export const pricingAddOnsFooter =
 export const pricingFaqs = [
   {
     q: 'What happens after my first 3 months?',
-    a: `Hosting on your {slug}.${brand.domain} subdomain stays free. Any text or photo updates after the initial 3-month window are billed at our standard $25 micro-task rate.`,
+    a: `Hosting on your ${brand.subdomainExample} address stays free. Any text or photo updates after the initial 3-month window are billed at our standard $25 micro-task rate.`,
   },
   {
     q: 'How do custom domains work?',

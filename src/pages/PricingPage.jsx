@@ -50,7 +50,7 @@ function PricingPage() {
             </Typography>
             <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
               One flat Starter package for local businesses and students. Pay once for your site on{' '}
-              <strong>{brand.subdomainExample.replace('yourname', '{slug}')}</strong>—add upgrades only when you need them.
+              <strong>{brand.subdomainExample}</strong>—add upgrades only when you need them.
             </Typography>
             <Chip label={capacityBadge} color="primary" variant="outlined" sx={{ width: 'fit-content', fontWeight: 600 }} />
             <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
@@ -187,7 +187,8 @@ function PricingPage() {
               <Stack spacing={1}>
                 <Typography variant="h6">Scope boundaries</Typography>
                 <Typography color="text.secondary" variant="body2">
-                  Intake worksheet and payment are required before we build your preview. One free slug rename before launch; changes
+                  Intake worksheet and payment are required before we build your preview. One free website address name change before
+                  launch; changes
                   after launch are $25 micro-tasks. Monthly tweaks (months 1–3): email{' '}
                   <strong>{brand.updatesEmail}</strong> by the 25th—unused updates do not roll over.
                 </Typography>

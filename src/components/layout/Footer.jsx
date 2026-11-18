@@ -5,7 +5,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined'
 import {
   Box,
-  Chip,
   Container,
   Divider,
   IconButton,
@@ -26,8 +25,6 @@ const quickLinks = [
   { label: 'About', path: '/about' },
   { label: 'Contact', path: '/contact' },
 ]
-
-const techBadges = ['React', 'JavaScript', 'Vite']
 
 function Footer() {
   return (
@@ -82,11 +79,6 @@ function Footer() {
               <Typography variant="body2" color="text.secondary">
                 {business.shortDescription}
               </Typography>
-              <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
-                {techBadges.map((badge) => (
-                  <Chip key={badge} label={badge} size="small" variant="outlined" />
-                ))}
-              </Stack>
             </Stack>
 
             <Stack spacing={1.2}>

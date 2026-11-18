@@ -1,5 +1,10 @@
 import { knownHostnames, lookupHost, resolveLeadEmailByClientId } from './hosts.js'
 import { allowedOrigins, corsHeaders, withCors } from './cors.js'
+import {
+  buildLeadEmailHtml,
+  buildLeadEmailText,
+  buildSimpleLeadSections,
+} from './lead-email-template.js'
 
 const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' }
 
@@ -56,7 +61,41 @@ async function verifyTurnstile(token, env, remoteip) {
   return { ok: true }
 }
 
-async function sendLeadEmail({ env, to, clientId, name, email, message, originHost, intent }) {
+function normalizeEmailSections(raw) {
+  if (!Array.isArray(raw) || raw.length === 0) return null
+  const sections = []
+  for (const entry of raw) {
+    if (!entry || typeof entry !== 'object') continue
+    const title = String(entry.title ?? '').trim() || 'Details'
+    const rowsIn = Array.isArray(entry.rows) ? entry.rows : []
+    const rows = []
+    for (const r of rowsIn) {
+      if (!r || typeof r !== 'object') continue
+      const label = String(r.label ?? '').trim()
+      const value = r.value
+      if (!label) continue
+      if (value == null || value === '' || value === false) continue
+      rows.push({
+        label,
+        value: Array.isArray(value) ? value.join(', ') : String(value),
+      })
+    }
+    if (rows.length) sections.push({ title, rows })
+  }
+  return sections.length ? sections : null
+}
+
+async function sendLeadEmail({
+  env,
+  to,
+  clientId,
+  name,
+  email,
+  message,
+  originHost,
+  intent,
+  emailSections,
+}) {
   const apiKey = env.RESEND_API_KEY
   const from = env.RESEND_FROM || 'AltruDigiTech <hello@altrudigitech.com>'
   if (!apiKey) {
@@ -68,19 +107,37 @@ async function sendLeadEmail({ env, to, clientId, name, email, message, originHo
       ? `[Studio] ${intent ? String(intent).slice(0, 80) : 'Contact'} — ${name || email || 'Unknown'}`
       : `[${clientId}] New lead from ${name || 'Unknown'}`
 
-  const text = [
-    `Client ID: ${clientId}`,
-    `Origin: ${originHost || 'unknown'}`,
-    '',
-    `Name: ${name || '(not provided)'}`,
-    `Email: ${email || '(not provided)'}`,
-    '',
-    'Message:',
-    message || '(empty)',
-    '',
-    '---',
-    'Your inquiry was securely transmitted via AltruDigiTech.',
-  ].join('\n')
+  const headline =
+    clientId === 'studio'
+      ? 'New studio intake'
+      : clientId === 'internal-demo'
+        ? 'New sandbox lead'
+        : `New lead · ${clientId}`
+
+  const sections =
+    emailSections?.length > 0
+      ? emailSections
+      : buildSimpleLeadSections({ name, email, message })
+
+  let textBody = buildLeadEmailText({
+    headline: `${headline} (${clientId})`,
+    sections,
+  })
+  if (emailSections?.length && message) {
+    const crmIdx = message.indexOf('Spreadsheet row')
+    if (crmIdx !== -1) {
+      textBody = `${textBody}\n\n${message.slice(crmIdx)}`
+    }
+  }
+
+  const html = buildLeadEmailHtml({
+    headline,
+    clientId,
+    name,
+    email,
+    originHost,
+    sections,
+  })
 
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -93,7 +150,8 @@ async function sendLeadEmail({ env, to, clientId, name, email, message, originHo
       to: [to],
       reply_to: email || undefined,
       subject,
-      text,
+      text: textBody,
+      html,
     }),
   })
 
@@ -127,6 +185,7 @@ function parseLeadBody(raw) {
   const turnstileToken = String(data.turnstileToken ?? data['cf-turnstile-response'] ?? '').trim()
   const clientId = String(data.client_id ?? data.clientId ?? 'studio').trim()
   const intent = String(data.intent ?? '').trim()
+  const emailSections = normalizeEmailSections(data.email_sections ?? data.emailSections)
 
   if (!email || !message) {
     return { error: 'email and message are required' }
@@ -135,7 +194,7 @@ function parseLeadBody(raw) {
     return { error: 'invalid email' }
   }
 
-  return { name, email, message, turnstileToken, clientId, intent }
+  return { name, email, message, turnstileToken, clientId, intent, emailSections }
 }
 
 /**
@@ -166,7 +225,7 @@ export async function handleLeadApi(request, env) {
     return withCors(json({ error: parsed.error }, 400), cors)
   }
 
-  let { name, email, message, turnstileToken, clientId, intent } = parsed
+  let { name, email, message, turnstileToken, clientId, intent, emailSections } = parsed
 
   const requestOrigin = request.headers.get('Origin') || ''
   const fromOrigin = clientFromOrigin(requestOrigin)
@@ -199,6 +258,7 @@ export async function handleLeadApi(request, env) {
       email,
       message,
       intent,
+      emailSections,
       originHost: request.headers.get('Origin') || new URL(request.url).hostname,
     })
     return withCors(json({ ok: true, id: resend.id }, 201), cors)

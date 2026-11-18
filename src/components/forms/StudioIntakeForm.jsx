@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Radio,
@@ -22,7 +23,10 @@ import {
   Typography,
 } from '@mui/material'
 import { business, brand } from '../../utils/siteData'
-import { formatStudioIntakeMessage } from '../../utils/formatStudioIntakeMessage'
+import {
+  buildStudioIntakeEmailSections,
+  formatStudioIntakePlainText,
+} from '../../utils/formatStudioIntakeMessage'
 import {
   customBudgetOptions,
   customProjectTypes,
@@ -288,8 +292,15 @@ export default function StudioIntakeForm({ id = 'intake' }) {
       return
     }
 
-    const message = formatStudioIntakeMessage({
-      intentLabel: intentMeta?.label ?? intentId,
+    const intentLabel = intentMeta?.label ?? intentId
+    const message = formatStudioIntakePlainText({
+      intentId,
+      intentLabel,
+      fields,
+    })
+    const email_sections = buildStudioIntakeEmailSections({
+      intentId,
+      intentLabel,
       fields,
     })
 
@@ -302,7 +313,8 @@ export default function StudioIntakeForm({ id = 'intake' }) {
           name: fields.contactName.trim(),
           email: fields.contactEmail.trim(),
           message,
-          intent: intentMeta?.label ?? intentId,
+          email_sections,
+          intent: intentLabel,
           turnstileToken: token,
           client_id: 'studio',
         }),
@@ -446,12 +458,21 @@ export default function StudioIntakeForm({ id = 'intake' }) {
               </Select>
             </FormControl>
             <TextField
-              label="Preferred subdomain slug"
-              placeholder="your-business"
-              helperText={`We host at https://your-slug.${brand.domain}`}
+              label="Your website address name"
+              placeholder="joes-plumbing"
+              helperText={`Pick the name people will see in your link — for example joes-plumbing becomes joes-plumbing.${brand.domain}. Use letters, numbers, and hyphens only.`}
               value={fields.slug}
               onChange={(e) => patchFields({ slug: e.target.value })}
               size="small"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
+                      .{brand.domain}
+                    </Typography>
+                  </InputAdornment>
+                ),
+              }}
             />
           </Stack>
         )
