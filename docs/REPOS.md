@@ -26,7 +26,7 @@ The **`legacy`** remote and gh-pages flow are no longer part of the studio workf
 
 ```bash
 npm run deploy:worker   # hosts.json, /api/lead, routes
-npm run deploy:cf         # optional manual Pages upload — prefer git push
+npm run deploy:cf         # optional manual Pages upload — normal path is git push main
 ```
 
 Details: **[DEPLOY.md](./DEPLOY.md)**.

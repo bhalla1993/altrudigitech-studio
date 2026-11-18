@@ -1,69 +1,72 @@
-# Deploy to Cloudflare (on command)
+# Deploy to Cloudflare
 
-Production target: **`https://altrudigitech.com`** (Pages project **`altrudigitech-studio`**).
+Production: **`https://altrudigitech.com`** (Pages project **`altrudigitech-studio`**).
 
-**Git auto-deploy:** see **[PAGES_GIT.md](./PAGES_GIT.md)**. **Email Routing:** **[EMAIL_ROUTING.md](./EMAIL_ROUTING.md)**.
+**Default path:** push to **`main`** — Git builds on Cloudflare Pages (`npm ci && npm run build`). Turnstile site key is in **`config/turnstile-site-key.mjs`** (no Pages env vars required).
 
-## One-time setup
+**Related:** [PAGES_GIT.md](./PAGES_GIT.md) · [WORKER_ROUTES.md](./WORKER_ROUTES.md) · [EMAIL_ROUTING.md](./EMAIL_ROUTING.md)
 
-1. **Login** (browser):
+---
 
-   ```bash
-   npx wrangler login
-   ```
+## Marketing site (Pages)
 
-2. **Custom domain** (Cloudflare dashboard, once):  
-   Workers & Pages → **altrudigitech-studio** → **Custom domains** → add **`altrudigitech.com`**.
+| When | Command |
+|------|---------|
+| Normal release | `git push origin main` |
+| Emergency / skip Git queue | `npm run deploy:cf` (requires `.dev.vars` with `CLOUDFLARE_*`) |
 
-3. **Non-interactive deploy:** `.dev.vars` (gitignored) with:
-
-   ```env
-   CLOUDFLARE_API_TOKEN=...
-   CLOUDFLARE_ACCOUNT_ID=...
-   ```
-
-   `npm run deploy:cf` loads `.dev.vars` automatically. First deploy may require creating the project once:
-
-   ```bash
-   npx wrangler pages project create altrudigitech-studio --production-branch=main
-   ```
-
-## Deploy (every release)
-
-From repo root:
+### One-time Wrangler setup
 
 ```bash
-npm run deploy:cf
+npx wrangler login
 ```
 
-This runs `npm run build` (Vite + `dist/sites/*` client copy) then `wrangler pages deploy dist`.
+Optional non-interactive deploy — `.dev.vars`:
 
-Or ask in Cursor Agent mode: **“Deploy studio to Cloudflare.”**
+```env
+CLOUDFLARE_API_TOKEN=...
+CLOUDFLARE_ACCOUNT_ID=...
+```
 
-## Verify after deploy
+First manual project create (if needed):
+
+```bash
+npx wrangler pages project create altrudigitech-studio --production-branch=main
+```
+
+`npm run deploy:cf` runs `npm run build` then `wrangler pages deploy dist`.
+
+### Verify after deploy
 
 | URL | What |
 |-----|------|
-| `https://altrudigitech.com/` | Marketing app |
-| `https://altrudigitech.com/pricing` | SPA deep link (must be **200**, not 404) |
-| `https://altrudigitech.com/sites/shiva-bhalla/` | First client portfolio |
-| `https://altrudigitech.com/sites/internal-demo/` | Sandbox placeholder |
-
-Until **Phase 2 Worker**, client subdomains like `https://shiva-bhalla.altrudigitech.com` are not routed — use **`/sites/{slug}/`** on the apex.
-
-## Worker (Phase 2–3, local only until Slice B)
+| `https://altrudigitech.com/pricing` | SPA deep link (**200**) |
+| `https://altrudigitech.com/contact` | Intake form |
+| `https://altrudigitech.com/sites/shiva-bhalla/` | Portfolio via apex path |
+| `https://shiva-bhalla.altrudigitech.com/` | Same site via Worker subdomain |
 
 ```bash
-npm run dev:worker   # http://localhost:8787/health
-npm run test:resend  # requires .dev.vars — see .env.example
+npm run verify:subdomains
 ```
 
-Plan: **[PHASE_2_3_PLAN.md](./PHASE_2_3_PLAN.md)**. Production Worker: **[WORKER_ROUTES.md](./WORKER_ROUTES.md)** (`npm run deploy:worker`).
+---
 
-## Do not use
+## Worker (API + subdomain routing)
 
-- `npm run deploy` — legacy **gh-pages** to the retired `altruism` repo. Production is Cloudflare Pages only (`git push origin main` or `npm run deploy:cf`).
+```bash
+npm run deploy:worker   # hosts.json, /api/lead, routes
+npm run dev:worker      # local :8787
+npm run test:resend     # needs .dev.vars
+```
+
+Secrets sync from `.dev.vars` when set: `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `STUDIO_LEAD_EMAIL`.
+
+---
+
+## Do not use for production
+
+- `npm run deploy` — legacy **gh-pages** to retired **`altruism`** repo.
 
 ## LocalTopSpot
 
-**localtopspot.ca** is a separate project — do not deploy from this repo’s `deploy:cf`.
+**localtopspot.ca** is a separate project — not deployed from this repo.

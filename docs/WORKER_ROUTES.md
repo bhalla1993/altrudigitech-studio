@@ -101,10 +101,14 @@ Add clients by redeploying the Worker after updating `hosts.json`.
   "name": "Test",
   "email": "you@example.com",
   "message": "Hello",
+  "email_sections": [{ "title": "Message", "rows": [{ "label": "Details", "value": "Hello" }] }],
   "turnstileToken": "<token from Turnstile widget>",
-  "client_id": "studio"
+  "client_id": "studio",
+  "intent": "General question"
 }
 ```
+
+`email_sections` optional — studio intake sends structured sections for HTML email.
 
 **Test CORS preflight:**
 
@@ -116,14 +120,16 @@ curl -sI -X OPTIONS "https://altrudigitech.com/api/lead" \
 
 Expect `204` and `access-control-allow-origin: https://altrudigitech.com`.
 
-Google Form intake stays on studio Contact (Slice D+).
+Studio **intake** is `StudioIntakeForm` on `/contact` (not Google Form). See [INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md).
+
+Studio POST body may include **`email_sections`** for HTML table emails (`workers/lead-form/src/lead-email-template.js`).
 
 ## 7. Slice E — client subdomain forms
 
 - **`config/hosts.json`:** set `lead_email` per FQDN (sandbox uses studio Gmail).
-- **Build:** `TURNSTILE_SITE_KEY` in `.dev.vars` → `npm run build` runs `sync-lead-config.mjs` → `clients/{slug}/assets/lead-form/lead-config.js` (gitignored).
+- **Build:** `sync-lead-config.mjs` writes `clients/{slug}/assets/lead-form/lead-config.js` using **`config/turnstile-site-key.mjs`** (env override optional).
 - **Demo form:** `https://internal-demo.altrudigitech.com/` → “Send test lead”.
 - **CORS:** POST from `https://{host in hosts.json}`; Worker binds `client_id` from origin (not spoofable).
 - **Shared script:** `clients/_shared/lead-form/altru-lead.js`
 
-Redeploy after host map changes: `npm run deploy:worker` then `npm run deploy:cf`.
+Redeploy after host map changes: **`npm run deploy:worker`**; push `main` if client static files changed under `clients/`.

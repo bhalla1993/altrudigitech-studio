@@ -12,7 +12,7 @@
 | **Domain** | altrudigitech.com | Hosting, canonical URLs, email (`updates@`) |
 | **Public contact (Gmail fallback)** | altrudigitech.studio@gmail.com | Destination for Email Routing; not shown on site |
 | **Public contact (site)** | hello@altrudigitech.com | `business.email` / `mailto` — set up in [EMAIL_ROUTING.md](./EMAIL_ROUTING.md) |
-| **Subdomain pattern** | `{slug}.altrudigitech.com` | Starter client URLs |
+| **Subdomain pattern** | `yourname.altrudigitech.com` (`brand.subdomainExample`) | Customer-facing Starter URL; repo uses technical `{slug}` for paths |
 | **Client footer credit** | AltruDigiTech → altrudigitech.com | HTML template footers |
 
 ## Deprecated (do not use in copy)

@@ -11,6 +11,7 @@ Production-ready React marketing site for **AltruDigiTech** — affordable singl
 | **[docs/START_HERE.md](docs/START_HERE.md)** | Clone, secrets, commands, doc index (new machine / new chat) |
 | **[docs/CUTOVER_CHECKLIST.md](docs/CUTOVER_CHECKLIST.md)** | Retire GitHub Pages, social URLs, live checks |
 | **[docs/NEXT_STEPS.md](docs/NEXT_STEPS.md)** | Promote, Phase 4 first client onboarding |
+| **[docs/INTAKE_AND_LEADS.md](docs/INTAKE_AND_LEADS.md)** | Contact intake, Turnstile, `/api/lead`, emails |
 | **[docs/STUDIO_PLAN.md](docs/STUDIO_PLAN.md)** | Locked product, pricing, phases 0–5 |
 
 Brand: **[docs/BRAND.md](docs/BRAND.md)** (`src/utils/siteData.js`).
@@ -27,11 +28,13 @@ Brand: **[docs/BRAND.md](docs/BRAND.md)** (`src/utils/siteData.js`).
 ## Project Structure
 
 ```text
-src/              Studio React app
+config/           hosts.json, turnstile-site-key.mjs (public site key)
+src/              Studio React app (StudioIntakeForm on /contact)
 public/           Static assets + SPA template demos
 clients/{slug}/   Client static sites → dist/sites/{slug}/
-scripts/          Build helpers
-docs/             START_HERE, STUDIO_PLAN, deploy, worker, email
+workers/          altrudigitech-studio-worker (/api/lead)
+scripts/          Build helpers (sync-lead-config, deploy)
+docs/             START_HERE, STUDIO_PLAN, intake, deploy, worker
 ```
 
 ## Local Development
@@ -63,19 +66,19 @@ Connect this repository in the Cloudflare dashboard (**Workers & Pages** → **C
 | Build output directory | `dist` |
 | Root directory | `/` |
 
+Turnstile **site key** is in **`config/turnstile-site-key.mjs`** — Pages env vars for Turnstile are **optional**. Do not put Worker secrets on Pages.
+
 Add custom domain **`altrudigitech.com`**. Configure **`www` → apex** 301 in Cloudflare Bulk Redirects.
 
 GitHub Pages on the old **`altruism`** repo is retired; production is **altrudigitech.com** only (see [docs/CUTOVER_CHECKLIST.md](docs/CUTOVER_CHECKLIST.md)).
 
-### Deploy from your machine (Wrangler)
+### Deploy
 
-One-time: `npx wrangler login`. Then:
+**Normal:** `git push origin main` (Pages Git).  
+**Worker:** `npm run deploy:worker` when `config/hosts.json` or Worker code changes.  
+**Optional:** `npm run deploy:cf` (Wrangler upload; needs `.dev.vars`).
 
-```bash
-npm run deploy:cf
-```
-
-See **[docs/DEPLOY.md](docs/DEPLOY.md)** · Git builds: **[docs/PAGES_GIT.md](docs/PAGES_GIT.md)** · Email: **[docs/EMAIL_ROUTING.md](docs/EMAIL_ROUTING.md)**.
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** · **[docs/PAGES_GIT.md](docs/PAGES_GIT.md)** · **[docs/INTAKE_AND_LEADS.md](docs/INTAKE_AND_LEADS.md)**.
 
 ### SPA routing
 

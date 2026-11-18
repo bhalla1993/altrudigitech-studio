@@ -1,7 +1,9 @@
 # Phase 2 & 3 implementation plan (locked)
 
-**Status:** Slice E · **Approved:** 2026-03-16  
-**References:** [START_HERE.md](./START_HERE.md), [STUDIO_PLAN.md](./STUDIO_PLAN.md), [DEPLOY.md](./DEPLOY.md), `config/hosts.json`
+**Status:** **Complete** (Slices A–E live). **Approved:** 2026-03-16 · **Verified:** 2026-11-17  
+**References:** [START_HERE.md](./START_HERE.md), [INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md), [DEPLOY.md](./DEPLOY.md)
+
+**Historical note:** This plan referenced **Google Form** intake on Contact through Phase 3. Production now uses **`StudioIntakeForm`** + Turnstile + HTML emails. Locked routing/API decisions below still apply.
 
 ---
 
@@ -12,7 +14,7 @@
 | **2** | `https://{slug}.altrudigitech.com` → `dist/sites/{slug}/`; unknown subdomains **404** |
 | **3** | `POST https://altrudigitech.com/api/lead` → Turnstile + Resend → `lead_email` |
 
-Google Form intake stays through Phase 3.
+Intake on marketing site: **`StudioIntakeForm`** ([INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md)).
 
 ---
 
@@ -37,7 +39,7 @@ Google Form intake stays through Phase 3.
 | ID | Decision |
 |----|----------|
 | **D1** | `PAGES_ORIGIN` = `https://altrudigitech.com` |
-| **D2** | Google Form stays active for intake through Phase 3 |
+| **D2** | ~~Google Form~~ → **StudioIntakeForm** on `/contact` (2026) |
 | **D3** | `hello@` Email Routing after **Slice C**, before heavy promotion; `updates@` in Phase 4 |
 | **D4** | Verify `altrudigitech.com` in Resend in **Slice A** (test to external inboxes in Slice E) |
 | **D5** | Commit + push pending repo work before Worker production routes |
@@ -78,8 +80,8 @@ Google Form intake stays through Phase 3.
 
 - [x] Route `altrudigitech.com/api/*` deployed
 - [x] Secrets: `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `STUDIO_LEAD_EMAIL`
-- [x] OPTIONS + POST `/api/lead` from apex origin with valid Turnstile → email (Contact quick message)
-- [x] Google Form intake unchanged on Contact page
+- [x] OPTIONS + POST `/api/lead` from apex origin with valid Turnstile → email
+- [x] Studio intake on Contact (`StudioIntakeForm`)
 
 ### Slice E exit
 
@@ -94,7 +96,7 @@ Google Form intake stays through Phase 3.
 
 | Channel | Role |
 |---------|------|
-| Google Form | Intake (through Phase 3) |
+| Studio intake form | `POST /api/lead` from `/contact` |
 | Resend | Outbound leads via Worker |
 | CF Email Routing | Inbound `hello@` / `updates@` → Gmail |
 

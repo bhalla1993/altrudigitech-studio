@@ -2,7 +2,7 @@
 
 **Canonical repo:** [bhalla1993/altrudigitech-studio](https://github.com/bhalla1993/altrudigitech-studio)  
 **Production:** [https://altrudigitech.com](https://altrudigitech.com)  
-**Status (2026):** Phase 1–3 live on Cloudflare; cutover complete except [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) **§4** (social/listing website URLs). Phase 4+ selling: [NEXT_STEPS.md](./NEXT_STEPS.md).
+**Status (2026-11-17):** Phase 1–3 live on Cloudflare; **cutover complete** ([CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md)). Studio **intake form** on `/contact`; **`git push main`** deploys with committed Turnstile site key. **Selling / client onboard:** [NEXT_STEPS.md](./NEXT_STEPS.md).
 
 New chat or fresh machine? Point the agent at **this file** plus [STUDIO_PLAN.md](./STUDIO_PLAN.md).
 
@@ -20,6 +20,7 @@ New chat or fresh machine? Point the agent at **this file** plus [STUDIO_PLAN.md
 | **[DEPLOY.md](./DEPLOY.md)** | Pages deploy overview |
 | **[PAGES_GIT.md](./PAGES_GIT.md)** | Cloudflare Pages ↔ GitHub builds |
 | **[WORKER_ROUTES.md](./WORKER_ROUTES.md)** | Wildcard DNS, Worker routes, `/api/lead` |
+| **[INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md)** | StudioIntakeForm, Turnstile, API, HTML emails |
 | **[EMAIL_ROUTING.md](./EMAIL_ROUTING.md)** | `hello@` / `updates@` → Gmail |
 | **[BRAND.md](./BRAND.md)** | Names, emails, repo naming |
 | **[REPOS.md](./REPOS.md)** | Canonical `origin`; retired `altruism` GitHub Pages |
@@ -68,13 +69,13 @@ Folder name can be anything (`altrudigitech-studio` is clearer than legacy `altr
 |---------|---------|
 | `npm run dev` | Studio Vite app (localhost:5173) |
 | `npm run build` | `dist/` + `dist/sites/*` + lead-config sync |
-| `npm run deploy:cf` | Manual Pages deploy (optional if Git connected) |
+| `npm run deploy:cf` | Manual Pages upload (optional; prefer `git push`) |
 | `npm run deploy:worker` | Worker + routes + API |
 | `npm run dev:worker` | Local Worker (8787) |
 | `npm run verify:subdomains` | curl smoke test for subdomains |
 | `npm run test:resend` | Resend API test |
 
-After **`config/hosts.json`** or Worker code changes → **deploy Worker**. After studio/client static changes → **push `main`** (Git) or **`deploy:cf`**.
+After **`config/hosts.json`** or Worker code changes → **`npm run deploy:worker`**. After studio/client static changes → **`git push origin main`**. Use **`deploy:cf`** only for emergency overrides.
 
 ---
 
@@ -82,9 +83,12 @@ After **`config/hosts.json`** or Worker code changes → **deploy Worker**. Afte
 
 - **Marketing app:** Cloudflare **Pages** at `altrudigitech.com`.
 - **Client subdomains:** **Worker** `*.altrudigitech.com` → fetches `/sites/{slug}/` on Pages origin.
-- **Leads:** **Worker** `POST /api/lead` on `altrudigitech.com/api/*` (Turnstile + Resend).
-- **Intake CRM:** Google Form on Contact (unchanged through Phase 3).
+- **Intake:** `StudioIntakeForm` on **`/contact`** — branches by intent; Turnstile on last step.
+- **Leads:** **Worker** `POST /api/lead` → Turnstile verify + **HTML/text email** (Resend).
+- **Turnstile site key:** `config/turnstile-site-key.mjs` (public, in git). **Secret** on Worker only.
 - **Config:** `config/hosts.json` (FQDN keys) bundled in Worker.
+
+Details: [INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md).
 
 ---
 
@@ -92,7 +96,7 @@ After **`config/hosts.json`** or Worker code changes → **deploy Worker**. Afte
 
 | URL | Expected |
 |-----|----------|
-| `/` `/pricing` `/contact` | 200 |
+| `/` `/pricing` `/contact` | 200; `/contact` intake submits |
 | `internal-demo.altrudigitech.com` | Sandbox + test form |
 | `shiva-bhalla.altrudigitech.com` | Showcase site |
 | `not-a-client.altrudigitech.com` | 404 |
@@ -106,8 +110,9 @@ See [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) for full list.
 Suggested prompt:
 
 ```text
-Read docs/START_HERE.md, docs/STUDIO_PLAN.md, docs/PHASE_2_3_PLAN.md, and docs/NEXT_STEPS.md.
+Read docs/START_HERE.md, docs/INTAKE_AND_LEADS.md, docs/NEXT_STEPS.md, and docs/STUDIO_PLAN.md.
 Production: altrudigitech.com on Cloudflare Pages + altrudigitech-studio-worker.
+Intake: StudioIntakeForm on /contact. Turnstile site key: config/turnstile-site-key.mjs.
 ```
 
 Do not commit `.dev.vars`. Rotate `CLOUDFLARE_API_TOKEN` if it was ever exposed.

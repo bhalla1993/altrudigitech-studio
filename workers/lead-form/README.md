@@ -1,8 +1,8 @@
 # altrudigitech-studio-worker
 
-Phase 2–3 Worker: `*.altrudigitech.com` routing and `POST /api/lead`.
+Phase 2–3 Worker: `*.altrudigitech.com` routing and `POST /api/lead` (HTML + text email via Resend).
 
-**Slice A:** local dev only. Do not `wrangler deploy` until Slice B/D.
+**Production:** `npm run deploy:worker` from repo root. Studio intake posts from `altrudigitech.com` with optional `email_sections` payload.
 
 ## Local dev
 

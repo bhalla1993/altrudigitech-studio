@@ -29,7 +29,7 @@
 - React + Vite on **GitHub Pages** (`base: '/altruism/'`) — migrating to apex `/` for Cloudflare Pages.
 - 18 templates in `public/templates/spa/` (+ duplicate under `src/templates/SPATemplates/`).
 - Templates include fixed **“Built by altrudigitech.com”** footer bar.
-- Lead forms in templates are mostly **demo `alert()`**; studio uses **Google Form** on Home.
+- Lead forms in templates are mostly **demo `alert()`**; studio uses **`StudioIntakeForm`** on `/contact` (see [INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md)).
 - Pricing/copy conflicts: Home $99/48h vs Pricing $99/$149/$199 vs unused $499 tiers in `siteData.js`.
 
 ---
@@ -289,7 +289,9 @@ dist/
 
 ### Intake worksheet (required before build)
 
-Single Google Form or Notion form — **6 fields only:**
+**Implementation (2026):** Public site uses **`StudioIntakeForm`** on `/contact` (branching intents; mirrors former Google Form fields). Leads → `/api/lead` → Resend (HTML email).
+
+**Business minimum** (Starter / worksheet) — **6 fields only:**
 
 1. Business Name  
 2. Phone  
@@ -300,10 +302,11 @@ Single Google Form or Notion form — **6 fields only:**
 
 **Do not start building** until form is **submitted and payment received** (per §9-B).
 
-### Slug & subdomain
+### Website address & subdomain
 
-- Confirm proposed URL **`https://{slug}.altrudigitech.com`** on intake acknowledgment.
-- **One free rename pre-launch**; any URL/slug change **after launch** = **$25** micro-task.
+- Customer-facing pattern: **`https://yourname.altrudigitech.com`** (`brand.subdomainExample` in `siteData.js`).
+- Confirm proposed URL on intake acknowledgment (technical folder name = **name part** only, e.g. `joes-plumbing`).
+- **One free website address name change pre-launch**; changes **after launch** = **$25** micro-task.
 
 ### Monthly tweaks (months 1–3 included)
 

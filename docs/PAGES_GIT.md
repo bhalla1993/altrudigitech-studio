@@ -49,7 +49,7 @@ This repo includes **`.node-version`** (`20`). In Pages **Settings** → **Envir
 | URL | Expected |
 |-----|----------|
 | `https://altrudigitech.com/pricing` | 200 |
-| `https://altrudigitech.com/contact` | Quick message form + Google intake |
+| `https://altrudigitech.com/contact` | Multi-step intake + Turnstile |
 
 Dashboard → **Deployments** should show **Success** on `main`.
 

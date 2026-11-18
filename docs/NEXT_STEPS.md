@@ -1,6 +1,8 @@
-# Next steps — after Phase 2–3 (infra complete)
+# Next steps — sell & onboard (post cutover)
 
-**You are here:** Marketing site live, Worker routing, `/api/lead`, internal-demo form, Contact quick message + **Google Form intake**.
+**You are here (2026-11-17):** Production on Cloudflare. **Cutover complete** (GitHub Pages retired, social listings point to **altrudigitech.com**). Studio **multi-step intake** + Turnstile + HTML lead emails on **`/contact`**. **`git push main`** deploys Pages with committed Turnstile site key (`config/turnstile-site-key.mjs`).
+
+Deep reference: **[INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md)**
 
 ---
 
@@ -8,49 +10,52 @@
 
 | Priority | Action |
 |----------|--------|
-| 1 | [CUTOVER §4](CUTOVER_CHECKLIST.md#4-social--listings-point-to-cloudflare-not-github) — set Facebook / Instagram / LinkedIn / GBP **website** to `https://altrudigitech.com` (only cutover item left). |
-| 2 | **Promote:** local trades, students, GTA/Ontario — link `/pricing`, `/contact#intake` |
-| 3 | **Capacity:** honest cap on Pricing if you use it (“3 builds this week”) |
-| 4 | **Intake + payment** before custom build ([STUDIO_PLAN.md](./STUDIO_PLAN.md) §9-B, §12) |
+| 1 | **Promote** — local trades, students, GTA/Ontario → `/pricing`, `/contact` or `/contact#intake` |
+| 2 | **Capacity** — update Pricing copy if you cap weekly Starter builds |
+| 3 | **Process** — intake + **payment before build** ([STUDIO_PLAN.md](./STUDIO_PLAN.md) §9-B, §12) |
+| 4 | **Smoke test** — occasional incognito submit on `/contact` after deploys |
 
-**Intake:** Google Form on Contact (embedded). **Quick questions:** Contact mini-form → `/api/lead`.
+**Intake:** native **`StudioIntakeForm`** on Contact (not Google Form). Leads → Worker → Resend → studio inbox.
 
 ---
 
-## Phase 4 — first paid $99 Starter client
+## Phase 4 — each paid $99 Starter client
 
-Follow this order when payment + intake worksheet are complete.
+Follow when **payment** is received and intake (form) has what you need to build.
 
 ### Before build
 
-- [ ] Intake has **6 fields** + trade/license checkbox (§11)
-- [ ] Payment received
-- [ ] Confirm slug URL: `https://{slug}.altrudigitech.com` (one free rename pre-launch)
-- [ ] Pick template from `/templates`; gather copy/photos
+- [ ] Starter intake complete (business, template, services, legal checkbox, packages as applicable)
+- [ ] **Website address name** agreed — `https://yourname.altrudigitech.com` (one free **name change** pre-launch; post-launch = $25 micro-task)
+- [ ] Template from `/templates`; client copy/photos gathered
+
+Technical `slug` in repo = the **name part** only (e.g. `joes-plumbing`).
 
 ### Repo & deploy
 
-1. **`clients/{slug}/`** — copy/adapt from template + client content
-2. **`config/hosts.json`** — add FQDN entry:
+1. **`clients/{slug}/`** — copy/adapt template + client content  
+2. **`config/hosts.json`** — add FQDN:
+
    ```json
-   "{slug}.altrudigitech.com": {
-     "slug": "{slug}",
-     "client_id": "{slug}",
+   "joes-plumbing.altrudigitech.com": {
+     "slug": "joes-plumbing",
+     "client_id": "joes-plumbing",
      "lead_email": "client@example.com"
    }
    ```
-3. **`scripts/sync-lead-config.mjs`** — add `{ slug, clientId }` to `CLIENTS` if using shared lead form
-4. **Turnstile** — add `{slug}.altrudigitech.com` to widget hostnames (dashboard)
+
+3. **`scripts/sync-lead-config.mjs`** — add `{ slug, clientId }` to `CLIENTS` if using shared lead form  
+4. **Turnstile dashboard** — add `joes-plumbing.altrudigitech.com` to widget hostnames  
 5. **Deploy**
-   - `npm run deploy:worker` (hosts.json + API)
-   - Push `main` (Pages Git) or `npm run deploy:cf`
-6. **Privacy line** on client form (§11): *"Your inquiry is securely transmitted directly to [Business Name] via AltruDigiTech."*
+   - `git push origin main` (studio + `dist/sites/*` via Pages Git)
+   - `npm run deploy:worker` (hosts.json, routes, API)
+6. **Privacy line** on client form: *"Your inquiry is securely transmitted directly to [Business Name] via AltruDigiTech."*
 
 ### Handoff to client
 
-- [ ] Live URL: `https://{slug}.altrudigitech.com`
-- [ ] Lead form test → client `lead_email`
-- [ ] Acknowledgment email with tweak rules (months 1–3, `updates@` when configured)
+- [ ] Live: `https://{name}.altrudigitech.com`
+- [ ] Lead form test → `lead_email`
+- [ ] Acknowledgment + tweak rules (months 1–3; `updates@` when configured)
 
 Details: [STUDIO_PLAN.md](./STUDIO_PLAN.md) Phase 4 exit, §12.
 
@@ -58,12 +63,7 @@ Details: [STUDIO_PLAN.md](./STUDIO_PLAN.md) Phase 4 exit, §12.
 
 ## Phase 5 — $49 custom domain (when sold)
 
-- Client buys/registers `.ca` (or other TLD)
-- New zone in your Cloudflare; client NS delegation
-- Worker on client zone; Turnstile hostnames added
-- Same `hosts.json` pattern with client’s FQDN (locked plan §5)
-
-Defer until first custom-domain sale.
+Defer until first custom-domain sale: client zone, NS delegation, Worker on client zone, Turnstile hostnames.
 
 ---
 
@@ -71,12 +71,12 @@ Defer until first custom-domain sale.
 
 | Item | Notes |
 |------|--------|
-| `updates@` Email Routing | When first client on monthly tweaks |
-| Replace shiva-bhalla Google Form iframe with `altru-lead` | Consistency with API |
-| Retire `npm run deploy:cf` habit | Once Git deploys trusted |
-| Connect analytics | CF Web Analytics or Plausible |
-| Phase 2 apex Worker passthrough | Only if ever needed (Slice F — avoid unless required) |
-| Care plan upsell | After **5** completed Starters (plan §12) |
+| `updates@` Email Routing | First client on monthly tweaks — [EMAIL_ROUTING.md](./EMAIL_ROUTING.md) |
+| **shiva-bhalla** portfolio form | Replace Google Form iframe with `altru-lead` + API |
+| **Analytics** | CF Web Analytics or Plausible |
+| **`/api/lead` rate limiting** | If spam volume grows |
+| **Care plan upsell** | After **5** completed Starters — [STUDIO_PLAN.md](./STUDIO_PLAN.md) §12 |
+| **Doc-only** | Rotate `CLOUDFLARE_API_TOKEN` if ever exposed — [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) §6.2 |
 
 ---
 
@@ -84,27 +84,27 @@ Defer until first custom-domain sale.
 
 | Change | Action |
 |--------|--------|
-| Studio React / `clients/*` / `public/` | `git push origin main` |
-| `config/hosts.json`, Worker code | `npm run deploy:worker` |
-| Resend/Turnstile/studio inbox secrets | Update `.dev.vars` → `deploy:worker` |
-| Turnstile site key only | Pages env vars + rebuild |
+| Studio app, `clients/*`, `public/`, Turnstile **site** key in repo | `git push origin main` |
+| `config/hosts.json`, Worker code, Resend/Turnstile **secret** | `npm run deploy:worker` (secrets from `.dev.vars`) |
+| Emergency override / faster than Git | `npm run deploy:cf` (loads `.dev.vars`; optional for Turnstile) |
 
 ---
 
 ## Docs to re-read for pricing/legal
 
 - [STUDIO_PLAN.md](./STUDIO_PLAN.md) — §2 pricing, §11 legal, §12 ops, §4 handover ($129)
-- [BRAND.md](./BRAND.md) — public names and emails
+- [BRAND.md](./BRAND.md) — names, emails, `yourname.altrudigitech.com`
 
 ---
 
-## Agent prompt for Phase 4 implementation
+## Agent prompt for Phase 4
 
 ```text
-Phase 4 onboard: new client slug "{slug}".
-Add clients/{slug}/, hosts.json FQDN, sync-lead-config, deploy worker + pages.
+Phase 4 onboard: client website name "joes-plumbing" → joes-plumbing.altrudigitech.com
+Add clients/joes-plumbing/, hosts.json FQDN, sync-lead-config CLIENTS entry,
+Turnstile hostname, deploy worker + git push main.
 Lead email: ...
 Template base: ...
 ```
 
-Always start from [START_HERE.md](./START_HERE.md).
+Start from [START_HERE.md](./START_HERE.md).
