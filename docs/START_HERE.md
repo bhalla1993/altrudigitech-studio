@@ -40,7 +40,7 @@ Folder name can be anything (`altrudigitech-studio` is clearer than legacy `altr
 
 1. Copy **[`.env.example`](../.env.example)** → **`.dev.vars`** at repo root (gitignored).
 2. Fill values below.
-3. For **local Vite** Contact form Turnstile widget, also set **`VITE_TURNSTILE_SITE_KEY`** in **`.env.local`** (same value as site key), or rely on deploy builds that export it from `.dev.vars`.
+3. Turnstile **site key** is committed in **`config/turnstile-site-key.mjs`** (Git/Pages builds work without dashboard vars). Optional **`VITE_TURNSTILE_SITE_KEY`** in **`.env.local`** or **`.dev.vars`** to override locally.
 
 | Variable | Where used | Required for |
 |----------|------------|--------------|
@@ -49,14 +49,14 @@ Folder name can be anything (`altrudigitech-studio` is clearer than legacy `altr
 | `PAGES_ORIGIN` | Worker | `https://altrudigitech.com` (default in wrangler) |
 | `RESEND_API_KEY` | Worker | `/api/lead` email send |
 | `TURNSTILE_SECRET_KEY` | Worker | Turnstile verify |
-| `TURNSTILE_SITE_KEY` | build (`sync-lead-config`) | Client static forms |
-| `VITE_TURNSTILE_SITE_KEY` | Vite build | Studio Contact quick message (or mirrored in Pages env) |
+| `TURNSTILE_SITE_KEY` | optional override | Defaults from `config/turnstile-site-key.mjs` |
+| `VITE_TURNSTILE_SITE_KEY` | optional override | Same; Vite also inlines committed default |
 | `STUDIO_LEAD_EMAIL` | Worker secret | Inbox for `client_id: studio` |
 | `RESEND_TEST_TO` | local script | `npm run test:resend` |
 | `RESEND_FROM` | Worker | optional; default hello@ in wrangler |
 | `ALLOW_DEV_ROUTES` | local Worker only | `true` for `/api/_test/resend`; never in prod |
 
-**Cloudflare Pages (Git):** set `TURNSTILE_SITE_KEY` + `VITE_TURNSTILE_SITE_KEY` in the dashboard — see [PAGES_GIT.md](./PAGES_GIT.md). Do **not** put Worker API secrets on Pages.
+**Cloudflare Pages (Git):** normal **`git push`** builds include the public Turnstile site key from the repo — see [PAGES_GIT.md](./PAGES_GIT.md). Do **not** put Worker API secrets on Pages.
 
 **Worker production secrets:** `npm run deploy:worker` syncs `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `STUDIO_LEAD_EMAIL` from `.dev.vars` when set.
 

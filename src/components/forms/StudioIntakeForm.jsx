@@ -41,9 +41,10 @@ import {
   studentNeedOptions,
   studentTemplateOptions,
 } from '../../utils/studioIntakeConfig'
+import { TURNSTILE_SITE_KEY as COMMITTED_TURNSTILE_SITE_KEY } from '../../../config/turnstile-site-key.mjs'
 
 const LEAD_API = 'https://altrudigitech.com/api/lead'
-const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ''
+const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || COMMITTED_TURNSTILE_SITE_KEY || ''
 
 const emptyFields = () => ({
   contactName: '',

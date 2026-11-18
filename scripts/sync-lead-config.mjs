@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * Writes per-client lead-config.js from .dev.vars (TURNSTILE_SITE_KEY).
+ * Writes per-client lead-config.js from committed site key (+ optional env override).
  * Run before client copy / Pages deploy.
  */
 
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { TURNSTILE_SITE_KEY as COMMITTED_SITE_KEY } from '../config/turnstile-site-key.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const devVarsPath = path.join(root, '.dev.vars')
@@ -37,7 +38,8 @@ function loadDevVars(filePath) {
 }
 
 const env = loadDevVars(devVarsPath)
-const siteKey = env.TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || ''
+const siteKey =
+  env.TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || COMMITTED_SITE_KEY || ''
 
 for (const { slug, clientId } of CLIENTS) {
   const assetsDir = path.join(root, 'clients', slug, 'assets', 'lead-form')
@@ -61,5 +63,7 @@ for (const { slug, clientId } of CLIENTS) {
 }
 
 if (!siteKey) {
-  console.warn('sync-lead-config: TURNSTILE_SITE_KEY missing in .dev.vars — forms will not load Turnstile until set.')
+  console.warn(
+    'sync-lead-config: no Turnstile site key — set config/turnstile-site-key.mjs or TURNSTILE_SITE_KEY in env.',
+  )
 }

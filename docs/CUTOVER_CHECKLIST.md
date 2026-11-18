@@ -31,7 +31,7 @@ Plan reference: [STUDIO_PLAN.md](./STUDIO_PLAN.md) §9-E.
 | 2.3 | DNS wildcard `*` CNAME → `@`, **Proxied** (client subdomains) | ☑ |
 | 2.4 | Worker routes: `*.altrudigitech.com/*`, `altrudigitech.com/api/*` | ☑ |
 | 2.5 | Pages **Git** connected to **`main`** — latest deploy Success | ☑ |
-| 2.6 | Pages env: `TURNSTILE_SITE_KEY` + `VITE_TURNSTILE_SITE_KEY` | ☑ |
+| 2.6 | Turnstile site key in repo (`config/turnstile-site-key.mjs`); Git builds need no Pages env |
 
 ---
 

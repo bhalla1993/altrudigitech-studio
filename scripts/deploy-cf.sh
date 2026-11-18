@@ -9,6 +9,7 @@ if [[ -f .dev.vars ]]; then
   set +a
 fi
 
+# Optional: .dev.vars can override committed config/turnstile-site-key.mjs for Vite
 if [[ -n "${TURNSTILE_SITE_KEY:-}" ]]; then
   export VITE_TURNSTILE_SITE_KEY="${TURNSTILE_SITE_KEY}"
 fi
