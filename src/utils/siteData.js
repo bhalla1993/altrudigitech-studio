@@ -23,9 +23,17 @@ export const business = {
   siteUrl: brand.siteUrl,
   domain: brand.domain,
   tagline: 'We build your online presence—simple, fast, and affordable.',
+  /** Home hero H1 — outcome first */
+  heroHeadline:
+    'Get a simple, professional website that helps local customers find and contact your business—without monthly builder fees.',
+  heroAudience: 'For local trades, small shops, and students across Ontario and Canada.',
+  heroOfferLine: `$99 one-time Starter — pick a template, complete intake & payment, and launch on ${brand.subdomainExample}.`,
+  studioBadge: 'Canadian-Owned · Ontario-Based Studio',
+  hostingClarifier: `Studio subdomain hosting on ${brand.subdomainExample} is included with no monthly fee from us (CAD). Custom .ca or .com is a $49 CAD setup add-on; annual registrar fees are paid by you directly (often about $15–25 CAD/yr).`,
+  homeProofLine: 'Built for local businesses in Ontario—serving clients across Canada.',
   shortDescription: `$99 one-time single-page sites for local trades, small shops, and students—live on ${brand.subdomainExample} with transparent add-ons.`,
   defaultMetaDescription:
-    'AltruDigiTech Digital Studio builds $99 single-page websites for trades, shops, and students in Ontario and across Canada. No monthly builder fees.',
+    'Professional single-page websites for trades, shops, and students in Ontario and Canada—$99 one-time Starter, no monthly builder fees on your studio subdomain.',
   email: brand.helloEmail,
   /** Pin / contact card — remote studio, no street address */
   location: 'Based in Ontario, Canada',
@@ -51,7 +59,7 @@ export const pageSeo = {
   home: business.defaultMetaDescription,
   about: `${brand.legalName} builds $99 single-page sites for Ontario trades, shops, and students—serving clients across Canada on ${brand.domain}.`,
   services: `${brand.legalName} $99 Starter sites, domain and handover add-ons, and custom web apps for small businesses in Ontario and Canada.`,
-  pricing: `${brand.shortName} Starter site for $99 one-time in CAD. Transparent add-ons; no monthly site fees on your studio subdomain.`,
+  pricing: `${brand.shortName} $99 Starter site one-time in CAD. Clear included / not-included scope; no monthly site fees from us on your studio subdomain.`,
   templates: `Browse trade, shop, and resume templates included in the ${brand.shortName} $99 Starter package.`,
   liveProjects: `Client sites and Studio Lab products from ${brand.legalName}, including SparkShots, LocalTopSpot, and template-based launches.`,
   portfolio: `Client work and live demos are on Live Projects—real sites built by ${brand.legalName}.`,
@@ -113,39 +121,60 @@ export const capacityBadge = 'Currently accepting 3 new Starter builds this week
 export const studentPromoNote =
   'Students: email us for promo code STUDENT20 ($20 off). Same Starter package; not published as a separate tier.'
 
+export const launchProcessSteps = [
+  {
+    title: 'Intake & payment',
+    detail: 'Complete the online intake and confirm payment—we align on your template and content.',
+  },
+  {
+    title: 'We build',
+    detail: 'We personalize your chosen template with the details you provide.',
+  },
+  {
+    title: 'Review & launch',
+    detail: 'One batched pre-launch revision, then go live on your studio subdomain.',
+  },
+]
+
+export const paymentRefundPolicy =
+  'Payment is required before we start your build. One batched pre-launch revision round is included. Builds are non-refundable once work has begun; a full refund is available only if you cancel before we start building.'
+
 export const starterPackage = {
-  name: 'Starter Site',
+  name: '$99 Starter Site',
   price: '$99',
-  priceNote: 'one-time',
-  audience: 'Local trades, small shops, and students who want one professional link—no monthly builder fees.',
+  priceNote: 'one-time (CAD)',
+  audience: 'Local trades, small shops, and students who want one professional link—no monthly builder fees from us on your studio subdomain.',
   features: [
-    'Single-page site: Hero, Services, About, Contact',
-    'Template-based design with your name, colors, and text',
-    `Hosted at ${brand.subdomainExample} (free ongoing)`,
-    'Stock photos until you provide your own (with attribution)',
-    'One contact/quote form on your live site',
-    'One pre-launch revision round',
-    'One minor text/hours update per month for the first 3 months',
+    'One mobile-friendly single scrolling page (Hero, Services, About, Contact)',
+    'Template-based build with your name, colours, and text',
+    `Live on ${brand.subdomainExample} — no monthly site hosting fee from AltruDigiTech`,
+    'Stock images until you provide your own (with attribution where required)',
+    'One contact / lead form on your live site',
+    'One batched pre-launch revision round',
+    'Minor text updates in months 1–3 per Pricing (~15 min or ~50 words/month)',
   ],
 }
 
 export const starterIncluded = [
-  'Single scrolling page (4 sections)',
+  'Single scrolling page (four sections)',
   'Mobile-first layout',
-  'Studio subdomain hosting',
-  'One lead form',
+  'Studio subdomain hosting (no monthly fee from us)',
+  'One lead / contact form',
   'One batched pre-launch revision',
   '3 months of included minor monthly tweaks (~15 min or ~50 words)',
 ]
 
 export const starterNotIncluded = [
-  'Custom domain (add-on $49)',
+  'Custom domain (add-on $49 CAD; registrar fees paid by you)',
   'Multi-page sites, booking, or e-commerce',
   'Unlimited revisions or full rebrand',
   'Copywriting from scratch',
-  'Code handover (add-on $129)',
+  'Code handover (add-on $129 CAD)',
   'SEO campaigns or ad management',
 ]
+
+/** Compact “not included” list on Home (subset of starterNotIncluded) */
+export const starterHomeNotIncluded = starterNotIncluded.slice(0, 5)
 
 export const pricingAddOns = [
   {
@@ -187,6 +216,10 @@ export const pricingAddOnsFooter =
   '* LocalTopSpot is a regional studio perk for qualifying Durham-area trade sites—not a separate product charge. Other rows are studio fees in CAD; “From” and ranges depend on scope.'
 
 export const pricingFaqs = [
+  {
+    q: 'When do I pay, and what is your refund policy?',
+    a: paymentRefundPolicy,
+  },
   {
     q: 'What happens after my first 3 months?',
     a: `Hosting on your ${brand.subdomainExample} address stays free. Any text or photo updates after the initial 3-month window are billed at our standard $25 micro-task rate.`,

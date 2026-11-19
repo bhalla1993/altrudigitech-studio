@@ -1,6 +1,7 @@
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import BoltIcon from '@mui/icons-material/Bolt'
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
@@ -17,22 +18,24 @@ import Seo from '../components/common/Seo'
 import ServiceCard from '../components/cards/ServiceCard'
 import StudioIntakeForm from '../components/forms/StudioIntakeForm'
 import TemplatePreviewCard from '../components/templates/TemplatePreviewCard'
+import imgElectricianContractor from '../assets/images/electrician-contractor.png'
 import {
   brand,
   business,
   capacityBadge,
+  launchProcessSteps,
   pageSeo,
   pricingFootnote,
   serviceItems,
+  starterHomeNotIncluded,
   starterPackage,
 } from '../utils/siteData'
 import { templates } from '../utils/templatesData'
 
 const approachItems = [
-  `Starter sites at ${brand.subdomainExample} with no monthly hosting fees.`,
-  'Custom .ca or .com domains available as a $49 add-on.',
-  `Code & asset handover ($129) when you want to self-host.`,
-  'Template-first delivery so you launch quickly after intake and payment.',
+  business.hostingClarifier,
+  `Code & asset handover ($129 CAD) when you want to self-host.`,
+  'Template-first delivery after intake and payment.',
 ]
 
 const socialItems = [
@@ -42,9 +45,9 @@ const socialItems = [
 ]
 
 const heroTrustItems = [
-  '$99 Starter — one-time',
-  'No monthly site fees',
-  'Launch after intake & payment',
+  '$99 Starter — one-time (CAD)',
+  'No monthly site fee from us',
+  'Intake & payment before build',
 ]
 
 function HomePage() {
@@ -62,20 +65,23 @@ function HomePage() {
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={7}>
               <Stack spacing={2.5}>
-                <Chip icon={<RocketLaunchIcon />} label="Small Business Digital Partner" color="primary" variant="outlined" sx={{ width: 'fit-content' }} />
-                <Typography variant="h1" sx={{ fontSize: { xs: '2.4rem', md: '3.7rem' }, lineHeight: 1.1 }}>
-                  {business.tagline}
+                <Chip label={business.studioBadge} color="primary" variant="outlined" sx={{ width: 'fit-content', fontWeight: 600 }} />
+                <Typography variant="h1" sx={{ fontSize: { xs: '2.4rem', md: '3.7rem' }, lineHeight: 1.12 }}>
+                  {business.heroHeadline}
+                </Typography>
+                <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 720, fontWeight: 500, lineHeight: 1.45 }}>
+                  {business.heroAudience}
                 </Typography>
                 <Typography
-                  variant="h5"
+                  variant="subtitle1"
                   sx={{
                     maxWidth: 760,
                     fontWeight: 700,
-                    color: 'text.primary',
-                    lineHeight: 1.35,
+                    color: 'primary.main',
+                    lineHeight: 1.4,
                   }}
                 >
-                  $99 single-page sites for local trades, shops & students — pick a template, we personalize and launch on your studio subdomain.
+                  {business.heroOfferLine}
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                   <Button component={RouterLink} to="/pricing" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
@@ -108,12 +114,40 @@ function HomePage() {
             <Grid item xs={12} md={5}>
               <Box
                 component="img"
-                src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="A professional team planning software delivery"
-                sx={{ width: '100%', borderRadius: 4, border: '1px solid', borderColor: 'divider' }}
+                src={imgElectricianContractor}
+                alt="Sample $99 Starter template preview for a local trade business"
+                sx={{ width: '100%', borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: 4 }}
               />
             </Grid>
           </Grid>
+        </AnimatedSection>
+      </Box>
+
+      {/* ── 3-step process ──────────────────────────────────────────── */}
+      <Box component="section" aria-labelledby="home-process-title" sx={{ mb: 8 }}>
+        <AnimatedSection delay={0.04}>
+          <Stack spacing={2.5}>
+            <Typography id="home-process-title" variant="h2" sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
+              How you get live
+            </Typography>
+            <Grid container spacing={2}>
+              {launchProcessSteps.map((step, index) => (
+                <Grid item xs={12} md={4} key={step.title}>
+                  <Card sx={{ height: '100%' }}>
+                    <CardContent>
+                      <Stack spacing={1}>
+                        <Chip label={`Step ${index + 1}`} size="small" color="primary" variant="outlined" sx={{ width: 'fit-content' }} />
+                        <Typography variant="h6">{step.title}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {step.detail}
+                        </Typography>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Stack>
         </AnimatedSection>
       </Box>
 
@@ -143,6 +177,41 @@ function HomePage() {
                 <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
                   {pricingFootnote}
                 </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {business.hostingClarifier}
+                </Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" gutterBottom>
+                      Included
+                    </Typography>
+                    <Stack spacing={0.5}>
+                      {starterPackage.features.slice(0, 6).map((feature) => (
+                        <Stack key={feature} direction="row" spacing={0.6} alignItems="flex-start">
+                          <CheckCircleOutlineIcon sx={{ color: 'primary.main', fontSize: 17, mt: 0.1, flexShrink: 0 }} />
+                          <Typography variant="body2" color="text.secondary">
+                            {feature}
+                          </Typography>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" gutterBottom>
+                      Not included
+                    </Typography>
+                    <Stack spacing={0.5}>
+                      {starterHomeNotIncluded.map((item) => (
+                        <Stack key={item} direction="row" spacing={0.6} alignItems="flex-start">
+                          <CancelOutlinedIcon sx={{ color: 'text.disabled', fontSize: 17, mt: 0.1, flexShrink: 0 }} />
+                          <Typography variant="body2" color="text.secondary">
+                            {item}
+                          </Typography>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </Grid>
+                </Grid>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
                   <Button component={RouterLink} to="/pricing" variant="contained">
                     See what&apos;s included
@@ -157,32 +226,19 @@ function HomePage() {
         </AnimatedSection>
       </Box>
 
-      {/* ── Featured Services ───────────────────────────────────────── */}
-      <Box component="section" aria-labelledby="featured-services-title">
-        <AnimatedSection delay={0.08}>
-          <Stack spacing={3}>
-            <Typography id="featured-services-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
-              How We Help You Launch
-            </Typography>
-            <Grid container spacing={3}>
-              {serviceItems.slice(0, 3).map((service) => (
-                <Grid item xs={12} md={4} key={service.title}>
-                  <ServiceCard service={service} />
-                </Grid>
-              ))}
-            </Grid>
-          </Stack>
-        </AnimatedSection>
-      </Box>
-
-      {/* ── Starter Templates ───────────────────────────────────────── */}
-      <Box component="section" aria-labelledby="starter-templates-title" sx={{ mt: 8 }}>
+      {/* ── Starter Templates (proof) ───────────────────────────────── */}
+      <Box component="section" aria-labelledby="starter-templates-title" sx={{ mb: 8 }}>
         <AnimatedSection delay={0.12}>
           <Stack spacing={3}>
             <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }}>
-              <Typography id="starter-templates-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
-                Starter Templates
-              </Typography>
+              <Stack spacing={0.6}>
+                <Typography id="starter-templates-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
+                  Starter Templates
+                </Typography>
+                <Typography color="text.secondary" variant="body2">
+                  {business.homeProofLine} Demos below are labelled—open full demos or see client work on Live Projects.
+                </Typography>
+              </Stack>
               <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
                 <Button component={RouterLink} to="/templates" variant="outlined">
                   Browse All Templates
@@ -196,6 +252,29 @@ function HomePage() {
               {templates.slice(0, 3).map((template, index) => (
                 <Grid key={template.id} item xs={12} md={4}>
                   <TemplatePreviewCard template={template} index={index} />
+                </Grid>
+              ))}
+            </Grid>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
+              <Button component={RouterLink} to="/live-projects" variant="outlined">
+                Live Projects & client sites
+              </Button>
+            </Stack>
+          </Stack>
+        </AnimatedSection>
+      </Box>
+
+      {/* ── Featured Services ───────────────────────────────────────── */}
+      <Box component="section" aria-labelledby="featured-services-title">
+        <AnimatedSection delay={0.08}>
+          <Stack spacing={3}>
+            <Typography id="featured-services-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
+              How We Help You Launch
+            </Typography>
+            <Grid container spacing={3}>
+              {serviceItems.slice(0, 3).map((service) => (
+                <Grid item xs={12} md={4} key={service.title}>
+                  <ServiceCard service={service} />
                 </Grid>
               ))}
             </Grid>
@@ -319,7 +398,7 @@ function HomePage() {
           <Stack spacing={4}>
             <Stack spacing={1.2}>
               <Typography id="home-contact-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.6rem' } }}>
-                Let&apos;s Build Your Next Digital Product
+                Start your $99 Starter or ask a question
               </Typography>
               <Typography color="text.secondary" sx={{ maxWidth: 720 }}>
                 Complete intake below—Starter, questions, custom apps, or student pricing. We usually respond within one business
