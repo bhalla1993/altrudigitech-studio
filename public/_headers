@@ -1,0 +1,11 @@
+# HTML shell — always revalidate so new Vite chunk hashes load after deploy
+/index.html
+  Cache-Control: no-cache, must-revalidate
+
+/
+  Cache-Control: no-cache, must-revalidate
+
+# Hashed build assets — safe to cache long-term (filename changes each release)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff

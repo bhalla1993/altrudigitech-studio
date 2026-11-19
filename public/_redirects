@@ -1,3 +1,7 @@
 # Cloudflare Pages — SPA fallback (studio React app at apex)
-# Do not add top-level 404.html; it disables Pages SPA mode and breaks deep links.
+# Do not add top-level 404.html; it disables Pages SPA mode for marketing routes.
+#
+# Missing hashed chunks must NOT return index.html (causes MIME errors + blank screen).
+/assets/* 404
+
 /* /index.html 200

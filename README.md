@@ -82,7 +82,7 @@ See **[docs/DEPLOY.md](docs/DEPLOY.md)** · **[docs/PAGES_GIT.md](docs/PAGES_GIT
 
 ### SPA routing
 
-`public/_redirects` serves the React app for deep links on Cloudflare Pages. Do **not** add a root `404.html` (it disables Pages SPA mode and breaks `/pricing`, etc.).
+`public/_redirects` serves the React app for deep links on Cloudflare Pages. Missing `/assets/*` returns **404** (not `index.html`) so stale chunk URLs fail clearly. `public/_headers` keeps HTML uncached and hashes immutable. Do **not** add a root `404.html` (it disables Pages SPA mode and breaks `/pricing`, etc.).
 
 ## Git remote
 

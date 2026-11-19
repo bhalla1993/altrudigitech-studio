@@ -12,8 +12,10 @@ Production: **`https://altrudigitech.com`** (Pages project **`altrudigitech-stud
 
 | When | Command |
 |------|---------|
-| Normal release | `git push origin main` |
+| Normal release | `git push origin main` — wait until Pages shows **Success** |
 | Emergency / skip Git queue | `npm run deploy:cf` (requires `.dev.vars` with `CLOUDFLARE_*`) |
+
+**Do not** `git push` and `npm run deploy:cf` back-to-back on the same change. Two production uploads can briefly serve `index.html` that references removed `/assets/*.js` chunks → blank screen and console MIME errors. Pick **one** path per release.
 
 ### One-time Wrangler setup
 
@@ -35,6 +37,17 @@ npx wrangler pages project create altrudigitech-studio --production-branch=main
 ```
 
 `npm run deploy:cf` runs `npm run build` then `wrangler pages deploy dist`.
+
+### Blank screen / “Expected JavaScript module” after deploy
+
+Usually **stale `index.html`** or **missing chunk** while `/* → index.html` was serving HTML for `/assets/*.js`. In-repo fix: `public/_redirects` returns **404** for missing `/assets/*`; `public/_headers` sets **no-cache** on HTML.
+
+| Step | Action |
+|------|--------|
+| 1 | Cloudflare → **altrudigitech-studio** → confirm latest deployment **Success** |
+| 2 | **Caching** → **Purge Everything** (or purge `https://altrudigitech.com/`) once |
+| 3 | Browser: private window, or clear site data for `altrudigitech.com` |
+| 4 | Going forward: one deploy path per release (Git **or** `deploy:cf`, not both at once) |
 
 ### Verify after deploy
 

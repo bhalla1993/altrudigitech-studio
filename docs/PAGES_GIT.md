@@ -72,4 +72,5 @@ Root **`wrangler.toml`** is **Pages-only** (`pages_build_output_dir`). Worker co
 |--------|-----|
 | Build warns on Turnstile site key | Fix or commit `config/turnstile-site-key.mjs` |
 | Contact form missing Turnstile | Confirm `config/turnstile-site-key.mjs` is committed; rebuild. Optional Pages env override. |
-| Old content after push | Check deployment branch is `main`; purge browser cache |
+| Old content after push | Check deployment branch is `main`; purge CF cache + browser site data |
+| Blank screen, MIME errors on `.js` | Stale HTML vs chunks — see [DEPLOY.md](./DEPLOY.md) § Blank screen; avoid push + `deploy:cf` together |
