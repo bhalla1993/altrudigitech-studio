@@ -29,7 +29,7 @@ Canonical git repo: **`bhalla1993/altrudigitech-studio`**. Legacy **`altruism`**
 3. **Body copy:** prefer **AltruDigiTech**; use full name once on About or legal contexts  
 4. **Meta descriptions:** `pageSeo.*` in `siteData.js` — do not hardcode brand strings in pages  
 5. **index.html:** keep fallback meta aligned with `business.defaultMetaDescription` and `brand.legalName`  
-6. **Social:** “AltruDigiTech Builders” handles are fine; company page should match **AltruDigiTech Digital Studio** where possible  
+6. **Social (canonical URLs in `business.socialLinks`):** Facebook & Instagram **`altrudigitechdigitalstudio`**; LinkedIn **company/altrudigitech-digital-builders**  
 
 ## Related properties
 

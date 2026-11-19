@@ -54,8 +54,8 @@ Plan reference: [STUDIO_PLAN.md](./STUDIO_PLAN.md) §9-E.
 
 | Platform | Update | Done |
 |----------|--------|------|
-| Facebook **AltruDigiTech Builders** | Website URL (+ email if shown) | ☑ |
-| Instagram **altrudigitechbuilders** | Link in bio | ☑ |
+| Facebook **altrudigitechdigitalstudio** | Website URL (+ email if shown) | ☑ |
+| Instagram **altrudigitechdigitalstudio** | Link in bio | ☑ |
 | LinkedIn company | Website URL | ☑ |
 | Google Business Profile (if used) | Website | ☐ when applicable |
 | Other pins/bios | No `github.io/altruism` | ☑ |

@@ -40,8 +40,8 @@ export const business = {
   intakeFormEmbedUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSeZjnqO_9JhPJ_wrJQwbenOCeUP6AQwIeDDVaFdXzgJivZozg/viewform?embedded=true',
   socialLinks: {
-    facebook: 'https://www.facebook.com/altrudigitechbuilders',
-    instagram: 'https://www.instagram.com/altrudigitechbuilders?utm_source=qr',
+    facebook: 'https://www.facebook.com/altrudigitechdigitalstudio',
+    instagram: 'https://www.instagram.com/altrudigitechdigitalstudio',
     linkedin: 'https://www.linkedin.com/company/altrudigitech-digital-builders/',
   },
 }
