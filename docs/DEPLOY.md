@@ -40,7 +40,7 @@ npx wrangler pages project create altrudigitech-studio --production-branch=main
 
 ### Blank screen / “Expected JavaScript module” after deploy
 
-Usually **stale `index.html`** or **missing chunk** while `/* → index.html` was serving HTML for `/assets/*.js`. In-repo fix: `public/_redirects` returns **404** for missing `/assets/*`; `public/_headers` sets **no-cache** on HTML.
+Usually **stale `index.html`** or **missing chunk** while SPA fallback served HTML for `/assets/*.js`. In-repo fix: `functions/[[path]].js` returns **404** for missing `/assets/*`; `public/_headers` sets **no-cache** on HTML. (`_redirects` cannot emit 404 on Pages — see Cloudflare redirects docs.)
 
 | Step | Action |
 |------|--------|
