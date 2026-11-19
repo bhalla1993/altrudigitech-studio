@@ -8,6 +8,8 @@ export const brand = {
   domain: 'altrudigitech.com',
   siteUrl: 'https://altrudigitech.com',
   subdomainExample: 'yourname.altrudigitech.com',
+  /** Home hero browser chrome — reads as “your brand” without a person’s name */
+  subdomainHeroExample: 'your-business.altrudigitech.com',
   clientSiteCredit: 'AltruDigiTech',
   updatesEmail: 'updates@altrudigitech.com',
   /** Legacy Gmail — fallback if hello@ routing is not ready */

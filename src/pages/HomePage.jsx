@@ -17,8 +17,8 @@ import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
 import ServiceCard from '../components/cards/ServiceCard'
 import StudioIntakeForm from '../components/forms/StudioIntakeForm'
+import HomeHeroTemplateMockup from '../components/home/HomeHeroTemplateMockup'
 import TemplatePreviewCard from '../components/templates/TemplatePreviewCard'
-import imgElectricianContractor from '../assets/images/electrician-contractor.png'
 import {
   brand,
   business,
@@ -62,45 +62,64 @@ function HomePage() {
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <Box component="section" sx={{ mb: 8 }}>
         <AnimatedSection>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={7}>
-              <Stack spacing={2.5}>
+          <Grid container spacing={{ xs: 3, md: 4 }} alignItems={{ xs: 'flex-start', md: 'flex-start' }}>
+            {/* Row 1: headline (left) + template mockup (right) */}
+            <Grid item xs={12} md={5}>
+              <Stack spacing={2} sx={{ justifyContent: 'flex-start', pt: { md: 0.5 } }}>
                 <Chip label={business.studioBadge} color="primary" variant="outlined" sx={{ width: 'fit-content', fontWeight: 600 }} />
-                <Typography variant="h1" sx={{ fontSize: { xs: '2.4rem', md: '3.7rem' }, lineHeight: 1.12 }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '2.05rem', sm: '2.35rem', md: '2.45rem', lg: '2.75rem' },
+                    lineHeight: 1.14,
+                  }}
+                >
                   {business.heroHeadline}
                 </Typography>
-                <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 720, fontWeight: 500, lineHeight: 1.45 }}>
+              </Stack>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={7}
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                justifyContent: { xs: 'center', md: 'flex-end' },
+                width: '100%',
+              }}
+            >
+              <HomeHeroTemplateMockup />
+            </Grid>
+
+            {/* Row 2: full width within same grid — left edge matches row 1 headline */}
+            <Grid item xs={12}>
+              <Stack spacing={{ xs: 2, md: 1.75 }} sx={{ width: '100%', pt: { xs: 0, md: 0.5 } }}>
+                <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 500, lineHeight: 1.5, fontSize: { md: '1.02rem' }, maxWidth: 900 }}>
                   {business.heroAudience}
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="body2"
                   sx={{
-                    maxWidth: 760,
                     fontWeight: 700,
                     color: 'primary.main',
-                    lineHeight: 1.4,
+                    lineHeight: 1.45,
+                    fontSize: { xs: '0.95rem', md: '1rem' },
+                    maxWidth: 960,
                   }}
                 >
                   {business.heroOfferLine}
                 </Typography>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
-                  <Button component={RouterLink} to="/pricing" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
-                    View $99 Starter
-                  </Button>
-                  <Button component={RouterLink} to="/templates" variant="outlined" size="large">
-                    Browse Templates
-                  </Button>
-                </Stack>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 0.5 }}>
+                <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
                   {heroTrustItems.map((item) => (
                     <Chip
                       key={item}
+                      size="small"
                       label={item}
                       variant="filled"
                       sx={{
                         borderRadius: 999,
-                        px: 0.6,
-                        fontWeight: 700,
+                        fontWeight: 600,
                         bgcolor: 'action.hover',
                         color: 'text.primary',
                         border: '1px solid',
@@ -109,15 +128,28 @@ function HomePage() {
                     />
                   ))}
                 </Stack>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} sx={{ pt: { xs: 0.25, md: 0.5 } }}>
+                  <Button
+                    component={RouterLink}
+                    to="/pricing"
+                    variant="contained"
+                    size="large"
+                    endIcon={<ArrowForwardIcon />}
+                    sx={{ py: { md: 1.1 }, fontSize: { md: '0.95rem' } }}
+                  >
+                    View $99 Starter
+                  </Button>
+                  <Button
+                    component={RouterLink}
+                    to="/templates"
+                    variant="outlined"
+                    size="large"
+                    sx={{ py: { md: 1.1 }, fontSize: { md: '0.95rem' } }}
+                  >
+                    Browse Templates
+                  </Button>
+                </Stack>
               </Stack>
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Box
-                component="img"
-                src={imgElectricianContractor}
-                alt="Sample $99 Starter template preview for a local trade business"
-                sx={{ width: '100%', borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: 4 }}
-              />
             </Grid>
           </Grid>
         </AnimatedSection>
