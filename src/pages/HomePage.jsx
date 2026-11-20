@@ -1,6 +1,8 @@
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import BoltIcon from '@mui/icons-material/Bolt'
+import BrushOutlinedIcon from '@mui/icons-material/BrushOutlined'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
@@ -11,11 +13,10 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined'
 import PublicIcon from '@mui/icons-material/Public'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import { Box, Button, Card, CardContent, Chip, Divider, Grid, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Chip, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
-import ServiceCard from '../components/cards/ServiceCard'
 import StudioIntakeForm from '../components/forms/StudioIntakeForm'
 import LiveProjectCard from '../components/cards/LiveProjectCard'
 import HomeHeroTemplateMockup from '../components/home/HomeHeroTemplateMockup'
@@ -30,7 +31,6 @@ import {
   launchProcessSteps,
   pageSeo,
   pricingFootnote,
-  serviceItems,
   starterHomeNotIncluded,
   starterPackage,
 } from '../utils/siteData'
@@ -50,6 +50,8 @@ const socialItems = [
 ]
 
 const homeFeaturedLaunches = liveProjects.filter((p) => homeFeaturedLaunchIds.includes(p.id))
+
+const launchProcessStepIcons = [AssignmentTurnedInOutlinedIcon, BrushOutlinedIcon, RocketLaunchIcon]
 
 function HomePage() {
   return (
@@ -152,7 +154,7 @@ function HomePage() {
                   <Button
                     component="a"
                     href="#home-launched-proof"
-                    variant="text"
+                    variant="outlined"
                     size="large"
                     sx={{ py: { md: 1.1 }, fontSize: { md: '0.95rem' } }}
                   >
@@ -184,13 +186,43 @@ function HomePage() {
             <Typography id="home-process-title" variant="h2" sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
               How you get live
             </Typography>
+            <Typography color="text.secondary" sx={{ maxWidth: 720 }}>
+              Three steps from template pick to a link you can share on Google and social—details and add-ons on{' '}
+              <Link component={RouterLink} to="/pricing" fontWeight={600} underline="hover">
+                Pricing
+              </Link>{' '}
+              and{' '}
+              <Link component={RouterLink} to="/services" fontWeight={600} underline="hover">
+                Services
+              </Link>
+              .
+            </Typography>
             <Grid container spacing={2}>
-              {launchProcessSteps.map((step, index) => (
+              {launchProcessSteps.map((step, index) => {
+                const StepIcon = launchProcessStepIcons[index] ?? RocketLaunchIcon
+                return (
                 <Grid item xs={12} md={4} key={step.title}>
                   <Card sx={{ height: '100%' }}>
                     <CardContent>
                       <Stack spacing={1}>
-                        <Chip label={`Step ${index + 1}`} size="small" color="primary" variant="outlined" sx={{ width: 'fit-content' }} />
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              width: 44,
+                              height: 44,
+                              borderRadius: 2,
+                              bgcolor: 'primary.main',
+                              color: 'primary.contrastText',
+                              flexShrink: 0,
+                            }}
+                          >
+                            <StepIcon sx={{ fontSize: 24 }} />
+                          </Box>
+                          <Chip label={`Step ${index + 1}`} size="small" color="primary" variant="outlined" sx={{ width: 'fit-content' }} />
+                        </Stack>
                         <Typography variant="h6">{step.title}</Typography>
                         <Typography variant="body2" color="text.secondary">
                           {step.detail}
@@ -199,7 +231,7 @@ function HomePage() {
                     </CardContent>
                   </Card>
                 </Grid>
-              ))}
+              )})}
             </Grid>
           </Stack>
         </AnimatedSection>
@@ -336,7 +368,7 @@ function HomePage() {
                 <Button component={RouterLink} to="/templates" variant="outlined">
                   Browse All Templates
                 </Button>
-                <Button component={RouterLink} to="/pricing" variant="text" size="small">
+                <Button component={RouterLink} to="/pricing" variant="outlined" size="small">
                   Get any design — $99 Starter
                 </Button>
               </Stack>
@@ -357,21 +389,32 @@ function HomePage() {
         </AnimatedSection>
       </Box>
 
-      {/* ── Featured Services ───────────────────────────────────────── */}
-      <Box component="section" aria-labelledby="featured-services-title">
+      {/* ── Services pointer (full lineup on /services) ───────────────── */}
+      <Box component="section" aria-labelledby="home-services-link" sx={{ mt: { xs: 8, md: 10 } }}>
         <AnimatedSection delay={0.08}>
-          <Stack spacing={3}>
-            <Typography id="featured-services-title" variant="h2" sx={{ fontSize: { xs: '1.9rem', md: '2.4rem' } }}>
-              How We Help You Launch
-            </Typography>
-            <Grid container spacing={3}>
-              {serviceItems.slice(0, 3).map((service) => (
-                <Grid item xs={12} md={4} key={service.title}>
-                  <ServiceCard service={service} />
-                </Grid>
-              ))}
-            </Grid>
-          </Stack>
+          <Card variant="outlined" sx={{ borderColor: 'divider' }}>
+            <CardContent>
+              <Stack
+                direction={{ xs: 'column', sm: 'row' }}
+                spacing={2}
+                alignItems={{ xs: 'flex-start', sm: 'center' }}
+                justifyContent="space-between"
+              >
+                <Stack spacing={0.5} sx={{ maxWidth: 640 }}>
+                  <Typography id="home-services-link" variant="h6">
+                    Domains, handover, and custom apps
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    The $99 Starter is one package. When you need your own .ca, a portable site zip, or a scoped web app, see the full
+                    service lineup on our Services page.
+                  </Typography>
+                </Stack>
+                <Button component={RouterLink} to="/services" variant="outlined" endIcon={<ArrowForwardIcon />} sx={{ flexShrink: 0 }}>
+                  View services
+                </Button>
+              </Stack>
+            </CardContent>
+          </Card>
         </AnimatedSection>
       </Box>
 
