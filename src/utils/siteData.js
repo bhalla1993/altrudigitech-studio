@@ -25,11 +25,11 @@ export const business = {
   siteUrl: brand.siteUrl,
   domain: brand.domain,
   tagline: 'We build your online presence—simple, fast, and affordable.',
-  /** Home hero H1 — outcome first */
+  /** Home hero H1 — outcome first (calls/reputation, not process) */
   heroHeadline:
-    'Get a simple, professional website that helps local customers find and contact your business—without monthly builder fees.',
+    'Turn social followers and Google searches into calls and quote requests—with a professional mobile site for your trade or shop.',
   heroAudience: 'For local trades, small shops, and students across Ontario and Canada.',
-  heroOfferLine: `$99 one-time Starter — pick a template, complete intake & payment, and launch on ${brand.subdomainExample}.`,
+  heroOfferLine: `$99 one-time Starter — launch fast on ${brand.subdomainExample} (included), then add your own .ca when you are ready ($49 setup).`,
   studioBadge: 'Canadian-Owned · Ontario-Based Studio',
   hostingClarifier: `Studio subdomain hosting on ${brand.subdomainExample} is included with no monthly fee from us (CAD). Custom .ca or .com is a $49 CAD setup add-on; annual registrar fees are paid by you directly (often about $15–25 CAD/yr).`,
   homeProofLine: 'Built for local businesses in Ontario—serving clients across Canada.',
@@ -119,6 +119,27 @@ export const pricingFootnote =
   'All prices in CAD. No HST charged (Small Supplier exemption).'
 
 export const capacityBadge = 'Currently accepting 3 new Starter builds this week.'
+
+/** Home hero trust chips — outcomes first; payment/refund detail stays on Pricing */
+export const heroTrustItems = [
+  '$99 one-time (CAD)',
+  'Mobile-friendly — easy to share on social',
+  'Real client launches you can open below',
+]
+
+/** Home proof section — links to `liveProjects` via `homeFeaturedLaunchIds` */
+export const homeLaunchProof = {
+  title: 'Launched for real businesses',
+  subtitle:
+    'These are live sites and products we built—not template filler. Your Starter uses the same trade templates, with your name, services, and contact form.',
+  durhamNote:
+    'Durham-area trades on our $99 Starter can qualify for a featured listing on localtopspot.ca so homeowners in your city know who to call.',
+}
+
+export const homeFeaturedLaunchIds = [
+  'sparkshots-photography-website',
+  'localtopspot-durham-directory',
+]
 
 export const studentPromoNote =
   'Students: email us for promo code STUDENT20 ($20 off). Same Starter package; not published as a separate tier.'

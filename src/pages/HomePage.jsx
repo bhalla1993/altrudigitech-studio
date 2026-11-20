@@ -17,12 +17,16 @@ import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
 import ServiceCard from '../components/cards/ServiceCard'
 import StudioIntakeForm from '../components/forms/StudioIntakeForm'
+import LiveProjectCard from '../components/cards/LiveProjectCard'
 import HomeHeroTemplateMockup from '../components/home/HomeHeroTemplateMockup'
 import TemplatePreviewCard from '../components/templates/TemplatePreviewCard'
 import {
   brand,
   business,
   capacityBadge,
+  heroTrustItems,
+  homeFeaturedLaunchIds,
+  homeLaunchProof,
   launchProcessSteps,
   pageSeo,
   pricingFootnote,
@@ -30,6 +34,7 @@ import {
   starterHomeNotIncluded,
   starterPackage,
 } from '../utils/siteData'
+import { liveProjects } from '../utils/liveProjectsData'
 import { templates } from '../utils/templatesData'
 
 const approachItems = [
@@ -44,11 +49,7 @@ const socialItems = [
   { label: 'LinkedIn', href: business.socialLinks.linkedin, Icon: LinkedInIcon },
 ]
 
-const heroTrustItems = [
-  '$99 Starter — one-time (CAD)',
-  'No monthly site fee from us',
-  'Intake & payment before build',
-]
+const homeFeaturedLaunches = liveProjects.filter((p) => homeFeaturedLaunchIds.includes(p.id))
 
 function HomePage() {
   return (
@@ -128,7 +129,7 @@ function HomePage() {
                     />
                   ))}
                 </Stack>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} sx={{ pt: { xs: 0.25, md: 0.5 } }}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} sx={{ pt: { xs: 0.25, md: 0.5 } }} flexWrap="wrap" useFlexGap>
                   <Button
                     component={RouterLink}
                     to="/pricing"
@@ -147,6 +148,27 @@ function HomePage() {
                     sx={{ py: { md: 1.1 }, fontSize: { md: '0.95rem' } }}
                   >
                     Browse Templates
+                  </Button>
+                  <Button
+                    component="a"
+                    href="#home-launched-proof"
+                    variant="text"
+                    size="large"
+                    sx={{ py: { md: 1.1 }, fontSize: { md: '0.95rem' } }}
+                  >
+                    See real launches
+                  </Button>
+                  <Button
+                    component="a"
+                    href={business.socialLinks.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    variant="outlined"
+                    size="large"
+                    startIcon={<InstagramIcon />}
+                    sx={{ py: { md: 1.1 }, fontSize: { md: '0.95rem' } }}
+                  >
+                    DM on Instagram
                   </Button>
                 </Stack>
               </Stack>
@@ -179,6 +201,45 @@ function HomePage() {
                 </Grid>
               ))}
             </Grid>
+          </Stack>
+        </AnimatedSection>
+      </Box>
+
+      {/* ── Real launches (social proof) ────────────────────────────── */}
+      <Box
+        id="home-launched-proof"
+        component="section"
+        aria-labelledby="home-launched-title"
+        sx={{ mb: 8, scrollMarginTop: { xs: 10, md: 12 } }}
+      >
+        <AnimatedSection delay={0.05}>
+          <Stack spacing={2.5}>
+            <Stack spacing={1}>
+              <Typography id="home-launched-title" variant="h2" sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
+                {homeLaunchProof.title}
+              </Typography>
+              <Typography color="text.secondary" sx={{ maxWidth: 820, lineHeight: 1.65 }}>
+                {homeLaunchProof.subtitle}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 820, lineHeight: 1.6 }}>
+                {homeLaunchProof.durhamNote}
+              </Typography>
+            </Stack>
+            <Grid container spacing={3}>
+              {homeFeaturedLaunches.map((project, index) => (
+                <Grid key={project.id} item xs={12} md={6}>
+                  <LiveProjectCard project={project} index={index} />
+                </Grid>
+              ))}
+            </Grid>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
+              <Button component={RouterLink} to="/live-projects" variant="outlined" endIcon={<ArrowForwardIcon />}>
+                All Live Projects
+              </Button>
+              <Button component={RouterLink} to="/contact#intake" variant="contained">
+                Start your Starter
+              </Button>
+            </Stack>
           </Stack>
         </AnimatedSection>
       </Box>
@@ -386,7 +447,7 @@ function HomePage() {
                         <Typography variant="h6">Our Vision</Typography>
                       </Stack>
                       <Typography color="text.secondary">
-                        To make professional online presence accessible to everyone through affordable, high-quality SPAs that require no hosting fees, no maintenance costs, and no technical knowledge.
+                        To make professional online presence accessible to everyone through affordable, mobile-friendly one-page sites—no hosting fees from us on your studio subdomain, and no need to learn WordPress or Wix.
                       </Typography>
                     </Stack>
                   </CardContent>
