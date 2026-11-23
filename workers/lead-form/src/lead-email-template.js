@@ -59,8 +59,8 @@ export function buildLeadEmailHtml({
   ]
     .map(
       ([label, value]) => `<tr>
-  <td style="padding:6px 0;font-size:13px;color:#94a3b8;width:80px;">${escapeHtml(label)}</td>
-  <td style="padding:6px 0;font-size:13px;color:#e2e8f0;">${escapeHtml(value)}</td>
+  <td style="padding:8px 12px 8px 0;font-size:13px;line-height:1.45;color:#334155;font-weight:600;width:88px;vertical-align:top;">${escapeHtml(label)}</td>
+  <td style="padding:8px 0;font-size:14px;line-height:1.5;color:#0f172a;font-weight:500;vertical-align:top;">${escapeHtml(value)}</td>
 </tr>`,
     )
     .join('')
