@@ -12,19 +12,53 @@ function formatCellValue(value) {
   return String(value)
 }
 
+function formatSiteLabel(originHost) {
+  if (!originHost) return ''
+  try {
+    const url = originHost.includes('://') ? originHost : `https://${originHost}`
+    const host = new URL(url).hostname
+    return host ? `https://${host}` : originHost
+  } catch {
+    return originHost
+  }
+}
+
+/** Plain-text footer for client-site leads (studio omit). */
+export function buildDeliveryNote(clientId, originHost) {
+  if (!clientId || clientId === 'studio') return ''
+  const site = formatSiteLabel(originHost)
+  const lines = ['How you received this', '—'.repeat(24)]
+  if (site) lines.push(`Submitted via your contact form at ${site}`)
+  lines.push('Delivered securely by AltruDigiTech Digital Studio.')
+  return lines.join('\n')
+}
+
+function buildDeliveryFooterHtml(clientId, originHost) {
+  if (!clientId || clientId === 'studio') return ''
+  const site = formatSiteLabel(originHost)
+  const siteLine = site
+    ? `<p style="margin:0 0 6px 0;font-size:12px;line-height:1.55;color:#64748b;">Submitted via your contact form at <strong style="color:#334155;font-weight:600;">${escapeHtml(site)}</strong></p>`
+    : ''
+  return `<tr>
+  <td style="padding:16px 28px 0 28px;border-top:1px solid #e2e8f0;background-color:#f8fafc;">
+    <p style="margin:0 0 8px 0;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#64748b;">How you received this</p>
+    ${siteLine}
+    <p style="margin:0;font-size:12px;line-height:1.55;color:#64748b;">Delivered securely by <strong style="color:#334155;font-weight:600;">AltruDigiTech</strong> (your studio-hosted contact form).</p>
+  </td>
+</tr>`
+}
+
 /**
  * @param {{ title: string, rows: { label: string, value: string }[] }[]} sections
  */
 export function buildLeadEmailHtml({
   headline,
   clientId,
-  name,
-  email,
   originHost,
   sections,
   footerNote,
 }) {
-  const safeHeadline = escapeHtml(headline || 'New lead')
+  const safeHeadline = escapeHtml(headline || 'New message')
   const sectionBlocks = (sections || [])
     .filter((s) => s?.rows?.length)
     .map((section) => {
@@ -51,19 +85,9 @@ export function buildLeadEmailHtml({
     })
     .join('')
 
-  const metaRows = [
-    ['Client', clientId || '—'],
-    ['Site', originHost || '—'],
-    ['Name', name || '—'],
-    ['Email', email || '—'],
-  ]
-    .map(
-      ([label, value]) => `<tr>
-  <td style="padding:8px 12px 8px 0;font-size:13px;line-height:1.45;color:#334155;font-weight:600;width:88px;vertical-align:top;">${escapeHtml(label)}</td>
-  <td style="padding:8px 0;font-size:14px;line-height:1.5;color:#0f172a;font-weight:500;vertical-align:top;">${escapeHtml(value)}</td>
-</tr>`,
-    )
-    .join('')
+  const deliveryFooter = buildDeliveryFooterHtml(clientId, originHost)
+  const replyNote =
+    footerNote || 'Reply directly to this email to reach the person who contacted you.'
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -79,15 +103,11 @@ export function buildLeadEmailHtml({
               <h1 style="margin:0;font-size:22px;font-weight:700;line-height:1.3;color:#ffffff;">${safeHeadline}</h1>
             </td>
           </tr>
-          <tr>
-            <td style="padding:16px 28px;background-color:#f8fafc;border-bottom:1px solid #e2e8f0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${metaRows}</table>
-            </td>
-          </tr>
           ${sectionBlocks}
+          ${deliveryFooter}
           <tr>
-            <td style="padding:20px 28px 28px 28px;border-top:1px solid #e2e8f0;">
-              <p style="margin:0;font-size:12px;line-height:1.6;color:#64748b;">${escapeHtml(footerNote || 'Reply directly to this message to reach the sender. Lead delivered securely via AltruDigiTech.')}</p>
+            <td style="padding:20px 28px 28px 28px;${deliveryFooter ? '' : 'border-top:1px solid #e2e8f0;'}">
+              <p style="margin:0;font-size:12px;line-height:1.6;color:#64748b;">${escapeHtml(replyNote)}</p>
             </td>
           </tr>
         </table>
@@ -101,8 +121,8 @@ export function buildLeadEmailHtml({
 /**
  * @param {{ title: string, rows: { label: string, value: string }[] }[]} sections
  */
-export function buildLeadEmailText({ headline, sections, extraBlock }) {
-  const lines = [headline || 'New lead', '='.repeat(Math.min(48, (headline || 'New lead').length)), '']
+export function buildLeadEmailText({ headline, sections, extraBlock, deliveryNote }) {
+  const lines = [headline || 'New message', '='.repeat(Math.min(48, (headline || 'New message').length)), '']
   for (const section of sections || []) {
     if (!section?.rows?.length) continue
     lines.push(section.title?.toUpperCase() || 'DETAILS')
@@ -116,6 +136,10 @@ export function buildLeadEmailText({ headline, sections, extraBlock }) {
     lines.push(extraBlock)
     lines.push('')
   }
+  if (deliveryNote) {
+    lines.push(deliveryNote)
+    lines.push('')
+  }
   lines.push('—')
   lines.push('AltruDigiTech · Reply to reach the sender.')
   return lines.join('\n')
@@ -127,7 +151,7 @@ export function buildLeadEmailText({ headline, sections, extraBlock }) {
 export function buildSimpleLeadSections({ name, email, message }) {
   return [
     {
-      title: 'Contact',
+      title: 'From',
       rows: [
         { label: 'Name', value: name || '' },
         { label: 'Email', value: email || '' },

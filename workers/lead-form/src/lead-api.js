@@ -1,6 +1,7 @@
 import { knownHostnames, lookupHost, resolveLeadEmailByClientId } from './hosts.js'
 import { allowedOrigins, corsHeaders, withCors } from './cors.js'
 import {
+  buildDeliveryNote,
   buildLeadEmailHtml,
   buildLeadEmailText,
   buildSimpleLeadSections,
@@ -102,17 +103,19 @@ async function sendLeadEmail({
     throw new Error('RESEND_API_KEY not configured')
   }
 
+  const senderLabel = name || email || 'A visitor'
+
   const subject =
     clientId === 'studio'
-      ? `[Studio] ${intent ? String(intent).slice(0, 80) : 'Contact'} — ${name || email || 'Unknown'}`
-      : `[${clientId}] New lead from ${name || 'Unknown'}`
+      ? `[Studio] ${intent ? String(intent).slice(0, 80) : 'Contact'} — ${senderLabel}`
+      : `New contact form message from ${senderLabel}`
 
   const headline =
     clientId === 'studio'
       ? 'New studio intake'
       : clientId === 'internal-demo'
         ? 'New sandbox lead'
-        : `New lead · ${clientId}`
+        : `New message from ${senderLabel}`
 
   const sections =
     emailSections?.length > 0
@@ -120,8 +123,9 @@ async function sendLeadEmail({
       : buildSimpleLeadSections({ name, email, message })
 
   let textBody = buildLeadEmailText({
-    headline: `${headline} (${clientId})`,
+    headline,
     sections,
+    deliveryNote: buildDeliveryNote(clientId, originHost),
   })
   if (emailSections?.length && message) {
     const crmIdx = message.indexOf('Spreadsheet row')
@@ -133,8 +137,6 @@ async function sendLeadEmail({
   const html = buildLeadEmailHtml({
     headline,
     clientId,
-    name,
-    email,
     originHost,
     sections,
   })
