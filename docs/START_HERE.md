@@ -98,7 +98,7 @@ Details: [INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md).
 |-----|----------|
 | `/` `/pricing` `/contact` | 200; `/contact` intake submits |
 | `internal-demo.altrudigitech.com` | Sandbox + test form |
-| `shiva-bhalla.altrudigitech.com` | Showcase site |
+| `shivabhalla.altrudigitech.com` | Portfolio showcase site |
 | `not-a-client.altrudigitech.com` | 404 |
 
 See [CUTOVER_CHECKLIST.md](./CUTOVER_CHECKLIST.md) for full list.

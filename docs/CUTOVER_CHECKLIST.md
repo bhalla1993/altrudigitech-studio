@@ -79,7 +79,7 @@ npm run verify:subdomains
 | `https://altrudigitech.com/contact` | Multi-step intake + Turnstile on last step |
 | `https://altrudigitech.com/sites/internal-demo/assets/lead-form/lead-config.js` | `turnstileSiteKey` non-empty |
 | `https://internal-demo.altrudigitech.com/` | 200 + test lead form |
-| `https://shiva-bhalla.altrudigitech.com/` | 200 |
+| `https://shivabhalla.altrudigitech.com/` | 200 |
 | `https://not-a-client.altrudigitech.com/` | 404 |
 
 **Intake:** submit on `/contact` → HTML email at `STUDIO_LEAD_EMAIL` / studio Gmail.
