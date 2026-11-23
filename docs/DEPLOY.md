@@ -55,8 +55,8 @@ Usually **stale `index.html`** or **missing chunk** while SPA fallback served HT
 |-----|------|
 | `https://altrudigitech.com/pricing` | SPA deep link (**200**) |
 | `https://altrudigitech.com/contact` | Intake form |
-| `https://altrudigitech.com/sites/shiva-bhalla/` | Portfolio via apex path |
-| `https://shiva-bhalla.altrudigitech.com/` | Same site via Worker subdomain |
+| `https://altrudigitech.com/sites/shivabhalla/` | Portfolio via apex path |
+| `https://shivabhalla.altrudigitech.com/` | Same site via Worker subdomain |
 
 ```bash
 npm run verify:subdomains

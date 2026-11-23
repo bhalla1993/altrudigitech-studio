@@ -72,7 +72,7 @@ Defer until first custom-domain sale: client zone, NS delegation, Worker on clie
 | Item | Notes |
 |------|--------|
 | `updates@` Email Routing | First client on monthly tweaks — [EMAIL_ROUTING.md](./EMAIL_ROUTING.md) |
-| **shiva-bhalla** portfolio form | Replace Google Form iframe with `altru-lead` + API |
+| **shivabhalla** portfolio form | Done — `altru-lead` + API on `shivabhalla.altrudigitech.com` |
 | **Analytics** | CF Web Analytics or Plausible |
 | **`/api/lead` rate limiting** | If spam volume grows |
 | **Care plan upsell** | After **5** completed Starters — [STUDIO_PLAN.md](./STUDIO_PLAN.md) §12 |

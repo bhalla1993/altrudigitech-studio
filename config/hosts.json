@@ -6,9 +6,14 @@
       "client_id": "internal-demo",
       "lead_email": "altrudigitech.studio@gmail.com"
     },
+    "shivabhalla.altrudigitech.com": {
+      "slug": "shivabhalla",
+      "client_id": "shivabhalla",
+      "lead_email": "altrudigitech.studio@gmail.com"
+    },
     "shiva-bhalla.altrudigitech.com": {
-      "slug": "shiva-bhalla",
-      "client_id": "shiva-bhalla",
+      "slug": "shivabhalla",
+      "client_id": "shivabhalla",
       "lead_email": "altrudigitech.studio@gmail.com"
     }
   }

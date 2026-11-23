@@ -35,8 +35,8 @@ export const templates = [
     thumbnail: imgStudentResume,
     demoUrl: `${BASE}templates/spa/student-resume.html`,
     /** Marketing SPA demo; production client example uses iPortfolio-style layout */
-    clientExampleSlug: 'shiva-bhalla',
-    clientExampleUrl: 'https://altrudigitech.com/sites/shiva-bhalla/',
+    clientExampleSlug: 'shivabhalla',
+    clientExampleUrl: 'https://shivabhalla.altrudigitech.com/',
     referencePortfolioUrl: 'https://bhalla1993.github.io/shivabhallaportfolio.github.io',
     type: 'spa-html',
     popularity: 91,

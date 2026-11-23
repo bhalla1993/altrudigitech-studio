@@ -7,13 +7,13 @@ const localTopSpotLab = studioLabs.find((lab) => lab.title === 'LocalTopSpot')
 
 export const liveProjects = [
   {
-    id: 'shiva-bhalla-portfolio',
-    title: 'Shiva Bhalla — Portfolio',
+    id: 'shivabhalla-portfolio',
+    title: 'Shiva Bhalla — Student resume showcase',
     description:
-      'Professional resume site (student-resume family). Live on the studio at /sites/shiva-bhalla/ after deploy; legacy mirror on GitHub Pages.',
-    badge: 'Live Project',
-    ctaLabel: 'View on studio',
-    url: 'https://altrudigitech.com/sites/shiva-bhalla/',
+      `Professional resume on ${brand.subdomainExample.replace('your-business', 'shivabhalla')} — AltruDigiTech lead form, Turnstile, and studio subdomain hosting (student Starter family).`,
+    badge: 'Student showcase',
+    ctaLabel: 'Visit shivabhalla.altrudigitech.com',
+    url: 'https://shivabhalla.altrudigitech.com/',
     thumbnail: resumeThumbnail,
   },
   {

@@ -8,12 +8,12 @@ import { execFileSync } from 'child_process'
 
 const checks = [
   { url: 'https://internal-demo.altrudigitech.com/', expect: [200] },
-  { url: 'https://shiva-bhalla.altrudigitech.com/', expect: [200] },
+  { url: 'https://shivabhalla.altrudigitech.com/', expect: [200] },
   {
-    url: 'https://shiva-bhalla.altrudigitech.com/assets/vendor/bootstrap/css/bootstrap.min.css',
+    url: 'https://shivabhalla.altrudigitech.com/assets/vendor/bootstrap/css/bootstrap.min.css',
     expect: [200],
   },
-  { url: 'https://shiva-bhalla.altrudigitech.com/assets/img/favicon.jpeg', expect: [200] },
+  { url: 'https://shivabhalla.altrudigitech.com/assets/img/favicon.jpeg', expect: [200] },
   { url: 'https://not-a-client.altrudigitech.com/', expect: [404] },
   { url: 'https://altrudigitech.com/', expect: [200] },
 ]

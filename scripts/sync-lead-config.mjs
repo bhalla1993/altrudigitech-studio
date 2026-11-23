@@ -13,7 +13,8 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const devVarsPath = path.join(root, '.dev.vars')
 
 const CLIENTS = [
-  { slug: 'internal-demo', clientId: 'internal-demo' },
+  { slug: 'internal-demo', clientId: 'internal-demo', businessName: 'Internal demo (sandbox)' },
+  { slug: 'shivabhalla', clientId: 'shivabhalla', businessName: 'Shiva Bhalla — portfolio showcase' },
 ]
 
 function loadDevVars(filePath) {
@@ -41,7 +42,7 @@ const env = loadDevVars(devVarsPath)
 const siteKey =
   env.TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || COMMITTED_SITE_KEY || ''
 
-for (const { slug, clientId } of CLIENTS) {
+for (const { slug, clientId, businessName } of CLIENTS) {
   const assetsDir = path.join(root, 'clients', slug, 'assets', 'lead-form')
   fs.mkdirSync(assetsDir, { recursive: true })
 
@@ -49,7 +50,7 @@ for (const { slug, clientId } of CLIENTS) {
   apiUrl: "https://altrudigitech.com/api/lead",
   clientId: ${JSON.stringify(clientId)},
   turnstileSiteKey: ${JSON.stringify(siteKey)},
-  businessName: ${JSON.stringify('Internal demo (sandbox)')},
+  businessName: ${JSON.stringify(businessName || slug)},
 };
 `
 
