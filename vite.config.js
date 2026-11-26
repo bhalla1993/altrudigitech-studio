@@ -11,10 +11,17 @@ function clientSitesTrailingSlash() {
     configurePreviewServer(server) {
       server.middlewares.use((req, res, next) => {
         const pathOnly = req.url?.split('?')[0] ?? ''
-        const match = pathOnly.match(/^\/sites\/([^/]+)$/)
-        if (match) {
+        const siteMatch = pathOnly.match(/^\/sites\/([^/]+)$/)
+        if (siteMatch) {
           const qs = req.url?.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''
-          res.writeHead(301, { Location: `/sites/${match[1]}/${qs}` })
+          res.writeHead(301, { Location: `/sites/${siteMatch[1]}/${qs}` })
+          res.end()
+          return
+        }
+        const creatorDemoMatch = pathOnly.match(/^\/templates\/creator\/([^/]+)$/)
+        if (creatorDemoMatch) {
+          const qs = req.url?.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''
+          res.writeHead(301, { Location: `/templates/creator/${creatorDemoMatch[1]}/${qs}` })
           res.end()
           return
         }

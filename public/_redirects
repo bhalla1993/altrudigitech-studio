@@ -1,5 +1,6 @@
 # Cloudflare Pages — prefer functions/[[path]].js for SPA + /assets 404.
 # Client sites live under /sites/{slug}/ — trailing slash required for static index.html.
 /sites/:slug /sites/:slug/ 301
+/templates/creator/:slug /templates/creator/:slug/ 301
 # Proxy below is a fallback if Functions are disabled; do not add root 404.html.
 /* /index.html 200

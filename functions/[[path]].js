@@ -13,6 +13,14 @@ export async function onRequest({ request, env }) {
     return Response.redirect(new URL(`/sites/${siteBare[1]}/`, url.origin), 301)
   }
 
+  const creatorDemoBare = pathname.match(/^\/templates\/creator\/([^/]+)$/)
+  if (creatorDemoBare) {
+    return Response.redirect(
+      new URL(`/templates/creator/${creatorDemoBare[1]}/`, url.origin),
+      301,
+    )
+  }
+
   const assetResponse = await env.ASSETS.fetch(request)
   const contentType = assetResponse.headers.get('Content-Type') || ''
 

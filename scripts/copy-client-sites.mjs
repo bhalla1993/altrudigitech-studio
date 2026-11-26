@@ -5,6 +5,12 @@ import { fileURLToPath } from 'url'
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const clientsDir = path.join(root, 'clients')
 const sitesOut = path.join(root, 'dist', 'sites')
+const distDir = path.join(root, 'dist')
+
+/** Client slug → public URL path under /templates/ (marketing demo, same files as /sites/{slug}/) */
+const TEMPLATE_DEMO_PATHS = {
+  'content-creator-demo': 'templates/creator/content-creator-demo',
+}
 
 if (!fs.existsSync(clientsDir)) {
   console.log('copy-client-sites: no clients/ directory, skipping')
@@ -43,4 +49,13 @@ for (const slug of fs.readdirSync(clientsDir)) {
   }
 
   console.log(`copy-client-sites: ${slug} → dist/sites/${slug}/`)
+
+  const templateRel = TEMPLATE_DEMO_PATHS[slug]
+  if (templateRel) {
+    const templateDest = path.join(distDir, templateRel)
+    fs.mkdirSync(path.dirname(templateDest), { recursive: true })
+    fs.rmSync(templateDest, { recursive: true, force: true })
+    fs.cpSync(dest, templateDest, { recursive: true })
+    console.log(`copy-client-sites: ${slug} → dist/${templateRel}/`)
+  }
 }

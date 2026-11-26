@@ -79,6 +79,7 @@ export const generalTopicOptions = [
 ]
 
 export const starterTemplateOptions = [
+  'Content creator (link hub & collabs)',
   'Electrician & contractor',
   'Home cleaning service',
   'HVAC technician',

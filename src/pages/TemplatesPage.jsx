@@ -41,14 +41,22 @@ function TemplatesPage() {
     }
 
     if (deferredSort === 'Recommended') {
-      return [...filtered].sort((a, b) => Number(Boolean(b.recommended)) - Number(Boolean(a.recommended)))
+      return [...filtered].sort((a, b) => {
+        const rec = Number(Boolean(b.recommended)) - Number(Boolean(a.recommended))
+        if (rec !== 0) return rec
+        return new Date(b.createdAt || '2024-01-01') - new Date(a.createdAt || '2024-01-01')
+      })
     }
 
     return [...filtered].sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
   }, [deferredFilter, deferredSort])
 
   const recommendedTemplates = useMemo(
-    () => templates.filter((template) => template.recommended).slice(0, 3),
+    () =>
+      [...templates]
+        .filter((template) => template.recommended)
+        .sort((a, b) => new Date(b.createdAt || '2024-01-01') - new Date(a.createdAt || '2024-01-01'))
+        .slice(0, 3),
     [],
   )
 
@@ -64,10 +72,10 @@ function TemplatesPage() {
         <AnimatedSection>
           <Stack spacing={3}>
             <Typography id="templates-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
-              Resume and Portfolio Templates
+              Templates for Creators, Resumes, and Local Business
             </Typography>
             <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
-              Browse customizable templates for trades, shops, and resumes. Each design is a starting point for our $99 Starter—we tailor content to your business after intake and payment.
+              Browse customizable templates for creators, trades, shops, and resumes. Each design is a starting point for our $99 Starter—we tailor content after intake and payment.
             </Typography>
 
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={1.2} alignItems={{ xs: 'flex-start', md: 'center' }}>

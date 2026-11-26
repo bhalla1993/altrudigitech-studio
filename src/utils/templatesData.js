@@ -1,3 +1,4 @@
+import imgContentCreator from '../assets/images/content-creator.jpg'
 import imgAdventurePhotographer from '../assets/images/adventure-photographer.png'
 import imgBakeryShop from '../assets/images/bakery-shop.png'
 import imgBarberShop from '../assets/images/barber-shop.png'
@@ -19,11 +20,29 @@ import imgStudentResume from '../assets/images/student-resume.png'
 
 const BASE = import.meta.env.BASE_URL
 
-export const templateFilters = ['All', 'Resume', 'Portfolio', 'Business', 'Services']
+export const templateFilters = ['All', 'Creator', 'Resume', 'Portfolio', 'Business', 'Services']
 
 export const templateSortOptions = ['Most Popular', 'Newest', 'Recommended']
 
 export const templates = [
+  // ── Creator ─────────────────────────────────────────────────────────────
+  {
+    id: 'content-creator-demo',
+    title: 'Content Creator',
+    category: 'Creator Templates',
+    filterCategory: 'Creator',
+    tags: ['Creator', 'Beauty', 'Link Hub', 'Brand Collabs'],
+    shortDescription:
+      'Editorial link-in-bio and media kit for multi-platform creators—YouTube, Instagram, TikTok, collab briefs, and lead capture.',
+    thumbnail: imgContentCreator,
+    demoUrl: `${BASE}templates/creator/content-creator-demo/`,
+    clientExampleSlug: 'content-creator-demo',
+    clientExampleUrl: `${BASE}sites/content-creator-demo/`,
+    type: 'spa-html',
+    popularity: 96,
+    createdAt: '2026-11-26',
+    recommended: true,
+  },
   // ── Resume ──────────────────────────────────────────────────────────────
   {
     id: 'student-resume',

@@ -20,6 +20,11 @@ const CLIENTS = [
     clientId: 'a1-india-bazaar',
     businessName: 'A1 India Bazaar (pitch preview)',
   },
+  {
+    slug: 'content-creator-demo',
+    clientId: 'content-creator-demo',
+    businessName: 'Creator media kit (template demo)',
+  },
 ]
 
 function loadDevVars(filePath) {
