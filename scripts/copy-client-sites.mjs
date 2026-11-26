@@ -11,6 +11,7 @@ const distDir = path.join(root, 'dist')
 const TEMPLATE_DEMO_PATHS = {
   'content-creator-demo': 'templates/creator/content-creator-demo',
   'real-estate-agent-profile': 'templates/services/real-estate-agent-profile',
+  'pizzeria-demo': 'templates/business/pizzeria-demo',
 }
 
 if (!fs.existsSync(clientsDir)) {

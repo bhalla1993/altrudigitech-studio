@@ -29,6 +29,14 @@ export async function onRequest({ request, env }) {
     )
   }
 
+  const businessDemoBare = pathname.match(/^\/templates\/business\/([^/]+)$/)
+  if (businessDemoBare) {
+    return Response.redirect(
+      new URL(`/templates/business/${businessDemoBare[1]}/`, url.origin),
+      301,
+    )
+  }
+
   const assetResponse = await env.ASSETS.fetch(request)
   const contentType = assetResponse.headers.get('Content-Type') || ''
 

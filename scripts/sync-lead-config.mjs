@@ -31,6 +31,11 @@ const CLIENTS = [
     businessName: 'Real Estate Agent Profile (template demo)',
   },
   {
+    slug: 'pizzeria-demo',
+    clientId: 'pizzeria-demo',
+    businessName: 'Local Pizzeria (template demo)',
+  },
+  {
     slug: 'shanaya',
     clientId: 'shanaya',
     businessName: 'Shanaya — creator links',

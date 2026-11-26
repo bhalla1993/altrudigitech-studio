@@ -22,6 +22,8 @@ New chat or fresh machine? Point the agent at **this file** plus [STUDIO_PLAN.md
 | **[WORKER_ROUTES.md](./WORKER_ROUTES.md)** | Wildcard DNS, Worker routes, `/api/lead` |
 | **[INTAKE_AND_LEADS.md](./INTAKE_AND_LEADS.md)** | StudioIntakeForm, Turnstile, API, HTML emails |
 | **[EMAIL_ROUTING.md](./EMAIL_ROUTING.md)** | `hello@` / `updates@` → Gmail |
+| **[CLIENT_DOMAIN_HANDOFF.md](./CLIENT_DOMAIN_HANDOFF.md)** | Client `.ca` / `.com` — NS delegation, call script |
+| **[SPARKSHOTS_GITHUB_PAGES_DNS.md](./SPARKSHOTS_GITHUB_PAGES_DNS.md)** | Family site `sparkshots.ca` + GoDaddy (non-Starter stack) |
 | **[BRAND.md](./BRAND.md)** | Names, emails, repo naming |
 | **[REPOS.md](./REPOS.md)** | Canonical `origin`; retired `altruism` GitHub Pages |
 

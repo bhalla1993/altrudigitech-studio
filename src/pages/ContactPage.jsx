@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
@@ -30,9 +30,15 @@ const socialItems = [
 
 function ContactPage() {
   const { hash } = useLocation()
+  const skipInitialIntakeScroll = useRef(true)
 
   useEffect(() => {
     if (hash !== '#intake') return
+    // Route navigation (e.g. Start Project → /contact#intake): ScrollToTop already sets y=0; don’t jump to the form.
+    if (skipInitialIntakeScroll.current) {
+      skipInitialIntakeScroll.current = false
+      return
+    }
     const el = document.getElementById('intake')
     el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [hash])

@@ -16,6 +16,7 @@ import imgLandscapeContractor from '../assets/images/landscape-contractor.png'
 import imgLuxuryPlumbing from '../assets/images/luxury-plumbing.png'
 import imgRealEstateAgent from '../assets/images/real-estate-agent.png'
 import imgRealEstateAgentProfile from '../assets/images/real-estate-agent-profile.png'
+import imgPizzeriaDemo from '../assets/images/pizzeria-demo.png'
 import imgSnowRemoval from '../assets/images/snow-removal.png'
 import imgStudentResume from '../assets/images/student-resume.png'
 
@@ -192,6 +193,23 @@ export const templates = [
     popularity: 96,
     createdAt: '2026-04-18',
     recommended: true,
+  },
+  {
+    id: 'pizzeria-demo',
+    title: 'Local Pizzeria',
+    category: 'Business Templates',
+    filterCategory: 'Business',
+    tags: ['Business', 'Pizza', 'Restaurant', 'Delivery', 'Food'],
+    shortDescription:
+      'Warm neighbourhood pizzeria site—hero, menu tabs, order paths, reviews, visit info, and catering lead capture.',
+    thumbnail: imgPizzeriaDemo,
+    demoUrl: `${BASE}templates/business/pizzeria-demo/`,
+    clientExampleSlug: 'pizzeria-demo',
+    clientExampleUrl: `${BASE}sites/pizzeria-demo/`,
+    type: 'spa-html',
+    popularity: 71,
+    createdAt: '2026-04-16',
+    recommended: false,
   },
   {
     id: 'fitness-trainer',

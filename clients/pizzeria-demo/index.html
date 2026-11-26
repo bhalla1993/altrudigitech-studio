@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Nonna's Hearth Pizzeria — wood-fired pizza, pasta, and wings. Delivery, takeout, and dine-in for your neighbourhood." />
+  <title>Nonna's Hearth | Local Pizzeria · Pizza · Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer onload="document.dispatchEvent(new Event('turnstile-loaded'))"></script>
+  <script src="assets/lead-form/lead-config.js"></script>
+  <style>
+    :root {
+      --tomato: #c73e2e;
+      --tomato-deep: #9e2f23;
+      --olive: #3d4f3a;
+      --olive-soft: #e8ede4;
+      --cream: #faf6ef;
+      --surface: #fffdf9;
+      --crust: #e8c9a0;
+      --ink: #1f1410;
+      --muted: #5c5048;
+      --line: #e6ddd0;
+      --radius: 16px;
+      --radius-lg: 22px;
+      --shadow: 0 24px 60px rgba(31, 20, 16, 0.12);
+      --shadow-sm: 0 10px 30px rgba(31, 20, 16, 0.08);
+      --scroll-offset: 104px;
+      --ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--scroll-offset); }
+    body {
+      font-family: Outfit, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      padding-top: var(--scroll-offset);
+      padding-bottom: 36px;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--tomato-deep); font-weight: 700; text-decoration: none; }
+    a:hover { color: var(--tomato); }
+    :focus-visible { outline: 3px solid var(--crust); outline-offset: 3px; }
+    .display { font-family: "DM Serif Display", Georgia, serif; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.35rem; }
+    section { padding: 4.5rem 0; }
+    h1, h2, h3 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; line-height: 1.08; color: var(--ink); }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); }
+    h2 { font-size: clamp(1.85rem, 3.5vw, 2.5rem); margin-bottom: 0.65rem; }
+    h2 em { font-style: italic; color: var(--tomato); }
+    h3 { font-size: 1.25rem; }
+    .eyebrow {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--olive); margin-bottom: 0.75rem;
+    }
+    .lead { font-size: 1.06rem; color: var(--muted); max-width: 34rem; }
+    .section-head { margin-bottom: 2rem; }
+    .section-head.center { text-align: center; }
+    .section-head.center .lead { margin-left: auto; margin-right: auto; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+      padding: 0.85rem 1.45rem; border-radius: 999px; font: inherit; font-weight: 800; font-size: 0.9rem;
+      border: 2px solid transparent; cursor: pointer; transition: transform 0.2s var(--ease), box-shadow 0.2s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-tomato { background: var(--tomato); color: #fff; box-shadow: 0 12px 28px rgba(199, 62, 46, 0.35); }
+    .btn-tomato:hover { color: #fff; background: var(--tomato-deep); }
+    .btn-olive { background: var(--olive); color: #fff; }
+    .btn-olive:hover { color: #fff; opacity: 0.92; }
+    .btn-ghost { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.45); color: #fff; }
+    .btn-ghost:hover { color: #fff; border-color: #fff; }
+
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+      background: var(--tomato-deep); color: #fff; font-size: 0.76rem; font-weight: 600;
+    }
+    .top-bar .wrap {
+      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+      padding: 0.38rem 1.35rem; flex-wrap: wrap;
+    }
+    .top-bar a { color: #fff; }
+    .hours-pill { background: rgba(0,0,0,0.15); padding: 0.2rem 0.55rem; border-radius: 6px; }
+
+    header#site-header {
+      position: fixed; top: 30px; left: 0; right: 0; z-index: 1000;
+      background: rgba(250, 246, 239, 0.94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    header.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0.6rem 1.35rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo { display: flex; flex-direction: column; color: var(--ink); text-decoration: none; line-height: 1.1; }
+    .logo strong { font-family: "DM Serif Display", serif; font-size: 1.2rem; }
+    .logo small { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tomato); }
+    nav ul { list-style: none; display: flex; gap: 1.1rem; flex-wrap: wrap; font-size: 0.84rem; font-weight: 700; }
+    nav a { color: var(--ink); }
+    nav a:hover { color: var(--tomato); }
+    .nav-toggle { display: none; width: 44px; height: 44px; border: 2px solid var(--tomato); border-radius: 10px; background: transparent; cursor: pointer; position: relative; }
+    .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+      display: block; width: 18px; height: 2px; background: var(--tomato); position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .nav-toggle span { top: 50%; margin-top: -1px; }
+    .nav-toggle span::before { content: ""; top: -6px; }
+    .nav-toggle span::after { content: ""; top: 6px; }
+
+    #hero {
+      min-height: 72vh;
+      display: flex; align-items: center;
+      background:
+        linear-gradient(105deg, rgba(12, 8, 6, 0.82) 0%, rgba(12, 8, 6, 0.55) 42%, rgba(12, 8, 6, 0.28) 68%, rgba(12, 8, 6, 0.12) 100%),
+        url('https://images.pexels.com/photos/2147491/pexels-photo-2147491.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+      color: #fff;
+      padding: 5rem 0 4rem;
+    }
+    #hero .hero-inner { max-width: 40rem; }
+    #hero .hero-copy {
+      background: #faf6ef;
+      padding: 1.5rem 1.35rem 1.4rem;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+    #hero .hero-eyebrow {
+      margin: 0 0 0.85rem;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: inline-block;
+      background: #fff3b0;
+      padding: 0.35rem 0.65rem;
+      border-radius: 4px;
+      line-height: 1.3;
+    }
+    #hero .hero-headline {
+      margin: 0;
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(2.05rem, 5vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    #hero .hero-mark {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0.22rem 0;
+      padding: 0.1em 0.42em 0.14em;
+      background: #fff59d;
+      color: #1a100c;
+      border-radius: 3px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    #hero .hero-mark--line2 {
+      background: #ffe082;
+      font-style: italic;
+      color: var(--tomato-deep);
+    }
+    #hero .hero-lead {
+      margin: 1rem 0 0;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      color: var(--ink);
+      opacity: 0.92;
+      max-width: none;
+    }
+    #hero .hero-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.35rem; }
+
+    .order-strip {
+      background: var(--surface); border-block: 1px solid var(--line);
+      padding: 1.35rem 0;
+    }
+    .order-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .order-card {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem 1.15rem;
+      background: var(--cream); text-align: center; transition: transform 0.25s var(--ease), box-shadow 0.25s;
+    }
+    .order-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .order-card .icon { font-size: 1.6rem; margin-bottom: 0.35rem; }
+    .order-card p { font-size: 0.88rem; color: var(--muted); margin-top: 0.35rem; }
+
+    #menu { background: linear-gradient(180deg, var(--surface), var(--cream)); }
+    .menu-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .menu-tabs button {
+      font: inherit; font-weight: 800; font-size: 0.8rem; padding: 0.45rem 0.9rem;
+      border-radius: 999px; border: 2px solid var(--line); background: var(--surface); cursor: pointer; color: var(--muted);
+    }
+    .menu-tabs button[aria-pressed="true"] { border-color: var(--tomato); background: var(--tomato); color: #fff; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .menu-item {
+      display: grid; grid-template-columns: 100px 1fr; gap: 1rem; align-items: start;
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 0.85rem; overflow: hidden;
+    }
+    .menu-item[hidden] { display: none; }
+    .menu-item img { width: 100px; height: 80px; object-fit: cover; border-radius: 10px; }
+    .menu-item h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+    .menu-item p { font-size: 0.84rem; color: var(--muted); }
+    .price { font-weight: 800; color: var(--tomato-deep); font-size: 0.95rem; margin-top: 0.35rem; }
+
+    .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .about-photo { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+    .about-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .review {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 1.25rem 1.15rem;
+    }
+    .stars { color: var(--tomato); font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .review footer { margin-top: 0.85rem; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+
+    #visit { background: var(--olive); color: #fff; }
+    #visit h2 { color: #fff; }
+    #visit .lead { color: rgba(255,255,255,0.75); }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .visit-map {
+      border-radius: var(--radius-lg); overflow: hidden; border: 3px solid rgba(255,255,255,0.15);
+    }
+    .visit-map img { width: 100%; aspect-ratio: 16/10; object-fit: cover; opacity: 0.95; }
+    .visit-list { list-style: none; display: grid; gap: 0.65rem; margin-top: 1rem; font-weight: 600; }
+    .visit-list li { padding-left: 1.25rem; position: relative; }
+    .visit-list li::before { content: "•"; position: absolute; left: 0; color: var(--crust); }
+
+    #contact .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 2rem; align-items: start; }
+    .contact-form {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+      padding: 1.6rem; box-shadow: var(--shadow-sm);
+    }
+    .contact-form h3 { font-size: 1.45rem; margin-bottom: 0.2rem; }
+    .contact-form .sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 1rem; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  .contact-form label { display: block; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      width: 100%; padding: 0.6rem 0.7rem; border-radius: 10px; border: 1px solid var(--line);
+      font: inherit; margin-bottom: 0.65rem;
+    }
+    .contact-form textarea { min-height: 100px; resize: vertical; }
+    .form-privacy { font-size: 0.72rem; color: var(--muted); }
+
+    footer.site-footer {
+      background: var(--ink); color: rgba(255,255,255,0.72); padding: 2.5rem 0 1.5rem; font-size: 0.86rem;
+    }
+    .foot-cols { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
+    .foot-cols h4 { color: #fff; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; font-family: Outfit, sans-serif; }
+    .foot-cols ul { list-style: none; display: grid; gap: 0.4rem; }
+    .foot-cols a { color: rgba(255,255,255,0.72); font-weight: 600; }
+    .credits { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; font-size: 0.74rem; line-height: 1.65; color: rgba(255,255,255,0.5); }
+
+    .studio-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+      padding: 7px 1rem; text-align: center; font-size: 0.68rem; font-weight: 700;
+      background: rgba(31, 20, 16, 0.94); color: rgba(255,255,255,0.55);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .studio-footer a { color: var(--crust); }
+
+    html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+    html.js .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html.js .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    @media (max-width: 900px) {
+      :root { --scroll-offset: 96px; }
+      header#site-header { top: 48px; }
+      .order-cards, .menu-grid, .about-split, .reviews, .visit-grid, .contact-grid, .foot-cols { grid-template-columns: 1fr; }
+      .nav-toggle { display: block; }
+      nav { position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--line); padding: 1rem 1.35rem; display: none; }
+      nav.open { display: block; }
+      nav ul { flex-direction: column; gap: 0.75rem; }
+      .nav-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="wrap">
+      <span class="hours-pill">Open today 11:00 AM – 9:00 PM · Demo hours</span>
+      <a href="tel:+19055550177">Order: (905) 555-0177</a>
+    </div>
+  </div>
+
+  <header id="site-header">
+    <div class="nav-inner">
+      <a class="logo" href="#hero">
+        <strong>Nonna's Hearth</strong>
+        <small>Pizzeria</small>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#order">Order</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#visit">Visit</a></li>
+          <li><a href="#contact">Catering</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-tomato nav-cta" href="tel:+19055550177">Call to order</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="wrap">
+        <div class="hero-inner reveal">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Wood-fired · Family recipes</p>
+            <h1 class="hero-headline display">
+              <span class="hero-mark">Neighbourhood pizza,</span>
+              <span class="hero-mark hero-mark--line2">worth the drive</span>
+            </h1>
+            <p class="hero-lead">Crispy crust, slow-simmered sauce, and toppings piled high. Dine in, grab takeout, or get delivery—swap in your town, hours, and ordering links on go-live.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-tomato" href="#menu">View menu</a>
+            <a class="btn btn-ghost" href="tel:+19055550177">(905) 555-0177</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-strip" id="order">
+      <div class="wrap">
+        <div class="order-cards reveal">
+          <a class="order-card" href="tel:+19055550177" style="text-decoration:none;color:inherit;">
+            <div class="icon" aria-hidden="true">📞</div>
+            <h3>Call &amp; order</h3>
+            <p>Fastest for custom pies and large orders</p>
+          </a>
+          <a class="order-card" href="#visit" style="text-decoration:none;color:inherit;">
+            <div class="icon" aria-hidden="true">🥡</div>
+            <h3>Takeout</h3>
+            <p>Ready in 20–35 min · curb pickup</p>
+          </a>
+          <a class="order-card" href="#contact" style="text-decoration:none;color:inherit;">
+            <div class="icon" aria-hidden="true">🍕</div>
+            <h3>Delivery</h3>
+            <p>Link Uber/DoorDash or in-house zone on launch</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Menu highlights</p>
+          <h2>Fan favourites <em>(demo)</em></h2>
+          <p class="lead">Sample items for layout—replace with your full menu or PDF on launch.</p>
+        </div>
+        <div class="menu-tabs reveal" role="group" aria-label="Menu category">
+          <button type="button" data-cat="pizza" aria-pressed="true">Pizza</button>
+          <button type="button" data-cat="pasta" aria-pressed="false">Pasta</button>
+          <button type="button" data-cat="sides" aria-pressed="false">Wings &amp; sides</button>
+        </div>
+        <div class="menu-grid" id="menu-grid">
+          <article class="menu-item reveal" data-cat="pizza">
+            <img src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Margherita pizza" loading="lazy" width="200" height="160" />
+            <div>
+              <h3>Margherita</h3>
+              <p>San Marzano-style sauce, fresh mozzarella, basil, olive oil.</p>
+              <div class="price">From $16.99</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="pizza" style="--d:.05s">
+            <img src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Pepperoni pizza" loading="lazy" />
+            <div>
+              <h3>Classic pepperoni</h3>
+              <p>Double pepperoni, mozzarella, light garlic butter edge.</p>
+              <div class="price">From $18.49</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="pizza" style="--d:.1s">
+            <img src="https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Vegetarian pizza" loading="lazy" />
+            <div>
+              <h3>Garden veggie</h3>
+              <p>Peppers, mushrooms, onions, olives, feta.</p>
+              <div class="price">From $17.99</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="pizza" style="--d:.15s">
+            <img src="https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Cheesy pizza slice" loading="lazy" />
+            <div>
+              <h3>Four-cheese</h3>
+              <p>Mozzarella, provolone, parmesan, ricotta pearls.</p>
+              <div class="price">From $19.49</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="pasta" hidden>
+            <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Pasta dish" loading="lazy" />
+            <div>
+              <h3>Baked lasagna</h3>
+              <p>Layers of meat sauce, ricotta, melted mozzarella.</p>
+              <div class="price">$14.99</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="pasta" hidden style="--d:.05s">
+            <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Penne pasta" loading="lazy" />
+            <div>
+              <h3>Penne arrabbiata</h3>
+              <p>Spicy tomato, garlic, parsley, parmesan.</p>
+              <div class="price">$13.49</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="sides" hidden>
+            <img src="https://images.pexels.com/photos/60616/pexels-photo-60616.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Garlic bread" loading="lazy" />
+            <div>
+              <h3>Cheesy garlic bread</h3>
+              <p>Toasted loaf, garlic butter, melted mozzarella.</p>
+              <div class="price">$8.99</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="sides" hidden style="--d:.05s">
+            <img src="https://images.pexels.com/photos/1059943/pexels-photo-1059943.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Chicken wings" loading="lazy" />
+            <div>
+              <h3>Hot wings (1 lb)</h3>
+              <p>Medium, hot, or honey garlic · celery &amp; dip.</p>
+              <div class="price">$15.99</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about-split">
+        <div class="about-photo reveal">
+          <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Pizzeria kitchen and chef preparing pizza" loading="lazy" />
+        </div>
+        <div class="reveal" style="--d:.08s">
+          <p class="eyebrow">Our story</p>
+          <h2>Dough raised here, <em>served hot</em></h2>
+          <p class="lead" style="margin-bottom:1rem;">A template story for family-run pizzerias: morning dough, evening rush, regulars who know your name. Replace with your founding year, neighbourhood, and what makes your oven special.</p>
+          <p style="color:var(--muted);font-size:0.95rem;">Catering trays, school nights, and Friday family boxes—add your real copy when this becomes a client site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Reviews</p>
+          <h2>Locals keep <em>coming back</em></h2>
+        </div>
+        <div class="reviews">
+          <blockquote class="review reveal">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>Best pepperoni in town—crust has that proper snap. Delivery was still hot.</p>
+            <footer>— Jamie · takeout</footer>
+          </blockquote>
+          <blockquote class="review reveal" style="--d:.06s">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>We order the party tray every hockey season. Easy call-in, always on time.</p>
+            <footer>— The R. family · catering</footer>
+          </blockquote>
+          <blockquote class="review reveal" style="--d:.12s">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>Garlic bread and wings are dangerous. Staff is friendly even when it&apos;s slammed.</p>
+            <footer>— Priya · dine-in</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit">
+      <div class="wrap visit-grid">
+        <div class="reveal">
+          <p class="eyebrow">Visit us</p>
+          <h2>Find the <em>hearth</em></h2>
+          <p class="lead">Swap address, lot parking notes, and map embed for your location.</p>
+          <ul class="visit-list">
+            <li>123 Main Street · Your Town, ON</li>
+            <li>Mon–Thu 11 AM – 9 PM · Fri–Sat till 10 PM</li>
+            <li>Free parking · wheelchair-accessible entrance</li>
+            <li><a href="tel:+19055550177" style="color:var(--crust);">(905) 555-0177</a></li>
+          </ul>
+        </div>
+        <div class="visit-map reveal" style="--d:.1s">
+          <img src="https://images.pexels.com/photos/696218/pexels-photo-696218.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="Restaurant interior with warm lighting" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Catering &amp; events</p>
+          <h2>Feeding a <em>team</em> or party?</h2>
+          <p class="lead">Lunch meetings, birthdays, sports teams—tell us headcount and date. Demo form routes to AltruDigiTech until your inbox is wired.</p>
+        </div>
+        <div class="contact-form reveal" style="--d:.08s">
+          <h3>Catering inquiry</h3>
+          <p class="sub">We reply within one business day.</p>
+          <form data-altru-lead data-turnstile-theme="light" method="post" action="#">
+            <div class="field-row">
+              <div><label for="lead-name">Name</label><input id="lead-name" name="name" type="text" autocomplete="name" required /></div>
+              <div><label for="lead-email">Email</label><input id="lead-email" name="email" type="email" autocomplete="email" required /></div>
+            </div>
+            <div class="field-row">
+              <div><label for="lead-phone">Phone</label><input id="lead-phone" name="phone" type="tel" autocomplete="tel" /></div>
+              <div>
+                <label for="lead-size">Party size</label>
+                <select id="lead-size" name="party_size">
+                  <option value="">Estimate</option>
+                  <option>5–10</option>
+                  <option>10–25</option>
+                  <option>25–50</option>
+                  <option>50+</option>
+                </select>
+              </div>
+            </div>
+            <label for="lead-message">Details</label>
+            <textarea id="lead-message" name="message" required placeholder="Date, time, dietary needs, pizzas vs trays…"></textarea>
+            <p class="form-privacy">Protected by Cloudflare Turnstile.</p>
+            <div data-turnstile></div>
+            <button type="submit" class="btn btn-tomato" style="margin-top:0.75rem;width:100%;">Send inquiry →</button>
+            <p data-altru-lead-status hidden role="status" style="margin-top:0.65rem;font-weight:700;"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-cols">
+        <div>
+          <p class="display" style="color:#fff;font-size:1.2rem;">Nonna's Hearth</p>
+          <p style="margin-top:0.5rem;max-width:20rem;">Local pizzeria template — fictional name and menu for studio demos.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#visit">Hours &amp; location</a></li>
+            <li><a href="#contact">Catering</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Order</h4>
+          <ul>
+            <li><a href="tel:+19055550177">(905) 555-0177</a></li>
+            <li><span style="opacity:0.65;">Delivery apps on launch</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="credits">
+        Photography via <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a>:
+        <a href="https://www.pexels.com/photo/person-holding-slice-of-pizza-2147491/" target="_blank" rel="noopener noreferrer">Chad Madden</a> (hero),
+        <a href="https://www.pexels.com/photo/pizza-with-vegetables-on-brown-wooden-table-315755/" target="_blank" rel="noopener noreferrer">Engin Akyurt</a>,
+        <a href="https://www.pexels.com/photo/pepperoni-pizza-708587/" target="_blank" rel="noopener noreferrer">Vince</a>,
+        <a href="https://www.pexels.com/photo/pizza-on-white-ceramic-plate-825661/" target="_blank" rel="noopener noreferrer">Fancycrave.com</a>,
+        <a href="https://www.pexels.com/photo/pizza-on-white-wooden-table-1566837/" target="_blank" rel="noopener noreferrer">NastyaSensei</a>,
+        <a href="https://www.pexels.com/photo/pasta-dish-1279330/" target="_blank" rel="noopener noreferrer">Lukas</a>,
+        <a href="https://www.pexels.com/photo/pasta-with-sauce-1437267/" target="_blank" rel="noopener noreferrer">Eiliv Aceron</a>,
+        <a href="https://www.pexels.com/photo/bread-on-white-ceramic-plate-60616/" target="_blank" rel="noopener noreferrer">Pixabay</a>,
+        <a href="https://www.pexels.com/photo/fried-chicken-1059943/" target="_blank" rel="noopener noreferrer">malidate jack</a>,
+        <a href="https://www.pexels.com/photo/man-standing-behind-white-counter-1267320/" target="_blank" rel="noopener noreferrer">Vinícius Caricatte</a>,
+        <a href="https://www.pexels.com/photo/brown-wooden-table-with-chairs-696218/" target="_blank" rel="noopener noreferrer">Marcin Rogozinski</a>.
+        Menu, prices, and reviews are sample content. Layout by <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>.
+      </div>
+    </div>
+  </footer>
+
+  <div class="studio-footer">
+    Local Pizzeria template · <a href="https://altrudigitech.com/templates" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>
+  </div>
+
+  <script src="assets/lead-form/altru-lead.js"></script>
+  <script>
+    (function () {
+      var header = document.getElementById('site-header');
+      var topBar = document.querySelector('.top-bar');
+      var toggle = document.getElementById('nav-toggle');
+      var nav = document.getElementById('site-nav');
+
+      function syncHeaderOffset() {
+        var h = (topBar ? topBar.offsetHeight : 0) + header.offsetHeight;
+        document.documentElement.style.setProperty('--scroll-offset', h + 'px');
+        document.body.style.paddingTop = h + 'px';
+        header.style.top = (topBar ? topBar.offsetHeight : 0) + 'px';
+      }
+      syncHeaderOffset();
+      window.addEventListener('resize', syncHeaderOffset);
+      window.addEventListener('scroll', function () { header.classList.toggle('scrolled', window.scrollY > 8); }, { passive: true });
+
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      var tabs = document.querySelectorAll('.menu-tabs button');
+      var items = document.querySelectorAll('.menu-item[data-cat]');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var cat = tab.getAttribute('data-cat');
+          tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
+          items.forEach(function (item) {
+            item.hidden = item.getAttribute('data-cat') !== cat;
+            if (!item.hidden) item.classList.add('in');
+          });
+        });
+      });
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var reveal = document.querySelectorAll('.reveal');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+        reveal.forEach(function (el) { io.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -3,5 +3,6 @@
 /sites/:slug /sites/:slug/ 301
 /templates/creator/:slug /templates/creator/:slug/ 301
 /templates/services/:slug /templates/services/:slug/ 301
+/templates/business/:slug /templates/business/:slug/ 301
 # Proxy below is a fallback if Functions are disabled; do not add root 404.html.
 /* /index.html 200

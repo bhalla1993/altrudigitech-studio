@@ -65,6 +65,9 @@ Details: [STUDIO_PLAN.md](./STUDIO_PLAN.md) Phase 4 exit, §12.
 
 Defer until first custom-domain sale: client zone, NS delegation, Worker on client zone, Turnstile hostnames.
 
+**Client-facing DNS / calls:** [CLIENT_DOMAIN_HANDOFF.md](./CLIENT_DOMAIN_HANDOFF.md) (nameservers, no password sharing, 15‑min script).  
+**Family SparkShots (GitHub Pages + GoDaddy):** [SPARKSHOTS_GITHUB_PAGES_DNS.md](./SPARKSHOTS_GITHUB_PAGES_DNS.md) — not the default Starter path.
+
 ---
 
 ## Optional engineering (not blocking sales)
