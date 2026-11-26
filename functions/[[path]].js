@@ -6,17 +6,11 @@ export async function onRequest({ request, env }) {
   const url = new URL(request.url)
   const pathname = url.pathname
 
-  const siteRoot = pathname.match(/^\/sites\/([^/]+)\/?$/)
-  if (siteRoot) {
-    const slug = siteRoot[1]
-    if (!pathname.endsWith('/')) {
-      return Response.redirect(new URL(`/sites/${slug}/`, url.origin), 301)
-    }
-    const indexUrl = new URL(`/sites/${slug}/index.html`, url.origin)
-    const indexResponse = await env.ASSETS.fetch(new Request(indexUrl, request))
-    if (indexResponse.status !== 404) {
-      return indexResponse
-    }
+  // Bare /sites/{slug} (no trailing slash) → directory URL. Do not fetch index.html here:
+  // Pages 308s index.html → /sites/{slug}/ and returning that 308 to the client causes a loop.
+  const siteBare = pathname.match(/^\/sites\/([^/]+)$/)
+  if (siteBare) {
+    return Response.redirect(new URL(`/sites/${siteBare[1]}/`, url.origin), 301)
   }
 
   const assetResponse = await env.ASSETS.fetch(request)
