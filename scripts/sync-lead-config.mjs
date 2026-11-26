@@ -25,6 +25,11 @@ const CLIENTS = [
     clientId: 'content-creator-demo',
     businessName: 'Creator media kit (template demo)',
   },
+  {
+    slug: 'shanaya',
+    clientId: 'shanaya',
+    businessName: 'Shanaya — creator links',
+  },
 ]
 
 function loadDevVars(filePath) {
