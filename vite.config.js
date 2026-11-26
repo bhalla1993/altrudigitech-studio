@@ -25,6 +25,13 @@ function clientSitesTrailingSlash() {
           res.end()
           return
         }
+        const servicesDemoMatch = pathOnly.match(/^\/templates\/services\/([^/]+)$/)
+        if (servicesDemoMatch) {
+          const qs = req.url?.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''
+          res.writeHead(301, { Location: `/templates/services/${servicesDemoMatch[1]}/${qs}` })
+          res.end()
+          return
+        }
         next()
       })
     },

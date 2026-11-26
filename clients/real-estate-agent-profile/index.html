@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Amara Chen — Durham Region REALTOR®. Buying, selling, and investing in Oshawa, Whitby, Ajax, and the east GTA. Personal service, local market insight, and responsive guidance." />
+  <title>Amara Chen | Durham Region Real Estate Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer onload="document.dispatchEvent(new Event('turnstile-loaded'))"></script>
+  <script src="assets/lead-form/lead-config.js"></script>
+  <style>
+    :root {
+      --navy: #0b1522;
+      --navy-2: #141f2e;
+      --navy-soft: #1e2d40;
+      --champagne: #c9a962;
+      --champagne-soft: #ebe0c8;
+      --cream: #f6f2ea;
+      --surface: #fffdf9;
+      --ink: #152033;
+      --muted: #5a6578;
+      --line: #ddd4c4;
+      --teal: #2d6a6a;
+      --teal-soft: #e3f0f0;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --shadow: 0 28px 70px rgba(11, 21, 34, 0.14);
+      --shadow-sm: 0 12px 36px rgba(11, 21, 34, 0.08);
+      --scroll-offset: 108px;
+      --ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--scroll-offset); }
+    body {
+      font-family: Figtree, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      padding-top: var(--scroll-offset);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--teal); font-weight: 700; text-decoration: none; }
+    a:hover { color: #1f4f4f; }
+    :focus-visible { outline: 3px solid var(--champagne); outline-offset: 3px; }
+  .display { font-family: "Libre Baskerville", Georgia, serif; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 1.35rem; }
+    section { padding: 5rem 0; position: relative; }
+    h1, h2, h3 { font-family: "Libre Baskerville", Georgia, serif; font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; color: var(--navy); }
+    h1 { font-size: clamp(2.15rem, 4.6vw, 3.35rem); }
+    h2 { font-size: clamp(1.85rem, 3.6vw, 2.65rem); margin-bottom: 0.75rem; }
+    h2 em { font-style: italic; color: var(--champagne); filter: brightness(0.72); }
+    h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--champagne); margin-bottom: 0.9rem;
+    }
+    .eyebrow::before { content: ""; width: 32px; height: 1px; background: currentColor; opacity: 0.85; }
+    .lead { font-size: 1.08rem; color: var(--muted); max-width: 36rem; }
+    .section-head { max-width: 42rem; margin-bottom: 2.25rem; }
+    .section-head.center { text-align: center; margin-left: auto; margin-right: auto; }
+    .section-head.center .eyebrow { justify-content: center; }
+    .section-head.center .lead { margin-left: auto; margin-right: auto; }
+    .sample-note {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      background: var(--champagne-soft); border: 1px dashed var(--champagne);
+      padding: 0.35rem 0.7rem; border-radius: 8px; margin-top: 0.85rem;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+      padding: 0.9rem 1.55rem; border-radius: 999px; font: inherit; font-weight: 800; font-size: 0.9rem;
+      border: 2px solid transparent; cursor: pointer; transition: transform 0.25s var(--ease), box-shadow 0.25s, background 0.25s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-gold { background: linear-gradient(135deg, var(--champagne), #a88942); color: var(--navy); box-shadow: 0 12px 30px rgba(201, 169, 98, 0.35); }
+    .btn-gold:hover { color: var(--navy); box-shadow: 0 16px 40px rgba(201, 169, 98, 0.45); }
+    .btn-ghost { background: transparent; border-color: rgba(255,255,255,0.45); color: #fff; }
+    .btn-ghost:hover { border-color: var(--champagne); color: #fff; }
+    .btn-navy { background: var(--navy); color: #fff; }
+    .btn-navy:hover { background: var(--navy-2); color: #fff; }
+
+    /* Top bar + header */
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+      background: var(--navy); color: rgba(255,255,255,0.9);
+      font-size: 0.78rem; font-weight: 600;
+    }
+    .top-bar .wrap {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding-top: 0.4rem; padding-bottom: 0.4rem; flex-wrap: wrap;
+    }
+    .top-bar a { color: #fff; font-weight: 700; }
+    .top-bar a:hover { color: var(--champagne-soft); }
+    .top-bar .sep { opacity: 0.35; margin: 0 0.4rem; }
+
+    header#site-header {
+      position: fixed; top: 34px; left: 0; right: 0; z-index: 1000;
+      background: rgba(246, 242, 234, 0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line); transition: box-shadow 0.3s;
+    }
+    header#site-header.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0.65rem 1.35rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo { display: flex; flex-direction: column; color: var(--navy); text-decoration: none; line-height: 1.15; }
+    .logo:hover { color: var(--navy); opacity: 0.92; }
+    .logo strong { font-family: "Libre Baskerville", serif; font-size: 1.15rem; font-weight: 700; }
+    .logo small { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    nav ul { list-style: none; display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.86rem; font-weight: 700; }
+    nav a { color: var(--ink); }
+    nav a:hover { color: var(--teal); }
+    .nav-cta { flex-shrink: 0; }
+    .nav-toggle {
+      display: none; width: 44px; height: 44px; border: 2px solid var(--navy);
+      border-radius: 10px; background: transparent; cursor: pointer; position: relative;
+    }
+    .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+      display: block; width: 20px; height: 2px; background: var(--navy); position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .nav-toggle span { top: 50%; margin-top: -1px; }
+    .nav-toggle span::before { content: ""; top: -6px; }
+    .nav-toggle span::after { content: ""; top: 6px; }
+
+    /* Hero */
+    #hero {
+      padding: 2.75rem 0 4.5rem;
+      background:
+        radial-gradient(900px 520px at 92% 8%, rgba(201, 169, 98, 0.18), transparent 55%),
+        radial-gradient(700px 480px at 0% 100%, rgba(45, 106, 106, 0.12), transparent 60%),
+        var(--cream);
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.5rem 3rem; align-items: start;
+    }
+    @media (min-width: 961px) {
+      .hero-copy { padding-top: 0.35rem; }
+      .hero-visual { justify-self: end; width: 100%; max-width: 440px; }
+    }
+    .hero-copy .badge-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.25rem 0 1.5rem;
+    }
+    .pill {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+    }
+    .pill.gold { border-color: var(--champagne); background: var(--champagne-soft); color: var(--navy); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+    .hero-visual { position: relative; }
+    .hero-frame {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); background: var(--navy);
+    }
+    .hero-frame img {
+      width: 100%; aspect-ratio: 1 / 1; max-height: min(440px, 42vh);
+      object-fit: cover; object-position: center 18%;
+    }
+    @media (min-width: 1200px) {
+      .hero-frame img { max-height: 400px; }
+    }
+    .hero-frame::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(11, 21, 34, 0.45) 100%);
+      pointer-events: none;
+    }
+    .hero-accent {
+      position: absolute; right: -12%; bottom: -8%; width: 55%; aspect-ratio: 1;
+      border-radius: 50%; background: radial-gradient(circle, rgba(201,169,98,0.35), transparent 70%);
+      filter: blur(2px); z-index: -1;
+    }
+    .broker-plate {
+      position: absolute; left: 1rem; bottom: 1rem; right: 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+      padding: 0.75rem 1rem; border-radius: 12px;
+      background: rgba(255,253,249,0.94); backdrop-filter: blur(8px);
+      font-size: 0.78rem; font-weight: 700; color: var(--navy);
+    }
+    .broker-plate span { color: var(--muted); font-weight: 600; }
+
+    /* Stats */
+    .stats-band {
+      background: var(--navy); color: #fff; padding: 2.25rem 0;
+      border-block: 1px solid rgba(255,255,255,0.08);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; text-align: center; }
+    .stat-num { font-family: "Libre Baskerville", serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--champagne); }
+    .stat-label { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.72); margin-top: 0.25rem; }
+
+    /* Why */
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.15rem; }
+    .why-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 1.5rem 1.4rem; transition: transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .why-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+    .why-icon {
+      width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--teal-soft); color: var(--teal); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.85rem;
+    }
+
+    /* Services */
+    #services { background: linear-gradient(180deg, var(--surface), var(--cream)); }
+    .service-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .service-card {
+      border-radius: var(--radius-lg); overflow: hidden; background: var(--navy); color: #fff;
+      display: flex; flex-direction: column; min-height: 100%;
+    }
+    .service-card img { width: 100%; height: 180px; object-fit: cover; opacity: 0.92; }
+    .service-body { padding: 1.5rem 1.35rem 1.75rem; flex: 1; display: flex; flex-direction: column; gap: 0.65rem; }
+    .service-body h3 { color: #fff; }
+    .service-body p { color: rgba(255,255,255,0.78); font-size: 0.95rem; flex: 1; }
+    .service-body a { color: var(--champagne-soft); font-size: 0.88rem; margin-top: 0.5rem; }
+
+    /* Areas */
+    .areas-wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 2.5rem; align-items: center; }
+    .areas-photo { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+    .areas-photo img { width: 100%; aspect-ratio: 4/3; max-height: 360px; object-fit: cover; object-position: center 15%; }
+    .area-chips { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.25rem; }
+    .area-chips span {
+      padding: 0.45rem 0.85rem; border-radius: 999px; background: var(--surface);
+      border: 1px solid var(--line); font-size: 0.82rem; font-weight: 700;
+    }
+
+    /* Process */
+    .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; counter-reset: step; }
+    .step {
+      position: relative; padding: 1.35rem 1.15rem 1.35rem 1.35rem;
+      background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line);
+    }
+    .step::before {
+      counter-increment: step; content: counter(step, decimal-leading-zero);
+      font-family: "Libre Baskerville", serif; font-size: 1.6rem; color: var(--champagne); display: block; margin-bottom: 0.5rem;
+      filter: brightness(0.75);
+    }
+    .step h3 { font-size: 1.05rem; }
+
+    /* Wins */
+    .wins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.15rem; }
+    .win {
+      border-radius: var(--radius); overflow: hidden; background: var(--surface); border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .win img { height: 160px; width: 100%; object-fit: cover; }
+    .win-body { padding: 1.1rem 1.15rem 1.25rem; }
+    .win-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); }
+    .win p { font-size: 0.92rem; color: var(--muted); margin-top: 0.35rem; }
+
+    /* Testimonials */
+    #testimonials {
+      background: var(--navy); color: rgba(255,255,255,0.88);
+      padding: 5.5rem 0;
+    }
+    #testimonials h2 { color: #fff; }
+    #testimonials .lead { color: rgba(255,255,255,0.68); }
+    #testimonials .eyebrow { color: var(--champagne); }
+    .reviews { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.15rem; }
+    .review {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius); padding: 1.35rem 1.25rem;
+    }
+    .stars { color: var(--champagne); font-size: 0.85rem; letter-spacing: 0.12em; margin-bottom: 0.65rem; }
+    .review p { font-size: 0.95rem; line-height: 1.6; }
+    .review footer { margin-top: 1rem; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.55); }
+
+    /* FAQ */
+    .acc { display: grid; gap: 0.65rem; max-width: 720px; margin: 0 auto; }
+    .acc-item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm, 12px); overflow: hidden; }
+    .acc-q {
+      width: 100%; text-align: left; font: inherit; font-weight: 800; font-size: 0.98rem;
+      padding: 1rem 1.15rem; background: none; border: 0; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--navy);
+    }
+    .acc-q .pm { width: 28px; height: 28px; border-radius: 50%; background: var(--champagne-soft); display: grid; place-items: center; }
+    .acc-item.open .pm { background: var(--navy); color: #fff; }
+    .acc-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s var(--ease); }
+    .acc-item.open .acc-a { grid-template-rows: 1fr; }
+    .acc-a > div { overflow: hidden; }
+    .acc-a p { padding: 0 1.15rem 1.1rem; color: var(--muted); font-size: 0.94rem; }
+
+    /* Contact */
+    #contact { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 55%, #0f2830 100%); color: #fff; }
+    #contact h2 { color: #fff; }
+    #contact .lead { color: rgba(255,255,255,0.7); }
+    .contact-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 2.5rem; align-items: start; }
+    .direct a {
+      display: flex; gap: 0.85rem; align-items: flex-start; padding: 0.9rem 1rem;
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; color: #fff; margin-bottom: 0.65rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .direct a:hover { border-color: var(--champagne); background: rgba(255,255,255,0.05); color: #fff; }
+    .direct small { display: block; font-weight: 600; color: rgba(255,255,255,0.55); font-size: 0.78rem; margin-top: 0.15rem; }
+    .contact-form {
+      background: var(--surface); color: var(--ink); border-radius: var(--radius-lg);
+      padding: 1.75rem; box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+    }
+    .contact-form h3 { font-size: 1.55rem; margin-bottom: 0.25rem; }
+    .contact-form > .sub { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.15rem; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .contact-form label { display: block; font-size: 0.76rem; font-weight: 800; margin-bottom: 0.28rem; color: var(--navy); }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      width: 100%; padding: 0.65rem 0.75rem; border-radius: 10px; border: 1px solid var(--line);
+      font: inherit; margin-bottom: 0.7rem; background: #fff;
+    }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .form-privacy { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; }
+
+    footer.site-footer {
+      background: var(--navy-2); color: rgba(255,255,255,0.75); padding: 3rem 0 2rem;
+      font-size: 0.88rem;
+    }
+    .foot-grid { display: grid; grid-template-columns: 1.2fr 0.9fr 0.9fr; gap: 2rem; margin-bottom: 2rem; }
+    .foot-grid h4 { color: #fff; font-family: Figtree, sans-serif; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .foot-grid ul { list-style: none; display: grid; gap: 0.45rem; }
+    .foot-grid a { color: rgba(255,255,255,0.72); font-weight: 600; }
+    .foot-grid a:hover { color: var(--champagne-soft); }
+    .credits {
+      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem;
+      font-size: 0.76rem; line-height: 1.65; color: rgba(255,255,255,0.5);
+    }
+    .credits a { color: rgba(255,255,255,0.72); font-weight: 600; }
+    .studio-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+      padding: 7px 1rem; text-align: center; font-size: 0.68rem; font-weight: 700;
+      background: rgba(11, 21, 34, 0.94); color: rgba(255,255,255,0.55);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .studio-footer a { color: var(--champagne-soft); }
+    body { padding-bottom: 36px; }
+
+    /* Reveal */
+    html.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    html.js .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html.js .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    @media (max-width: 960px) {
+      :root { --scroll-offset: 96px; }
+      header#site-header { top: 52px; }
+      .hero-grid, .areas-wrap, .contact-grid, .foot-grid { grid-template-columns: 1fr; }
+      .stats-grid, .service-trio, .process, .wins-grid, .reviews, .why-grid { grid-template-columns: 1fr; }
+      .nav-toggle { display: block; }
+      nav {
+        position: absolute; top: 100%; left: 0; right: 0; background: var(--surface);
+        border-bottom: 1px solid var(--line); padding: 1rem 1.35rem 1.25rem;
+        display: none; box-shadow: var(--shadow-sm);
+      }
+      nav.open { display: block; }
+      nav ul { flex-direction: column; gap: 0.85rem; }
+      .nav-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="wrap">
+      <span>Durham Region &amp; east GTA · Licensed REALTOR®</span>
+      <span>
+        <a href="tel:+19055550198">(905) 555-0198</a>
+        <span class="sep">|</span>
+        <a href="mailto:amara.chen@example.ca">amara.chen@example.ca</a>
+      </span>
+    </div>
+  </div>
+
+  <header id="site-header">
+    <div class="nav-inner">
+      <a class="logo" href="#hero">
+        <strong>Amara Chen</strong>
+        <small>Real Estate · Ontario</small>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#why">Why me</a></li>
+          <li><a href="#services">Buy · Sell · Invest</a></li>
+          <li><a href="#areas">Areas</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-navy nav-cta" href="#contact">Book a call</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Your Durham Region agent</p>
+          <h1 class="display">Meet <em style="font-style:italic;color:var(--teal)">Amara Chen</em> — trusted guidance for your next move</h1>
+          <p class="lead" style="margin-top:1rem;">
+            Award-oriented service for families, upsizers, and investors across Oshawa, Whitby, Ajax, and the wider east GTA.
+            Available when you need answers — clear advice, calm negotiation, and a plan that fits your timeline.
+          </p>
+          <div class="badge-row">
+            <span class="pill gold">Buy · Sell · Invest</span>
+            <span class="pill">Local market focus</span>
+            <span class="pill">Sample template demo</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#contact">Schedule consultation</a>
+            <a class="btn btn-navy" href="tel:+19055550198">Call (905) 555-0198</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal" style="--d:.08s">
+          <div class="hero-accent" aria-hidden="true"></div>
+          <div class="hero-frame">
+            <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="Real estate agent in blazer smiling" width="800" height="800" loading="eager" />
+            <div class="broker-plate">
+              <span>Listed with <strong>Your Brokerage™</strong></span>
+              <span>REALTOR®</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-band">
+      <div class="wrap stats-grid reveal">
+        <div><div class="stat-num">12+</div><div class="stat-label">Years in market</div></div>
+        <div><div class="stat-num">180+</div><div class="stat-label">Families served</div></div>
+        <div><div class="stat-num">$95M+</div><div class="stat-label">Sample volume*</div></div>
+        <div><div class="stat-num">5.0</div><div class="stat-label">Avg. review rating*</div></div>
+      </div>
+    </div>
+
+    <section id="why">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Why choose me</p>
+          <h2>Local expertise, <em>personal</em> service</h2>
+          <p class="lead">Every client path is different. These pillars guide how I work — swap in real credentials and market stats when this becomes your site.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card reveal">
+            <div class="why-icon">01</div>
+            <h3>Neighbourhood knowledge</h3>
+            <p>Schools, commutes, development plans, and street-by-street pricing — insight that helps you choose the right community, not just the right house.</p>
+          </div>
+          <div class="why-card reveal" style="--d:.06s">
+            <div class="why-icon">02</div>
+            <h3>Tailored strategy</h3>
+            <p>First-time buyer, move-up, downsizer, or investor — we build a plan around your goals, comfort level, and timeline instead of a one-size funnel.</p>
+          </div>
+          <div class="why-card reveal" style="--d:.12s">
+            <div class="why-icon">03</div>
+            <h3>Proven process</h3>
+            <p>Structured milestones from consultation to closing, with clear updates so you always know the next step and who is handling what.</p>
+          </div>
+          <div class="why-card reveal" style="--d:.18s">
+            <div class="why-icon">04</div>
+            <h3>Current market insight</h3>
+            <p>Inventory, interest rates, and local trends explained in plain language — so offers, list prices, and conditions reflect today&apos;s reality.</p>
+          </div>
+        </div>
+        <p class="sample-note" style="display:block;text-align:center;margin-top:1.5rem;">* Statistics and brokerage name are demo placeholders.</p>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">How I can help</p>
+          <h2>Buying, selling, and <em>investing</em></h2>
+        </div>
+        <div class="service-trio">
+          <article class="service-card reveal">
+            <img src="https://images.pexels.com/photos/101808/pexels-photo-101808.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Keys to a new home" loading="lazy" />
+            <div class="service-body">
+              <h3>Buyers</h3>
+              <p>Search, showings, comps, offers, and closing coordination — plus referrals to mortgage brokers, lawyers, and inspectors you can trust.</p>
+              <a href="#contact">Start your search →</a>
+            </div>
+          </article>
+          <article class="service-card reveal" style="--d:.08s">
+            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Family home exterior" loading="lazy" />
+            <div class="service-body">
+              <h3>Sellers</h3>
+              <p>Pricing strategy, prep checklist, photography, marketing, and negotiation focused on net proceeds and a smooth transition to your next chapter.</p>
+              <a href="#contact">Get a market opinion →</a>
+            </div>
+          </article>
+          <article class="service-card reveal" style="--d:.16s">
+            <img src="https://images.pexels.com/photos/8293772/pexels-photo-8293772.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Modern investment property interior" loading="lazy" />
+            <div class="service-body">
+              <h3>Investors</h3>
+              <p>Cash-flow scenarios, tenant-ready purchases, and portfolio thinking — aligned with Durham and east GTA rental demand.</p>
+              <a href="#contact">Discuss investment goals →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas">
+      <div class="wrap areas-wrap">
+        <div class="areas-photo reveal">
+          <img src="https://images.pexels.com/photos/2182971/pexels-photo-2182971.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Real estate agent in suit smiling — same demo agent" loading="lazy" />
+        </div>
+        <div class="reveal" style="--d:.1s">
+          <p class="eyebrow">Areas served</p>
+          <h2>Rooted in <em>Durham</em>, active across the east GTA</h2>
+          <p class="lead">I focus on communities I know deeply — and coordinate with trusted colleagues when your search extends further.</p>
+          <div class="area-chips">
+            <span>Oshawa</span><span>Whitby</span><span>Ajax</span><span>Pickering</span>
+            <span>Clarington</span><span>Scugog</span><span>Uxbridge</span><span>North Durham</span>
+            <span>Markham east</span><span>Scarborough</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">What to expect</p>
+          <h2>A clear path from <em>hello</em> to keys</h2>
+        </div>
+        <div class="process">
+          <div class="step reveal"><h3>Consultation</h3><p>Goals, budget, timing, and questions — in person, video, or phone.</p></div>
+          <div class="step reveal" style="--d:.06s"><h3>Strategy</h3><p>Custom search or pricing plan, prep list, and vendor referrals as needed.</p></div>
+          <div class="step reveal" style="--d:.12s"><h3>Offer &amp; negotiate</h3><p>Data-backed terms, calm communication, and paperwork explained plainly.</p></div>
+          <div class="step reveal" style="--d:.18s"><h3>Close &amp; beyond</h3><p>Lawyer, lender, and inspection milestones — plus check-ins after move-in.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="wins">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Client wins</p>
+          <h2>Recent stories <em>(demo)</em></h2>
+          <p class="lead">Showcase real outcomes — not a full MLS grid. Link to live listings or your broker IDX when you go live.</p>
+        </div>
+        <div class="wins-grid">
+          <div class="win reveal">
+            <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" alt="Detached home" loading="lazy" />
+            <div class="win-body">
+              <div class="win-tag">First-time buyers · Oshawa</div>
+              <p>Multiple-offer win under budget with firm conditions cleared in 18 days.</p>
+            </div>
+          </div>
+          <div class="win reveal" style="--d:.08s">
+            <img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" alt="Home with landscaped yard" loading="lazy" />
+            <div class="win-body">
+              <div class="win-tag">Seller · Whitby</div>
+              <p>Staged listing sold over ask; closed while sellers purchased their next home.</p>
+            </div>
+          </div>
+          <div class="win reveal" style="--d:.16s">
+            <img src="https://images.pexels.com/photos/7578901/pexels-photo-7578901.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" alt="Clients reviewing documents" loading="lazy" />
+            <div class="win-body">
+              <div class="win-tag">Investor · Ajax</div>
+              <p>Duplex acquisition with tenant transition plan and contractor intro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Client testimonials</p>
+          <h2>Reviews from <em>real moves</em></h2>
+          <p class="lead">On launch, embed Google reviews or paste verified quotes — these are sample stories for layout only.</p>
+        </div>
+        <div class="reviews">
+          <blockquote class="review reveal">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>&ldquo;Amara walked us through our first purchase step by step. She listened to our must-haves, explained every offer detail, and stayed reachable late on closing week.&rdquo;</p>
+            <footer>— Priya &amp; Daniel · Buyers, Oshawa</footer>
+          </blockquote>
+          <blockquote class="review reveal" style="--d:.06s">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>&ldquo;We sold in Whitby while buying in Ajax. She coordinated both timelines and connected us with a lawyer and mortgage broker we still use.&rdquo;</p>
+            <footer>— Marcus L. · Seller &amp; buyer</footer>
+          </blockquote>
+          <blockquote class="review reveal" style="--d:.12s">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>&ldquo;As an investor I needed honest rent comps and repair estimates. Clear numbers, no pressure — exactly the professionalism I wanted.&rdquo;</p>
+            <footer>— Fatima R. · Investor</footer>
+          </blockquote>
+          <blockquote class="review reveal" style="--d:.18s">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>&ldquo;Relocated from downtown Toronto. She narrowed neighbourhoods by commute and schools — we found the right fit in two weekends of showings.&rdquo;</p>
+            <footer>— James &amp; Aileen · Move-up buyers</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Questions about <em>your market</em></h2>
+        </div>
+        <div class="acc reveal">
+          <div class="acc-item">
+            <button class="acc-q" aria-expanded="false" aria-controls="faq1"><span>What are Durham Region market trends right now?</span><span class="pm" aria-hidden="true">+</span></button>
+            <div class="acc-a" id="faq1"><div><p>Inventory, days on market, and average prices shift seasonally. I share a concise snapshot during consultation and before any offer or list decision.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-q" aria-expanded="false" aria-controls="faq2"><span>Which neighbourhoods fit young families?</span><span class="pm" aria-hidden="true">+</span></button>
+            <div class="acc-a" id="faq2"><div><p>Areas differ by school catchment, transit, and budget. We shortlist options based on your commute, lifestyle, and must-have amenities.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-q" aria-expanded="false" aria-controls="faq3"><span>What closing costs should I budget?</span><span class="pm" aria-hidden="true">+</span></button>
+            <div class="acc-a" id="faq3"><div><p>Land transfer tax, legal fees, inspections, and adjustments vary by price and location. I provide an Ontario-style estimate before you commit.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-q" aria-expanded="false" aria-controls="faq4"><span>How long does it take to sell a home here?</span><span class="pm" aria-hidden="true">+</span></button>
+            <div class="acc-a" id="faq4"><div><p>Depends on price band, condition, and season. We set expectations using recent comparable sales — not national averages.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-q" aria-expanded="false" aria-controls="faq5"><span>Do I need an agent to buy or sell?</span><span class="pm" aria-hidden="true">+</span></button>
+            <div class="acc-a" id="faq5"><div><p>It&apos;s possible to go alone, but representation helps with pricing, contracts, negotiation, and risk — especially in multiple-offer situations.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-q" aria-expanded="false" aria-controls="faq6"><span>How do we get started?</span><span class="pm" aria-hidden="true">+</span></button>
+            <div class="acc-a" id="faq6"><div><p>Call, email, or send the form below. We&apos;ll book a consultation and outline next steps — no obligation.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Get in touch</p>
+          <h2>Let&apos;s talk about <em>your</em> move</h2>
+          <p class="lead">You&apos;ll hear back within one business day. For an immediate conversation, call — I keep evenings open for showings by appointment.</p>
+          <div class="direct" style="margin-top:1.5rem;">
+            <a href="tel:+19055550198"><span>📞</span><span>(905) 555-0198<small>Call or text · demo number</small></span></a>
+            <a href="mailto:amara.chen@example.ca"><span>✉️</span><span>amara.chen@example.ca<small>Personal inbox placeholder</small></span></a>
+          </div>
+        </div>
+        <div class="contact-form reveal" style="--d:.1s">
+          <h3>Request a consultation</h3>
+          <p class="sub">Demo form — messages route to AltruDigiTech until your lead inbox is connected.</p>
+          <form data-altru-lead data-turnstile-theme="light" method="post" action="#">
+            <div class="field-row">
+              <div><label for="lead-name">Your name</label><input id="lead-name" name="name" type="text" autocomplete="name" required /></div>
+              <div><label for="lead-email">Email</label><input id="lead-email" name="email" type="email" autocomplete="email" required /></div>
+            </div>
+            <div class="field-row">
+              <div><label for="lead-phone">Phone</label><input id="lead-phone" name="phone" type="tel" autocomplete="tel" /></div>
+              <div>
+                <label for="lead-interest">I&apos;m looking to</label>
+                <select id="lead-interest" name="interest">
+                  <option value="">Select one</option>
+                  <option>Buy a home</option>
+                  <option>Sell my home</option>
+                  <option>Buy and sell</option>
+                  <option>Invest</option>
+                  <option>Just exploring</option>
+                </select>
+              </div>
+            </div>
+            <label for="lead-message">Tell me about your goals</label>
+            <textarea id="lead-message" name="message" required placeholder="Timeline, areas, budget range, questions…"></textarea>
+            <p class="form-privacy">Protected by Cloudflare Turnstile. Used only to respond to your inquiry.</p>
+            <div data-turnstile></div>
+            <button type="submit" class="btn btn-gold" style="margin-top:0.85rem;width:100%;">Send message →</button>
+            <p data-altru-lead-status hidden role="status" style="margin-top:0.75rem;font-weight:700;"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <p class="display" style="color:#fff;font-size:1.25rem;">Amara Chen</p>
+          <p style="margin-top:0.6rem;max-width:22rem;">Durham Region REALTOR® profile template — swap headshot, brokerage, areas, and reviews for your brand.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#services">Buy · Sell · Invest</a></li>
+            <li><a href="#areas">Areas served</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Compliance</h4>
+          <ul>
+            <li><span style="color:rgba(255,255,255,0.55);font-weight:600;">Your Brokerage™ — logo on launch</span></li>
+            <li><span style="color:rgba(255,255,255,0.55);font-weight:600;">REALTOR® trademark notice as required</span></li>
+            <li><a href="#contact">Privacy · contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="credits">
+        Photography via <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a>:
+        <a href="https://www.pexels.com/photo/photo-of-man-standing-near-glass-window-2182970/" target="_blank" rel="noopener noreferrer">Andrea Piacquadio</a> (agent hero),
+        <a href="https://www.pexels.com/photo/man-in-black-button-up-shirt-smiling-2182971/" target="_blank" rel="noopener noreferrer">Andrea Piacquadio</a> (agent — areas section, same shoot as hero),
+        <a href="https://www.pexels.com/photo/keys-on-hand-101808/" target="_blank" rel="noopener noreferrer">PhotoMIX Company</a>,
+        <a href="https://www.pexels.com/photo/photo-of-single-story-house-106399/" target="_blank" rel="noopener noreferrer">Garrett Sears</a>,
+        <a href="https://www.pexels.com/photo/modern-living-room-interior-8293772/" target="_blank" rel="noopener noreferrer">Max Avans</a>,
+        <a href="https://www.pexels.com/photo/luxury-house-during-golden-hour-1396122/" target="_blank" rel="noopener noreferrer">Emre Can</a>,
+        <a href="https://www.pexels.com/photo/photo-of-a-house-280222/" target="_blank" rel="noopener noreferrer">David McBee</a>,
+        <a href="https://www.pexels.com/photo/people-sitting-on-chair-while-discussing-7578901/" target="_blank" rel="noopener noreferrer">KAROLINA GRABOWSKA</a>.
+        Statistics, testimonials, and agent identity are sample content.
+        Layout by <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>.
+      </div>
+    </div>
+  </footer>
+
+  <div class="studio-footer">
+    Real Estate Agent Profile template · <a href="https://altrudigitech.com/templates" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>
+  </div>
+
+  <script src="assets/lead-form/altru-lead.js"></script>
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var header = document.getElementById('site-header');
+      var toggle = document.getElementById('nav-toggle');
+      var nav = document.getElementById('site-nav');
+      var topBar = document.querySelector('.top-bar');
+
+      function syncHeaderOffset() {
+        var h = (topBar ? topBar.offsetHeight : 0) + header.offsetHeight;
+        document.documentElement.style.setProperty('--scroll-offset', h + 'px');
+        document.body.style.paddingTop = h + 'px';
+        header.style.top = (topBar ? topBar.offsetHeight : 0) + 'px';
+      }
+      syncHeaderOffset();
+      window.addEventListener('resize', syncHeaderOffset);
+
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('scrolled', window.scrollY > 12);
+      }, { passive: true });
+
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      if (!reduce) {
+        var reveal = document.querySelectorAll('.reveal');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        reveal.forEach(function (el) { io.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      }
+
+      document.querySelectorAll('.acc-q').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var item = btn.closest('.acc-item');
+          var open = item.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

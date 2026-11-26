@@ -10,6 +10,7 @@ const distDir = path.join(root, 'dist')
 /** Client slug → public URL path under /templates/ (marketing demo, same files as /sites/{slug}/) */
 const TEMPLATE_DEMO_PATHS = {
   'content-creator-demo': 'templates/creator/content-creator-demo',
+  'real-estate-agent-profile': 'templates/services/real-estate-agent-profile',
 }
 
 if (!fs.existsSync(clientsDir)) {

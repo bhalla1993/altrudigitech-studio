@@ -209,18 +209,36 @@ export const templates = [
 
   // ── Services ─────────────────────────────────────────────────────────────
   {
-    id: 'real-estate-agent',
-    title: 'Real Estate Agent',
+    id: 'real-estate-agent-profile',
+    title: 'Real Estate Agent Profile',
     category: 'Services Templates',
     filterCategory: 'Services',
-    tags: ['Services', 'Real Estate', 'Property', 'Luxury'],
-    shortDescription: 'Sophisticated website for luxury real estate agents and property professionals.',
+    tags: ['Services', 'Real Estate', 'REALTOR', 'Ontario', 'Lead Form', 'Agent'],
+    shortDescription:
+      'Agent-first site for Durham/GTA REALTORS® — your name, local market, reviews, buy/sell/invest, FAQ, and lead capture (not a listings portal).',
+    thumbnail: imgRealEstateAgent,
+    demoUrl: `${BASE}templates/services/real-estate-agent-profile/`,
+    clientExampleSlug: 'real-estate-agent-profile',
+    clientExampleUrl: `${BASE}sites/real-estate-agent-profile/`,
+    type: 'spa-html',
+    popularity: 97,
+    createdAt: '2026-11-26',
+    recommended: true,
+  },
+  {
+    id: 'real-estate-agent',
+    title: 'Real Estate Listings Gallery',
+    category: 'Services Templates',
+    filterCategory: 'Services',
+    tags: ['Services', 'Real Estate', 'Property', 'Luxury', 'Listings'],
+    shortDescription:
+      'Luxury property showcase with featured listings grid — inventory-first layout for high-end markets (separate from the agent profile template).',
     thumbnail: imgRealEstateAgent,
     demoUrl: `${BASE}templates/spa/real-estate-agent.html`,
     type: 'spa-html',
-    popularity: 93,
+    popularity: 88,
     createdAt: '2026-04-18',
-    recommended: true,
+    recommended: false,
   },
   {
     id: 'electrician-contractor',

@@ -26,6 +26,11 @@ const CLIENTS = [
     businessName: 'Creator media kit (template demo)',
   },
   {
+    slug: 'real-estate-agent-profile',
+    clientId: 'real-estate-agent-profile',
+    businessName: 'Real Estate Agent Profile (template demo)',
+  },
+  {
     slug: 'shanaya',
     clientId: 'shanaya',
     businessName: 'Shanaya — creator links',

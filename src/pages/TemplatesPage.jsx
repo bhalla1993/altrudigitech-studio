@@ -1,3 +1,4 @@
+import SearchIcon from '@mui/icons-material/Search'
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined'
 import {
   Box,
@@ -5,10 +6,12 @@ import {
   Divider,
   FormControl,
   Grid,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
   Stack,
+  TextField,
   Typography,
 } from '@mui/material'
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
@@ -21,15 +24,36 @@ import { pageSeo } from '../utils/siteData'
 import { liveProjects } from '../utils/liveProjectsData'
 import { templateFilters, templateSortOptions, templates } from '../utils/templatesData'
 
+function templateMatchesSearch(template, query) {
+  const q = query.trim().toLowerCase()
+  if (!q) return true
+  const haystack = [
+    template.title,
+    template.shortDescription,
+    template.category,
+    template.filterCategory,
+    ...(template.tags || []),
+    template.id,
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+  return haystack.includes(q) || q.split(/\s+/).every((word) => haystack.includes(word))
+}
+
 function TemplatesPage() {
   const [selectedFilter, setSelectedFilter] = useState('All')
   const [selectedSort, setSelectedSort] = useState('Most Popular')
+  const [searchQuery, setSearchQuery] = useState('')
   const filterMountRef = useRef(true)
 
   const visibleTemplates = useMemo(() => {
-    const filtered = selectedFilter === 'All'
-      ? templates
-      : templates.filter((template) => template.filterCategory === selectedFilter)
+    let filtered =
+      selectedFilter === 'All'
+        ? templates
+        : templates.filter((template) => template.filterCategory === selectedFilter)
+
+    filtered = filtered.filter((template) => templateMatchesSearch(template, searchQuery))
 
     if (selectedSort === 'Newest') {
       return [...filtered].sort((a, b) => new Date(b.createdAt || '2024-01-01') - new Date(a.createdAt || '2024-01-01'))
@@ -44,7 +68,7 @@ function TemplatesPage() {
     }
 
     return [...filtered].sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
-  }, [selectedFilter, selectedSort])
+  }, [selectedFilter, selectedSort, searchQuery])
 
   useLayoutEffect(() => {
     if (filterMountRef.current) {
@@ -69,6 +93,8 @@ function TemplatesPage() {
     [],
   )
 
+  const showNoResults = visibleTemplates.length === 0 && searchQuery.trim().length > 0
+
   return (
     <>
       <Seo
@@ -86,6 +112,23 @@ function TemplatesPage() {
             <Typography color="text.secondary" sx={{ maxWidth: 860 }}>
               Browse customizable templates for creators, trades, shops, and resumes. Each design is a starting point for our $99 Starter—we tailor content after intake and payment.
             </Typography>
+
+            <TextField
+              size="small"
+              fullWidth
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search templates — e.g. realtor, plumber, resume, creator"
+              aria-label="Search templates"
+              sx={{ maxWidth: 480 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon fontSize="small" color="action" />
+                  </InputAdornment>
+                ),
+              }}
+            />
 
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={1.2} alignItems={{ xs: 'flex-start', md: 'center' }}>
               <Stack direction="row" spacing={0.8} flexWrap="wrap" useFlexGap>
@@ -119,13 +162,19 @@ function TemplatesPage() {
               </FormControl>
             </Stack>
 
-            <Grid container spacing={3}>
-              {visibleTemplates.map((template, index) => (
-                <Grid key={template.id} item xs={12} md={6} lg={4}>
-                  <TemplatePreviewCard template={template} index={index} instant />
-                </Grid>
-              ))}
-            </Grid>
+            {showNoResults ? (
+              <Typography color="text.secondary" sx={{ py: 4 }}>
+                No templates match &ldquo;{searchQuery.trim()}&rdquo;. Try another keyword, choose a category above, or clear the search.
+              </Typography>
+            ) : (
+              <Grid container spacing={3}>
+                {visibleTemplates.map((template, index) => (
+                  <Grid key={template.id} item xs={12} md={6} lg={4}>
+                    <TemplatePreviewCard template={template} index={index} instant />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
           </Stack>
         </Box>
       </Box>
