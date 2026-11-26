@@ -15,7 +15,7 @@ import imgItConsultant from '../assets/images/it-consultant.png'
 import imgLandscapeContractor from '../assets/images/landscape-contractor.png'
 import imgLuxuryPlumbing from '../assets/images/luxury-plumbing.png'
 import imgRealEstateAgent from '../assets/images/real-estate-agent.png'
-import imgRealEstateAgentProfile from '../assets/images/real-estate-agent-profile.jpg'
+import imgRealEstateAgentProfile from '../assets/images/real-estate-agent-profile.png'
 import imgSnowRemoval from '../assets/images/snow-removal.png'
 import imgStudentResume from '../assets/images/student-resume.png'
 
@@ -218,7 +218,6 @@ export const templates = [
     shortDescription:
       'Agent-first site for Durham/GTA REALTORS® — your name, local market, reviews, buy/sell/invest, FAQ, and lead capture (not a listings portal).',
     thumbnail: imgRealEstateAgentProfile,
-    thumbnailObjectPosition: 'center 15%',
     demoUrl: `${BASE}templates/services/real-estate-agent-profile/`,
     clientExampleSlug: 'real-estate-agent-profile',
     clientExampleUrl: `${BASE}sites/real-estate-agent-profile/`,
