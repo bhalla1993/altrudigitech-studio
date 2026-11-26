@@ -44,7 +44,7 @@ function TemplatePreviewCard({ template, index = 0, instant = false }) {
           height: 185,
           minHeight: 185,
           objectFit: 'cover',
-          objectPosition: 'top',
+          objectPosition: template.thumbnailObjectPosition ?? 'top',
           display: 'block',
           bgcolor: 'grey.100',
         }}
