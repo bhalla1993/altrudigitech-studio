@@ -10,10 +10,8 @@ import {
   Select,
   Stack,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material'
-import { startTransition, useDeferredValue, useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import AnimatedSection from '../components/common/AnimatedSection'
 import Seo from '../components/common/Seo'
@@ -26,21 +24,18 @@ import { templateFilters, templateSortOptions, templates } from '../utils/templa
 function TemplatesPage() {
   const [selectedFilter, setSelectedFilter] = useState('All')
   const [selectedSort, setSelectedSort] = useState('Most Popular')
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-  const deferredFilter = useDeferredValue(selectedFilter)
-  const deferredSort = useDeferredValue(selectedSort)
+  const filterMountRef = useRef(true)
 
   const visibleTemplates = useMemo(() => {
-    const filtered = deferredFilter === 'All'
+    const filtered = selectedFilter === 'All'
       ? templates
-      : templates.filter((template) => template.filterCategory === deferredFilter)
+      : templates.filter((template) => template.filterCategory === selectedFilter)
 
-    if (deferredSort === 'Newest') {
+    if (selectedSort === 'Newest') {
       return [...filtered].sort((a, b) => new Date(b.createdAt || '2024-01-01') - new Date(a.createdAt || '2024-01-01'))
     }
 
-    if (deferredSort === 'Recommended') {
+    if (selectedSort === 'Recommended') {
       return [...filtered].sort((a, b) => {
         const rec = Number(Boolean(b.recommended)) - Number(Boolean(a.recommended))
         if (rec !== 0) return rec
@@ -49,7 +44,21 @@ function TemplatesPage() {
     }
 
     return [...filtered].sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
-  }, [deferredFilter, deferredSort])
+  }, [selectedFilter, selectedSort])
+
+  useLayoutEffect(() => {
+    if (filterMountRef.current) {
+      filterMountRef.current = false
+      return
+    }
+    const title = document.getElementById('templates-page-title')
+    if (title) {
+      const header = document.querySelector('header')
+      const headerH = header?.offsetHeight ?? 72
+      const top = title.getBoundingClientRect().top + window.scrollY - headerH - 8
+      window.scrollTo({ top: Math.max(0, top), behavior: 'auto' })
+    }
+  }, [selectedFilter, selectedSort])
 
   const recommendedTemplates = useMemo(
     () =>
@@ -69,7 +78,7 @@ function TemplatesPage() {
       />
 
       <Box component="section" aria-labelledby="templates-page-title">
-        <AnimatedSection>
+        <Box>
           <Stack spacing={3}>
             <Typography id="templates-page-title" variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
               Templates for Creators, Resumes, and Local Business
@@ -85,7 +94,10 @@ function TemplatesPage() {
                     key={filter}
                     variant={selectedFilter === filter ? 'contained' : 'outlined'}
                     size="small"
-                    onClick={() => startTransition(() => setSelectedFilter(filter))}
+                    onClick={(event) => {
+                      event.currentTarget.focus({ preventScroll: true })
+                      setSelectedFilter(filter)
+                    }}
                   >
                     {filter}
                   </Button>
@@ -98,7 +110,7 @@ function TemplatesPage() {
                   labelId="template-sort-label"
                   value={selectedSort}
                   label="Sort"
-                  onChange={(event) => startTransition(() => setSelectedSort(event.target.value))}
+                  onChange={(event) => setSelectedSort(event.target.value)}
                 >
                   {templateSortOptions.map((option) => (
                     <MenuItem key={option} value={option}>{option}</MenuItem>
@@ -110,22 +122,18 @@ function TemplatesPage() {
             <Grid container spacing={3}>
               {visibleTemplates.map((template, index) => (
                 <Grid key={template.id} item xs={12} md={6} lg={4}>
-                  <TemplatePreviewCard template={template} index={index} />
+                  <TemplatePreviewCard template={template} index={index} instant />
                 </Grid>
               ))}
             </Grid>
           </Stack>
-        </AnimatedSection>
+        </Box>
       </Box>
 
       <Box
         component="section"
         aria-labelledby="recommended-templates-title"
-        sx={{
-          mt: { xs: 8, md: 10 },
-          contentVisibility: 'auto',
-          containIntrinsicSize: isMobile ? '1px 1200px' : '1px 900px',
-        }}
+        sx={{ mt: { xs: 8, md: 10 } }}
       >
         <AnimatedSection>
           <Stack spacing={3}>
@@ -146,11 +154,7 @@ function TemplatesPage() {
       <Box
         component="section"
         aria-labelledby="showcase-title"
-        sx={{
-          mt: { xs: 10, md: 14 },
-          contentVisibility: 'auto',
-          containIntrinsicSize: isMobile ? '1px 1600px' : '1px 1100px',
-        }}
+        sx={{ mt: { xs: 10, md: 14 } }}
       >
         <AnimatedSection>
           <Stack spacing={4}>

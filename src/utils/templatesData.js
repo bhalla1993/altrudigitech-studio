@@ -1,4 +1,4 @@
-import imgContentCreator from '../assets/images/content-creator.jpg'
+import imgContentCreator from '../assets/images/content-creator.png'
 import imgAdventurePhotographer from '../assets/images/adventure-photographer.png'
 import imgBakeryShop from '../assets/images/bakery-shop.png'
 import imgBarberShop from '../assets/images/barber-shop.png'

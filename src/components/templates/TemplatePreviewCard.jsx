@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { motion, useReducedMotion } from 'framer-motion'
 
-function TemplatePreviewCard({ template, index = 0 }) {
+function TemplatePreviewCard({ template, index = 0, instant = false }) {
   const isSpaHtml = template.type === 'spa-html'
   const demoHref = isSpaHtml
     ? template.demoUrl
@@ -20,7 +20,7 @@ function TemplatePreviewCard({ template, index = 0 }) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const reduceMotion = useReducedMotion()
-  const disableMotion = reduceMotion || isMobile
+  const disableMotion = reduceMotion || isMobile || instant
 
   const card = (
     <Card
@@ -42,9 +42,11 @@ function TemplatePreviewCard({ template, index = 0 }) {
         sx={{
           width: '100%',
           height: 185,
+          minHeight: 185,
           objectFit: 'cover',
           objectPosition: 'top',
           display: 'block',
+          bgcolor: 'grey.100',
         }}
       />
       <CardContent>
