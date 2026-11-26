@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="A1 India Bazaar — Indian grocery in Greater Sudbury. Produce, grocery, dairy, sweets, spices, and frozen favourites." />
+  <title>A1 India Bazaar | Indian Grocery · Greater Sudbury</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer onload="document.dispatchEvent(new Event('turnstile-loaded'))"></script>
+  <script src="assets/lead-form/lead-config.js"></script>
+  <style>
+    :root {
+      --preview-h: 40px;
+      --brand-bar-h: 29px;
+      --nav-bar-h: 56px;
+      --header-total: calc(var(--brand-bar-h) + var(--nav-bar-h));
+      --scroll-offset: calc(var(--preview-h) + var(--header-total));
+      --red: #c8102e;
+      --red-dark: #9a0c24;
+      --red-bright: #e31837;
+      --gold: #f4c430;
+      --gold-soft: #fff4cc;
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --ink: #1a1214;
+      --muted: #5c4f52;
+      --border: #e8dde0;
+      --radius: 12px;
+      --shadow: 0 18px 40px rgba(154, 12, 36, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--scroll-offset);
+    }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.55;
+      padding-top: var(--scroll-offset);
+    }
+    main > [id],
+    main section[id] {
+      scroll-margin-top: var(--scroll-offset);
+    }
+    #top { scroll-margin-top: 0; }
+    a { color: var(--red); font-weight: 600; text-decoration: none; }
+    a:hover { color: var(--red-dark); }
+    img { max-width: 100%; display: block; }
+  .font-display { font-family: Oswald, "DM Sans", sans-serif; text-transform: uppercase; letter-spacing: 0.04em; }
+    .preview-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--preview-h);
+      z-index: 2000;
+      background: #1a1214;
+      color: #f5f0f1;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 12px;
+      line-height: 1.35;
+    }
+    .preview-banner strong { color: var(--gold); }
+    header {
+      position: fixed;
+      top: var(--preview-h);
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--red);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    }
+    .brand-bar {
+      background: var(--red-dark);
+      color: #fff;
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      min-height: var(--brand-bar-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-bar span { opacity: 0.85; }
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem;
+      min-height: var(--nav-bar-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .logo:hover { color: #fff; opacity: 0.95; }
+    .logo-mark {
+      background: #fff;
+      color: var(--red);
+      font-family: Oswald, sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      line-height: 1;
+      padding: 0.35rem 0.45rem;
+      border-radius: 4px;
+    }
+    .logo-text {
+      font-family: Oswald, sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      line-height: 1.15;
+      letter-spacing: 0.06em;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      opacity: 0.9;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.35rem;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+    }
+    nav a { color: rgba(255,255,255,0.92); font-weight: 600; }
+    nav a:hover { color: var(--gold); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.35rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    .btn-gold:hover { filter: brightness(1.05); color: var(--ink); }
+    .btn-white {
+      background: #fff;
+      color: var(--red-dark);
+    }
+    .btn-white:hover { background: var(--gold-soft); color: var(--red-dark); }
+    .btn-outline-light {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.85);
+      color: #fff;
+    }
+    .btn-outline-light:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
+    section { padding: 4rem 0; }
+    h1 { font-family: Oswald, sans-serif; font-size: clamp(2rem, 4.5vw, 2.9rem); line-height: 1.1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+    h2 { font-family: Oswald, sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.75rem; color: var(--red-dark); text-transform: uppercase; letter-spacing: 0.04em; }
+    .lead { font-size: 1.05rem; color: var(--muted); max-width: 34rem; }
+    .hero-wrap {
+      background: linear-gradient(180deg, var(--red-dark) 0%, var(--red) 100%);
+      padding-bottom: 2.75rem;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding-top: 1.5rem;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 1rem; }
+      nav ul { display: none; }
+    }
+    .hero-copy { color: #fff; }
+    .hero-copy .lead { color: rgba(255,255,255,0.92); max-width: 36rem; }
+    .hero-copy .social-row .label { color: rgba(255,255,255,0.75); }
+    .hero-copy h1 { margin-bottom: 1rem; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.25rem 0; }
+    .chip {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .chip-gold { background: var(--gold); color: var(--ink); }
+    .chip-light { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .hero-figure {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 4px solid #fff;
+    }
+    .hero-figure img { width: 100%; aspect-ratio: 3/4; max-height: min(72vh, 640px); object-fit: cover; object-position: center top; }
+    @media (min-width: 861px) { .hero-figure img { aspect-ratio: 4/5; max-height: 520px; } }
+    .hero-figure figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.68rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      color: #f5f5f5;
+    }
+    .social-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1rem; }
+    .social-row .label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-right: 0.25rem; }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(204, 35, 102, 0.35);
+    }
+    .social-icon svg { width: 22px; height: 22px; fill: currentColor; }
+    .social-icon:hover { transform: translateY(-1px); filter: brightness(1.06); color: #fff; }
+    .specials-panel {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .specials-panel .specials-media img { width: 100%; display: block; }
+    .specials-panel .specials-copy { padding: 1.5rem 1.75rem 1.75rem; }
+    .specials-panel .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .map-embed {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 3px solid var(--red);
+      box-shadow: var(--shadow);
+      min-height: 280px;
+      background: #e8dde0;
+    }
+    .map-embed iframe { width: 100%; height: 320px; border: 0; display: block; }
+    @media (min-width: 769px) { .map-embed iframe { height: 380px; } }
+    .reviews-wrap { background: #fff; border-radius: var(--radius); padding: 1.75rem; border: 1px solid var(--border); box-shadow: 0 8px 28px rgba(26,18,20,0.06); }
+    .reviews-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+    .reviews-score { font-family: Oswald, sans-serif; font-size: 2.5rem; line-height: 1; color: var(--red-dark); }
+    .stars { color: #f4b400; letter-spacing: 0.08em; font-size: 1.1rem; }
+    .reviews-grid { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    .review-card {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 1.1rem 1.15rem;
+      border-left: 4px solid var(--gold);
+    }
+    .review-card .meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.65rem; }
+    .review-card p { font-size: 0.92rem; color: var(--ink); }
+    .preview-note { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; padding: 0.65rem 0.75rem; background: var(--gold-soft); border-radius: 8px; border: 1px dashed var(--gold); }
+    .visit-layout { display: grid; gap: 1.75rem; }
+    @media (min-width: 900px) { .visit-layout { grid-template-columns: 1fr 1.05fr; align-items: start; } }
+    .mobile-call {
+      display: none;
+      position: fixed;
+      bottom: 44px;
+      right: 12px;
+      z-index: 1998;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--ink);
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      font-weight: 800;
+      font-size: 0.65rem;
+      text-align: center;
+      line-height: 1.1;
+    }
+    @media (max-width: 860px) { .mobile-call { display: flex; } }
+    .about-block {
+      text-align: center;
+      padding: 3.5rem 1.25rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .about-block h2 { text-align: center; }
+    .about-block .lead {
+      margin: 0 auto 1.1rem;
+      max-width: 40rem;
+      line-height: 1.65;
+    }
+    .about-block .about-extra {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .tagline-strip {
+      text-align: center;
+      font-family: Oswald, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      padding: 1.5rem 0 0;
+      text-transform: uppercase;
+    }
+    .tagline-strip strong { color: var(--red); }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 960px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .grid-4 { grid-template-columns: 1fr; } }
+    .dept-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(26, 18, 20, 0.08);
+      border-top: 4px solid var(--red);
+      height: 100%;
+    }
+    .dept-card img { width: 100%; height: 168px; object-fit: cover; }
+    .dept-card .body { padding: 1.1rem 1.15rem 1.25rem; }
+    .dept-card h3 {
+      font-family: Oswald, sans-serif;
+      font-size: 1.05rem;
+      color: var(--red-dark);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dept-card p { font-size: 0.9rem; color: var(--muted); }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } }
+    .hours-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      border-left: 5px solid var(--red);
+      box-shadow: 0 6px 20px rgba(26,18,20,0.06);
+    }
+    .hours-table { width: 100%; font-size: 0.92rem; border-collapse: collapse; }
+    .hours-table td { padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: 0 8px 24px rgba(26,18,20,0.06);
+    }
+    .contact-form label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      font: inherit;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.85rem;
+    }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .form-privacy { font-size: 0.78rem; color: var(--muted); margin: 0.5rem 0 1rem; }
+    [data-altru-lead-status] { font-size: 0.9rem; font-weight: 600; color: var(--red-dark); }
+    .map-link { display: inline-block; margin-top: 0.75rem; font-size: 0.9rem; }
+    footer {
+      background: var(--red-dark);
+      color: #fce8ec;
+      padding: 2.5rem 0 5.5rem;
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--gold); }
+    .credits { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.72rem; color: rgba(252,232,236,0.75); line-height: 1.65; }
+    .studio-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 16px;
+      background: rgba(26, 18, 20, 0.96);
+      color: #b8a8ab;
+      font-size: 11px;
+      text-align: center;
+      z-index: 1999;
+    }
+    .studio-footer a { color: #f4a5b5; }
+    .section-alt { background: linear-gradient(180deg, #fff 0%, var(--cream) 100%); }
+  </style>
+</head>
+<body>
+  <div class="preview-banner" role="status">
+    <span><strong>Pitch preview</strong> by AltruDigiTech — sample layout &amp; colours inspired by their Instagram; not the store’s official site until they approve.</span>
+  </div>
+
+  <header>
+    <div class="brand-bar font-display">
+      PRODUCE <span>·</span> GROCERY <span>·</span> DAIRY <span>·</span> INDIAN SWEETS &nbsp;|&nbsp; OPEN 7 DAYS
+    </div>
+    <div class="nav-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">A1</span>
+        <span class="logo-text">
+          India Bazaar
+          <small>Greater Sudbury</small>
+        </span>
+      </a>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#specials">Specials</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#visit">Visit</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-gold" href="tel:+17056691451">(705) 669-1451</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero-wrap">
+      <section class="container hero">
+        <div class="hero-copy">
+          <div class="chip-row">
+            <span class="chip chip-gold">Wholesale-friendly prices</span>
+            <span class="chip chip-light">1460 Fairburn St</span>
+          </div>
+          <h1>Your Sudbury stop for Indian groceries, sweets &amp; more</h1>
+          <p class="lead">
+            From basmati and masalas to Vadilal favourites, fresh produce, dairy, and celebration sweets — the kind of selection you see on their shelves every week.
+          </p>
+          <div class="chip-row">
+            <span class="chip chip-light">Daily 10 AM – 11 PM</span>
+          </div>
+          <div class="hero-cta">
+            <a class="btn btn-gold" href="https://maps.app.goo.gl/BiMdVEYdct3qqMsG8" target="_blank" rel="noopener noreferrer">Get directions</a>
+            <a class="btn btn-outline-light" href="#visit">Map &amp; hours</a>
+          </div>
+        </div>
+        <figure class="hero-figure">
+          <img
+            src="assets/ig/storefront.jpg"
+            alt="A1 India Bazaar storefront at 1460 Fairburn Street, Greater Sudbury"
+            width="900"
+            height="1200"
+            loading="eager"
+          />
+          <figcaption>Storefront · Fairburn St, Sudbury (client photo)</figcaption>
+        </figure>
+      </section>
+    </div>
+
+    <p class="tagline-strip container"><strong>Produce · Grocery · Dairy · Indian sweets</strong> — in-store every day</p>
+
+    <section id="about" class="container about-block">
+      <h2>Welcome to A1 India Bazaar</h2>
+      <p class="lead">
+        Right on Fairburn Street in Greater Sudbury, A1 India Bazaar is the neighbourhood spot for produce, grocery, dairy, and Indian sweets — the same mix they put on their sign and social posts every week.
+      </p>
+      <p class="about-extra">
+        Walk the aisles for basmati, lentils, masalas, chai, frozen Vadilal favourites, namkeen, bakery items, and celebration mithai. They’re open seven days a week with hours that work for after-work runs and weekend stocking up.
+      </p>
+      <p class="about-extra" style="margin-top:1rem;">
+        Call <a href="tel:+17056691451">(705) 669-1451</a> before you visit if you’re hunting a specific brand or checking weekly specials.
+      </p>
+    </section>
+
+    <section id="shop" class="container section-alt" style="margin-top:1rem;padding:3rem 0 4rem;border-radius:var(--radius);">
+      <h2>In-store departments</h2>
+      <p class="lead" style="margin-bottom:1.75rem;">Categories aligned with what they promote publicly — imagery below is placeholder stock until we swap in their own photos.</p>
+      <div class="grid-4">
+        <article class="dept-card">
+          <img
+            src="https://images.pexels.com/photos/31280796/pexels-photo-31280796.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800"
+            alt="Bowls of colourful Indian spice powders"
+            loading="lazy"
+          />
+          <div class="body">
+            <h3>Spices &amp; pantry</h3>
+            <p>Lentils, rice, flours, masalas, tea, and everyday cooking staples.</p>
+          </div>
+        </article>
+        <article class="dept-card">
+          <img
+            src="https://images.pexels.com/photos/12940854/pexels-photo-12940854.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800"
+            alt="Fresh vegetables and herbs at a grocery market"
+            loading="lazy"
+          />
+          <div class="body">
+            <h3>Produce &amp; fresh</h3>
+            <p>Seasonal vegetables and fruit for home cooking and gatherings.</p>
+          </div>
+        </article>
+        <article class="dept-card">
+          <img
+            src="https://images.pexels.com/photos/18488298/pexels-photo-18488298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800"
+            alt="Traditional Indian sweets on display"
+            loading="lazy"
+          />
+          <div class="body">
+            <h3>Indian sweets</h3>
+            <p>Mithai and bakery favourites for festivals and everyday treats.</p>
+          </div>
+        </article>
+        <article class="dept-card">
+          <img
+            src="https://images.pexels.com/photos/5498226/pexels-photo-5498226.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800"
+            alt="Packaged frozen foods in a store freezer case"
+            loading="lazy"
+          />
+          <div class="body">
+            <h3>Frozen &amp; snacks</h3>
+            <p>Freezer meals, namkeen, cookies, and quick weeknight picks.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="specials" class="container">
+      <h2>Event specials</h2>
+      <p class="lead" style="margin-bottom:1.25rem;">Homepage promos like their Instagram — festive offers, sweets, and seasonal deals. Example below from their Vaisakhi post.</p>
+      <article class="specials-panel">
+        <div class="specials-media">
+          <img
+            src="assets/ig/vaisakhi-special.jpg"
+            alt="A1 India Bazaar Vaisakhi special — 20% off on sweets, April 12"
+            width="1080"
+            height="1350"
+            loading="lazy"
+          />
+        </div>
+        <div class="specials-copy">
+          <p class="eyebrow">From their Instagram</p>
+          <p style="font-size:1rem;color:var(--ink);max-width:36rem;">
+            Rotating specials (Vaisakhi sweets, wholesale banners, product spotlights) can live here — same red-and-gold look as their social posts, without making people hunt the feed.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section id="reviews" class="container section-alt" style="padding:3.5rem 0 4rem;margin-top:0.5rem;border-radius:var(--radius);">
+      <h2>Google reviews</h2>
+      <p class="lead" style="margin-bottom:1.25rem;">Layout preview — swap in a live Google feed or real quotes after launch.</p>
+      <div class="reviews-wrap">
+        <div class="reviews-summary">
+          <span class="reviews-score">4.5</span>
+          <div>
+            <p class="stars" aria-hidden="true">★★★★★</p>
+            <p style="font-size:0.88rem;color:var(--muted);">Sample rating for pitch video only</p>
+          </div>
+          <a class="btn btn-gold" style="margin-left:auto;" href="https://maps.app.goo.gl/BiMdVEYdct3qqMsG8" target="_blank" rel="noopener noreferrer">View on Google Maps</a>
+        </div>
+        <div class="reviews-grid">
+          <article class="review-card">
+            <p class="stars" aria-label="5 stars">★★★★★</p>
+            <p>“Huge selection of spices and frozen items you won’t find at the big chains. Staff are helpful when you’re looking for something specific.”</p>
+            <p class="meta">— Preview name · Sudbury</p>
+          </article>
+          <article class="review-card">
+            <p class="stars" aria-label="5 stars">★★★★★</p>
+            <p>“Great sweets counter and produce for weekend cooking. Convenient hours and easy parking on Fairburn.”</p>
+            <p class="meta">— Preview name · Greater Sudbury</p>
+          </article>
+          <article class="review-card">
+            <p class="stars" aria-label="4 stars">★★★★☆</p>
+            <p>“Our go-to for basmati, chai, and snacks. Wholesale-style pricing on a lot of pantry staples.”</p>
+            <p class="meta">— Preview name · Sudbury</p>
+          </article>
+          <article class="review-card">
+            <p class="stars" aria-label="5 stars">★★★★★</p>
+            <p>“Clean store, well organized freezers, and they post deals on Instagram regularly.”</p>
+            <p class="meta">— Preview name · Onaping</p>
+          </article>
+        </div>
+        <p class="preview-note" role="note"><strong>Pitch preview:</strong> review text and names are placeholders for your screen recording — not copied from Google. Remove or replace with verified reviews before go-live.</p>
+      </div>
+    </section>
+
+    <section id="visit" class="container">
+      <h2>Visit us</h2>
+      <div class="visit-layout">
+        <div>
+          <p style="margin-bottom:0.75rem;color:var(--muted);">
+            <strong>A1 India Bazaar</strong><br />
+            1460 Fairburn St<br />
+            Greater Sudbury, ON P3A 1N7
+          </p>
+          <p style="margin-bottom:0.5rem;"><strong>Phone:</strong> <a href="tel:+17056691451">(705) 669-1451</a></p>
+          <p style="margin-bottom:0.5rem;"><strong>Website:</strong> <a href="https://a1indiabazaar.com" target="_blank" rel="noopener noreferrer">a1indiabazaar.com</a></p>
+          <div class="hours-card" style="margin-top:1.25rem;">
+            <h3 class="font-display" style="font-size:1.1rem;color:var(--red-dark);margin-bottom:0.75rem;">Store hours</h3>
+            <table class="hours-table" aria-label="Store hours">
+              <tr><td>Monday – Sunday</td><td><strong>10:00 AM – 11:00 PM</strong></td></tr>
+            </table>
+            <p style="font-size:0.82rem;color:var(--muted);margin-top:0.75rem;">Hours from public listings — store can confirm before go-live.</p>
+          </div>
+          <a class="btn btn-gold map-link" href="https://maps.app.goo.gl/BiMdVEYdct3qqMsG8" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+        </div>
+        <div class="map-embed">
+          <iframe
+            title="Map — A1 India Bazaar, 1460 Fairburn St, Greater Sudbury"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            src="https://maps.google.com/maps?q=A1+India+Bazaar,+1460+Fairburn+St,+Greater+Sudbury,+ON&amp;hl=en&amp;z=17&amp;output=embed"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="container" style="padding-bottom:5rem;">
+      <h2>Questions or wholesale inquiries</h2>
+      <p class="lead" style="margin-bottom:1rem;">Preview form — messages route to AltruDigiTech until the store approves this pitch site.</p>
+      <p style="margin-bottom:0.75rem;color:var(--muted);">
+        <strong>Phone:</strong> <a href="tel:+17056691451">(705) 669-1451</a>
+        · <strong>Instagram:</strong> <a href="https://www.instagram.com/a1.indiabazaar/" target="_blank" rel="noopener noreferrer">@a1.indiabazaar</a>
+      </p>
+      <div class="social-row" style="margin-bottom:1.5rem;" aria-label="Social media">
+        <a class="social-icon" href="https://www.instagram.com/a1.indiabazaar/" target="_blank" rel="noopener noreferrer" aria-label="A1 India Bazaar on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+      <div class="contact-form">
+        <form data-altru-lead data-turnstile-theme="light" method="post" action="#">
+          <label for="lead-name">Your name</label>
+          <input id="lead-name" name="name" type="text" autocomplete="name" required />
+          <label for="lead-email">Email</label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" required />
+          <label for="lead-message">Message</label>
+          <textarea id="lead-message" name="message" required placeholder="Example: Do you carry a specific brand or spice?"></textarea>
+          <p class="form-privacy">
+            Secure contact form powered by AltruDigiTech (preview mode). On a live client site, messages go directly to the business inbox.
+          </p>
+          <div data-turnstile></div>
+          <button type="submit" class="btn btn-gold" style="margin-top:1rem;">Send message</button>
+          <p data-altru-lead-status hidden role="status" style="margin-top:0.75rem;"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="font-display" style="font-size:1rem;"><strong>A1 India Bazaar</strong> · Sudbury, Ontario</p>
+      <p style="margin-top:0.35rem;opacity:0.85;">Pitch preview site · not affiliated until the store signs off</p>
+      <div class="credits">
+        Storefront &amp; specials images from client-provided references. Department placeholders via
+        <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a> (spices, produce, sweets, freezer).
+        Google review cards are layout samples only.
+        Preview built by <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>.
+      </div>
+    </div>
+  </footer>
+
+  <a class="mobile-call" href="tel:+17056691451" aria-label="Call store">CALL</a>
+
+  <div class="studio-footer">
+    Built by <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>
+    · <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">altrudigitech.com</a>
+  </div>
+
+  <script src="assets/lead-form/altru-lead.js"></script>
+</body>
+</html>

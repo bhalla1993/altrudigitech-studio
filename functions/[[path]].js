@@ -5,6 +5,20 @@
 export async function onRequest({ request, env }) {
   const url = new URL(request.url)
   const pathname = url.pathname
+
+  const siteRoot = pathname.match(/^\/sites\/([^/]+)\/?$/)
+  if (siteRoot) {
+    const slug = siteRoot[1]
+    if (!pathname.endsWith('/')) {
+      return Response.redirect(new URL(`/sites/${slug}/`, url.origin), 301)
+    }
+    const indexUrl = new URL(`/sites/${slug}/index.html`, url.origin)
+    const indexResponse = await env.ASSETS.fetch(new Request(indexUrl, request))
+    if (indexResponse.status !== 404) {
+      return indexResponse
+    }
+  }
+
   const assetResponse = await env.ASSETS.fetch(request)
   const contentType = assetResponse.headers.get('Content-Type') || ''
 

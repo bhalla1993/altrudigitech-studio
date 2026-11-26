@@ -15,6 +15,11 @@ const devVarsPath = path.join(root, '.dev.vars')
 const CLIENTS = [
   { slug: 'internal-demo', clientId: 'internal-demo', businessName: 'Internal demo (sandbox)' },
   { slug: 'shivabhalla', clientId: 'shivabhalla', businessName: 'Shiva Bhalla — portfolio showcase' },
+  {
+    slug: 'a1-india-bazaar',
+    clientId: 'a1-india-bazaar',
+    businessName: 'A1 India Bazaar (pitch preview)',
+  },
 ]
 
 function loadDevVars(filePath) {
