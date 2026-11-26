@@ -13,11 +13,10 @@
   <script src="assets/lead-form/lead-config.js"></script>
   <style>
     :root {
-      --preview-h: 40px;
       --brand-bar-h: 29px;
       --nav-bar-h: 56px;
       --header-total: calc(var(--brand-bar-h) + var(--nav-bar-h));
-      --scroll-offset: calc(var(--preview-h) + var(--header-total));
+      --scroll-offset: var(--header-total);
       --red: #c8102e;
       --red-dark: #9a0c24;
       --red-bright: #e31837;
@@ -52,27 +51,9 @@
     a:hover { color: var(--red-dark); }
     img { max-width: 100%; display: block; }
   .font-display { font-family: Oswald, "DM Sans", sans-serif; text-transform: uppercase; letter-spacing: 0.04em; }
-    .preview-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--preview-h);
-      z-index: 2000;
-      background: #1a1214;
-      color: #f5f0f1;
-      font-size: 0.78rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 12px;
-      line-height: 1.35;
-    }
-    .preview-banner strong { color: var(--gold); }
     header {
       position: fixed;
-      top: var(--preview-h);
+      top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
@@ -144,6 +125,43 @@
     }
     nav a { color: rgba(255,255,255,0.92); font-weight: 600; }
     nav a:hover { color: var(--gold); }
+    .nav-end { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+    }
+    .nav-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .nav-toggle-bars {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      position: relative;
+    }
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+    }
+    .nav-toggle-bars::before { top: -6px; }
+    .nav-toggle-bars::after { top: 6px; }
+    header.menu-open .nav-toggle-bars { background: transparent; }
+    header.menu-open .nav-toggle-bars::before { top: 0; transform: rotate(45deg); }
+    header.menu-open .nav-toggle-bars::after { top: 0; transform: rotate(-45deg); }
+    .primary-nav { position: static; }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -192,7 +210,37 @@
     }
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; padding-top: 1rem; }
-      nav ul { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .nav-inner { flex-wrap: wrap; position: relative; }
+      .nav-inner > .btn-gold { display: none; }
+      .primary-nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: var(--red-dark);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.28s ease, opacity 0.2s ease;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      }
+      header.menu-open .primary-nav {
+        max-height: 360px;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .primary-nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 0.35rem 0 0.5rem;
+      }
+      .primary-nav li a {
+        display: block;
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
     }
     .hero-copy { color: #fff; }
     .hero-copy .lead { color: rgba(255,255,255,0.92); max-width: 36rem; }
@@ -425,11 +473,7 @@
   </style>
 </head>
 <body>
-  <div class="preview-banner" role="status">
-    <span><strong>Pitch preview</strong> by AltruDigiTech — sample layout &amp; colours inspired by their Instagram; not the store’s official site until they approve.</span>
-  </div>
-
-  <header>
+  <header id="site-header">
     <div class="brand-bar font-display">
       PRODUCE <span>·</span> GROCERY <span>·</span> DAIRY <span>·</span> INDIAN SWEETS &nbsp;|&nbsp; OPEN 7 DAYS
     </div>
@@ -441,8 +485,8 @@
           <small>Greater Sudbury</small>
         </span>
       </a>
-      <nav aria-label="Primary">
-        <ul>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul id="nav-menu">
           <li><a href="#about">About</a></li>
           <li><a href="#shop">Shop</a></li>
           <li><a href="#specials">Specials</a></li>
@@ -451,7 +495,12 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <a class="btn btn-gold" href="tel:+17056691451">(705) 669-1451</a>
+      <div class="nav-end">
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+        </button>
+        <a class="btn btn-gold" href="tel:+17056691451">(705) 669-1451</a>
+      </div>
     </div>
   </header>
 
@@ -698,5 +747,36 @@
   </div>
 
   <script src="assets/lead-form/altru-lead.js"></script>
+  <script>
+    (function () {
+      const header = document.getElementById('site-header');
+      const toggle = document.getElementById('nav-toggle');
+      const menu = document.getElementById('nav-menu');
+      if (!header || !toggle || !menu) return;
+
+      toggle.addEventListener('click', function () {
+        const open = header.classList.toggle('menu-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+
+      menu.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          header.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && header.classList.contains('menu-open')) {
+          header.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+          toggle.focus();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
