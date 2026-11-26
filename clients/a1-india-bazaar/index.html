@@ -42,11 +42,6 @@
       line-height: 1.55;
       padding-top: var(--scroll-offset);
     }
-    main > [id],
-    main section[id] {
-      scroll-margin-top: var(--scroll-offset);
-    }
-    #top { scroll-margin-top: 0; }
     a { color: var(--red); font-weight: 600; text-decoration: none; }
     a:hover { color: var(--red-dark); }
     img { max-width: 100%; display: block; }
@@ -192,10 +187,12 @@
       color: #fff;
     }
     .btn-outline-light:hover { background: rgba(255,255,255,0.12); color: #fff; }
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
     section { padding: 4rem 0; }
     h1 { font-family: Oswald, sans-serif; font-size: clamp(2rem, 4.5vw, 2.9rem); line-height: 1.1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
     h2 { font-family: Oswald, sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.75rem; color: var(--red-dark); text-transform: uppercase; letter-spacing: 0.04em; }
+    .section-head { padding-left: 0.35rem; padding-right: 0.35rem; margin-bottom: 1.25rem; }
+    .section-head .lead { margin-bottom: 0; }
     .lead { font-size: 1.05rem; color: var(--muted); max-width: 34rem; }
     .hero-wrap {
       background: linear-gradient(180deg, var(--red-dark) 0%, var(--red) 100%);
@@ -209,10 +206,19 @@
       padding-top: 1.5rem;
     }
     @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; padding-top: 1rem; }
+      .hero { grid-template-columns: 1fr; padding-top: 1.25rem; }
       .nav-toggle { display: inline-flex; }
-      .nav-inner { flex-wrap: wrap; position: relative; }
-      .nav-inner > .btn-gold { display: none; }
+      .nav-inner {
+        flex-wrap: nowrap;
+        position: relative;
+        gap: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .logo { min-width: 0; flex: 1 1 auto; }
+      .logo-text { font-size: 0.92rem; }
+      .logo-mark { font-size: 1rem; padding: 0.3rem 0.4rem; }
+      .nav-end .btn-gold { display: none; }
       .primary-nav {
         position: absolute;
         left: 0;
@@ -378,11 +384,14 @@
     .tagline-strip {
       text-align: center;
       font-family: Oswald, sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
+      font-size: clamp(0.72rem, 2.5vw, 0.85rem);
+      letter-spacing: 0.14em;
       color: var(--muted);
-      padding: 1.5rem 0 0;
+      padding: 1.75rem 1.25rem 0;
+      margin: 0 auto;
+      max-width: 1140px;
       text-transform: uppercase;
+      line-height: 1.5;
     }
     .tagline-strip strong { color: var(--red); }
     .grid-4 {
@@ -470,6 +479,54 @@
     }
     .studio-footer a { color: #f4a5b5; }
     .section-alt { background: linear-gradient(180deg, #fff 0%, var(--cream) 100%); }
+    .section-shop,
+    .section-reviews {
+      margin-top: 1rem;
+      padding: 3rem 1.5rem 4rem;
+      border-radius: var(--radius);
+    }
+  .section-reviews { margin-top: 0.5rem; }
+    #contact { padding-top: 3.75rem; margin-top: 1.5rem; }
+    .contact-channels { display: flex; flex-direction: column; gap: 0.85rem; margin: 1.25rem 0 1.75rem; padding-left: 0.2rem; }
+    .contact-channel {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .contact-channel:hover { color: var(--red-dark); }
+    .contact-channel-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-channel-icon svg { width: 22px; height: 22px; }
+    .contact-channel--phone .contact-channel-icon {
+      background: var(--gold-soft);
+      color: var(--red-dark);
+    }
+    .contact-channel--phone .contact-channel-icon svg { fill: currentColor; }
+    .contact-channel--ig .contact-channel-icon {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+    }
+    .contact-channel--ig .contact-channel-icon svg { fill: #fff; }
+    .form-heading {
+      font-family: Oswald, sans-serif;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--red-dark);
+      margin-bottom: 1rem;
+      padding-top: 0.25rem;
+    }
   </style>
 </head>
 <body>
@@ -537,7 +594,7 @@
       </section>
     </div>
 
-    <p class="tagline-strip container"><strong>Produce · Grocery · Dairy · Indian sweets</strong> — in-store every day</p>
+    <p class="tagline-strip"><strong>Produce · Grocery · Dairy · Indian sweets</strong> — in-store every day</p>
 
     <section id="about" class="container about-block">
       <h2>Welcome to A1 India Bazaar</h2>
@@ -552,9 +609,11 @@
       </p>
     </section>
 
-    <section id="shop" class="container section-alt" style="margin-top:1rem;padding:3rem 0 4rem;border-radius:var(--radius);">
-      <h2>In-store departments</h2>
-      <p class="lead" style="margin-bottom:1.75rem;">Categories aligned with what they promote publicly — imagery below is placeholder stock until we swap in their own photos.</p>
+    <section id="shop" class="container section-alt section-shop">
+      <div class="section-head">
+        <h2>In-store departments</h2>
+        <p class="lead">Categories aligned with what they promote publicly — imagery below is placeholder stock until we swap in their own photos.</p>
+      </div>
       <div class="grid-4">
         <article class="dept-card">
           <img
@@ -604,8 +663,10 @@
     </section>
 
     <section id="specials" class="container">
-      <h2>Event specials</h2>
-      <p class="lead" style="margin-bottom:1.25rem;">Homepage promos like their Instagram — festive offers, sweets, and seasonal deals. Example below from their Vaisakhi post.</p>
+      <div class="section-head">
+        <h2>Event specials</h2>
+        <p class="lead">Homepage promos like their Instagram — festive offers, sweets, and seasonal deals. Example below from their Vaisakhi post.</p>
+      </div>
       <article class="specials-panel">
         <div class="specials-media">
           <img
@@ -625,9 +686,11 @@
       </article>
     </section>
 
-    <section id="reviews" class="container section-alt" style="padding:3.5rem 0 4rem;margin-top:0.5rem;border-radius:var(--radius);">
-      <h2>Google reviews</h2>
-      <p class="lead" style="margin-bottom:1.25rem;">Layout preview — swap in a live Google feed or real quotes after launch.</p>
+    <section id="reviews" class="container section-alt section-reviews">
+      <div class="section-head">
+        <h2>Google reviews</h2>
+        <p class="lead">Layout preview — swap in a live Google feed or real quotes after launch.</p>
+      </div>
       <div class="reviews-wrap">
         <div class="reviews-summary">
           <span class="reviews-score">4.5</span>
@@ -664,7 +727,9 @@
     </section>
 
     <section id="visit" class="container">
-      <h2>Visit us</h2>
+      <div class="section-head">
+        <h2>Visit us</h2>
+      </div>
       <div class="visit-layout">
         <div>
           <p style="margin-bottom:0.75rem;color:var(--muted);">
@@ -696,17 +761,25 @@
     </section>
 
     <section id="contact" class="container" style="padding-bottom:5rem;">
-      <h2>Questions or wholesale inquiries</h2>
-      <p class="lead" style="margin-bottom:1rem;">Preview form — messages route to AltruDigiTech until the store approves this pitch site.</p>
-      <p style="margin-bottom:0.75rem;color:var(--muted);">
-        <strong>Phone:</strong> <a href="tel:+17056691451">(705) 669-1451</a>
-        · <strong>Instagram:</strong> <a href="https://www.instagram.com/a1.indiabazaar/" target="_blank" rel="noopener noreferrer">@a1.indiabazaar</a>
-      </p>
-      <div class="social-row" style="margin-bottom:1.5rem;" aria-label="Social media">
-        <a class="social-icon" href="https://www.instagram.com/a1.indiabazaar/" target="_blank" rel="noopener noreferrer" aria-label="A1 India Bazaar on Instagram">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <div class="section-head">
+        <h2>Questions or wholesale inquiries</h2>
+        <p class="lead">Call or message — preview form routes to AltruDigiTech until the store approves this site.</p>
+      </div>
+      <div class="contact-channels" aria-label="Phone and Instagram">
+        <a class="contact-channel contact-channel--phone" href="tel:+17056691451">
+          <span class="contact-channel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.25 1.01l-2.2 2.23z"/></svg>
+          </span>
+          <span>(705) 669-1451</span>
+        </a>
+        <a class="contact-channel contact-channel--ig" href="https://www.instagram.com/a1.indiabazaar/" target="_blank" rel="noopener noreferrer">
+          <span class="contact-channel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </span>
+          <span>@a1.indiabazaar</span>
         </a>
       </div>
+      <h3 class="form-heading">Or reach out directly here</h3>
       <div class="contact-form">
         <form data-altru-lead data-turnstile-theme="light" method="post" action="#">
           <label for="lead-name">Your name</label>
@@ -760,11 +833,45 @@
         toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       });
 
-      menu.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener('click', function () {
+      function syncHeaderOffset() {
+        var h = header.offsetHeight;
+        document.documentElement.style.setProperty('--scroll-offset', h + 'px');
+        document.body.style.paddingTop = h + 'px';
+        document.documentElement.style.scrollPaddingTop = h + 'px';
+      }
+      syncHeaderOffset();
+      window.addEventListener('resize', syncHeaderOffset);
+      if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(syncHeaderOffset).observe(header);
+      }
+
+      function scrollToSection(id) {
+        if (!id || id === 'top') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        var target = document.getElementById(id);
+        if (!target) return;
+        var anchor = target.querySelector('.section-head h2') || target.querySelector('h2') || target;
+        var gap = 12;
+        var top = anchor.getBoundingClientRect().top + window.scrollY - header.offsetHeight - gap;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var href = link.getAttribute('href');
+          if (!href || href === '#') return;
+          var id = href.slice(1);
+          if (!document.getElementById(id)) return;
+          e.preventDefault();
           header.classList.remove('menu-open');
           toggle.setAttribute('aria-expanded', 'false');
           toggle.setAttribute('aria-label', 'Open menu');
+          requestAnimationFrame(function () {
+            syncHeaderOffset();
+            scrollToSection(id);
+          });
         });
       });
 
