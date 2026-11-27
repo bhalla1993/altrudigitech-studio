@@ -91,8 +91,12 @@
       position: fixed; top: 30px; left: 0; right: 0; z-index: 1000;
       background: rgba(250, 246, 239, 0.94); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
+      transition: box-shadow 0.28s var(--ease), background 0.28s var(--ease);
     }
-    header.scrolled { box-shadow: var(--shadow-sm); }
+    header.scrolled {
+      box-shadow: var(--shadow-sm);
+      background: rgba(255, 253, 249, 0.98);
+    }
     .nav-inner {
       max-width: 1120px; margin: 0 auto; padding: 0.6rem 1.35rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
@@ -115,18 +119,17 @@
       min-height: 72vh;
       display: flex; align-items: center;
       background:
-        linear-gradient(105deg, rgba(12, 8, 6, 0.82) 0%, rgba(12, 8, 6, 0.55) 42%, rgba(12, 8, 6, 0.28) 68%, rgba(12, 8, 6, 0.12) 100%),
+        linear-gradient(100deg, rgba(12, 8, 6, 0.62) 0%, rgba(12, 8, 6, 0.4) 42%, rgba(12, 8, 6, 0.2) 64%, rgba(12, 8, 6, 0.06) 100%),
         url('https://images.pexels.com/photos/2147491/pexels-photo-2147491.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
       color: #fff;
       padding: 5rem 0 4rem;
     }
     #hero .hero-inner { max-width: 40rem; }
     #hero .hero-copy {
-      background: #faf6ef;
-      padding: 1.5rem 1.35rem 1.4rem;
-      border-radius: var(--radius-lg);
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: transparent;
+      padding: 0;
+      border: none;
+      box-shadow: none;
     }
     #hero .hero-eyebrow {
       margin: 0 0 0.85rem;
@@ -134,45 +137,29 @@
       font-weight: 800;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--ink);
-      display: inline-block;
-      background: #fff3b0;
-      padding: 0.35rem 0.65rem;
-      border-radius: 4px;
-      line-height: 1.3;
+      color: var(--crust);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
     }
     #hero .hero-headline {
       margin: 0;
       font-family: "DM Serif Display", Georgia, serif;
       font-size: clamp(2.05rem, 5vw, 3.25rem);
       font-weight: 400;
-      line-height: 1.2;
-      color: var(--ink);
+      line-height: 1.18;
+      color: #fffdf9;
+      text-shadow: 0 3px 24px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.45);
     }
-    #hero .hero-mark {
-      display: block;
-      width: fit-content;
-      max-width: 100%;
-      margin: 0.22rem 0;
-      padding: 0.1em 0.42em 0.14em;
-      background: #fff59d;
-      color: #1a100c;
-      border-radius: 3px;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
-    }
-    #hero .hero-mark--line2 {
-      background: #ffe082;
+    #hero .hero-headline em {
       font-style: italic;
-      color: var(--tomato-deep);
+      color: var(--crust);
     }
     #hero .hero-lead {
       margin: 1rem 0 0;
       font-size: 1.02rem;
       line-height: 1.55;
-      color: var(--ink);
-      opacity: 0.92;
-      max-width: none;
+      color: rgba(255, 253, 249, 0.94);
+      max-width: 34rem;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
     }
     #hero .hero-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.35rem; }
 
@@ -183,27 +170,82 @@
     .order-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .order-card {
       border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem 1.15rem;
-      background: var(--cream); text-align: center; transition: transform 0.25s var(--ease), box-shadow 0.25s;
+      background: var(--cream); text-align: center;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s;
     }
-    .order-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
-    .order-card .icon { font-size: 1.6rem; margin-bottom: 0.35rem; }
+    .order-card:hover,
+    .order-card:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+      border-color: rgba(199, 62, 46, 0.25);
+    }
+    .order-icon {
+      width: 40px; height: 40px; margin: 0 auto 0.45rem; color: var(--tomato);
+      display: block;
+    }
     .order-card p { font-size: 0.88rem; color: var(--muted); margin-top: 0.35rem; }
+
+    .trust-bar {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+      padding: 0.15rem 0 0.2rem;
+    }
+    .trust-chip {
+      background: var(--olive-soft); color: var(--olive);
+      font-size: 0.76rem; font-weight: 800; letter-spacing: 0.02em;
+      padding: 0.45rem 0.8rem; border-radius: 999px; min-height: 44px;
+      display: inline-flex; align-items: center;
+    }
+
+    .specials { background: var(--tomato-deep); color: #fff; padding: 1.05rem 0; }
+    .specials-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .specials h2 { color: #fff; font-size: 1.35rem; margin: 0 0 0.2rem; }
+    .specials p { color: rgba(255,255,255,0.88); font-size: 0.92rem; margin: 0; }
+    .specials .btn { background: #fff; color: var(--tomato-deep); min-height: 44px; }
+    .specials .btn:hover { color: var(--tomato); }
+
+    .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .featured-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+      overflow: hidden; box-shadow: var(--shadow-sm); color: inherit; text-decoration: none;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .featured-card:hover, .featured-card:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); color: inherit; }
+    .featured-card img { width: 100%; height: 180px; object-fit: cover; }
+    .featured-card div { padding: 1rem 1.05rem 1.15rem; }
+    .featured-card h3 { font-size: 1.2rem; margin-bottom: 0.25rem; }
+    .featured-card p { font-size: 0.86rem; color: var(--muted); font-weight: 500; }
+    .featured-card .price { margin-top: 0.45rem; }
+
+    .menu-tools {
+      display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 0.75rem;
+      margin-bottom: 1.15rem;
+    }
+    .menu-download { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+    .menu-tools .hint { font-size: 0.78rem; color: var(--muted); font-weight: 600; margin: 0; }
 
     #menu { background: linear-gradient(180deg, var(--surface), var(--cream)); }
     .menu-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
     .menu-tabs button {
       font: inherit; font-weight: 800; font-size: 0.8rem; padding: 0.45rem 0.9rem;
       border-radius: 999px; border: 2px solid var(--line); background: var(--surface); cursor: pointer; color: var(--muted);
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
     }
     .menu-tabs button[aria-pressed="true"] { border-color: var(--tomato); background: var(--tomato); color: #fff; }
-    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+      transition: opacity 0.22s var(--ease);
+    }
+    .menu-grid.menu-fade { opacity: 0.4; pointer-events: none; }
     .menu-item {
-      display: grid; grid-template-columns: 100px 1fr; gap: 1rem; align-items: start;
+      display: flex; flex-direction: column;
       background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 0.85rem; overflow: hidden;
+      overflow: hidden; box-shadow: var(--shadow-sm);
     }
     .menu-item[hidden] { display: none; }
-    .menu-item img { width: 100px; height: 80px; object-fit: cover; border-radius: 10px; }
+    .menu-item img { width: 100%; height: 168px; object-fit: cover; }
+    .menu-item > div { padding: 0.9rem 1rem 1.05rem; }
     .menu-item h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
     .menu-item p { font-size: 0.84rem; color: var(--muted); }
     .price { font-weight: 800; color: var(--tomato-deep); font-size: 0.95rem; margin-top: 0.35rem; }
@@ -211,6 +253,43 @@
     .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
     .about-photo { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
     .about-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-top: 1.15rem; }
+    .about-stats div {
+      background: var(--olive-soft); border-radius: 12px; padding: 0.7rem 0.45rem; text-align: center;
+    }
+    .about-stats strong {
+      display: block; font-family: "DM Serif Display", Georgia, serif;
+      font-size: 1.15rem; color: var(--tomato-deep); font-weight: 400; line-height: 1.1;
+    }
+    .about-stats span { font-size: 0.72rem; font-weight: 700; color: var(--olive); }
+
+    #gallery { background: var(--surface); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .gallery-item {
+      position: relative; margin: 0; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .gallery-item img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      transition: transform 0.45s var(--ease);
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item figcaption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.4rem 0.75rem 0.65rem;
+      background: linear-gradient(transparent, rgba(31, 20, 16, 0.78));
+      color: #fff; font-weight: 800; font-size: 0.86rem;
+    }
+
+    .apps {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin-top: 1.1rem;
+    }
+    .apps a {
+      min-height: 44px; padding: 0.55rem 1rem; border-radius: 999px;
+      border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 800; font-size: 0.84rem;
+    }
+    .apps a:hover { border-color: var(--tomato); color: var(--tomato); }
+    .apps-note { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 0.55rem; font-weight: 600; }
 
     .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .review {
@@ -221,16 +300,40 @@
     .review footer { margin-top: 0.85rem; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
 
     #visit { background: var(--olive); color: #fff; }
+    #visit .eyebrow { color: var(--crust); }
     #visit h2 { color: #fff; }
-    #visit .lead { color: rgba(255,255,255,0.75); }
+    #visit .lead { color: rgba(255,255,255,0.82); }
     .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-    .visit-map {
-      border-radius: var(--radius-lg); overflow: hidden; border: 3px solid rgba(255,255,255,0.15);
-    }
-    .visit-map img { width: 100%; aspect-ratio: 16/10; object-fit: cover; opacity: 0.95; }
     .visit-list { list-style: none; display: grid; gap: 0.65rem; margin-top: 1rem; font-weight: 600; }
     .visit-list li { padding-left: 1.25rem; position: relative; }
     .visit-list li::before { content: "•"; position: absolute; left: 0; color: var(--crust); }
+    .hours-table {
+      width: 100%; margin-top: 1.15rem; border-collapse: collapse; font-size: 0.9rem;
+    }
+    .hours-table td { padding: 0.45rem 0.55rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .hours-table td:first-child { font-weight: 700; width: 42%; }
+    .hours-table tr.hours-today td {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+    .hours-table tr.hours-today td:last-child { color: var(--crust); font-weight: 800; }
+    #visit .btn-directions {
+      margin-top: 1.25rem;
+      background: var(--crust);
+      color: var(--ink);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    }
+    #visit .btn-directions:hover { color: var(--ink); background: #f0d49a; }
+    .map-embed {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+      min-height: 300px;
+      background: #e8ede4;
+    }
+    .map-embed iframe { width: 100%; height: 300px; border: 0; display: block; }
+    @media (min-width: 769px) { .map-embed iframe { height: 380px; } }
 
     #contact .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 2rem; align-items: start; }
     .contact-form {
@@ -240,7 +343,7 @@
     .contact-form h3 { font-size: 1.45rem; margin-bottom: 0.2rem; }
     .contact-form .sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 1rem; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-  .contact-form label { display: block; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .contact-form label { display: block; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.25rem; }
     .contact-form input, .contact-form textarea, .contact-form select {
       width: 100%; padding: 0.6rem 0.7rem; border-radius: 10px; border: 1px solid var(--line);
       font: inherit; margin-bottom: 0.65rem;
@@ -265,16 +368,30 @@
     }
     .studio-footer a { color: var(--crust); }
 
-    html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+    html.js .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+      transition-delay: var(--d, 0s);
+    }
     html.js .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       html.js .reveal { opacity: 1; transform: none; transition: none; }
+      .order-card:hover, .order-card:focus-visible,
+      .featured-card:hover, .featured-card:focus-visible { transform: none; }
+      .menu-grid { transition: none; }
+      header#site-header { transition: none; }
+      .gallery-item img { transition: none; }
+      .gallery-item:hover img { transform: none; }
     }
 
     @media (max-width: 900px) {
       :root { --scroll-offset: 96px; }
       header#site-header { top: 48px; }
-      .order-cards, .menu-grid, .about-split, .reviews, .visit-grid, .contact-grid, .foot-cols { grid-template-columns: 1fr; }
+      .order-cards, .menu-grid, .about-split, .reviews, .visit-grid, .contact-grid, .foot-cols,
+      .featured-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .menu-download { align-items: flex-start; }
+      .about-stats { grid-template-columns: 1fr; }
       .nav-toggle { display: block; }
       nav { position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--line); padding: 1rem 1.35rem; display: none; }
       nav.open { display: block; }
@@ -305,6 +422,7 @@
           <li><a href="#order">Order</a></li>
           <li><a href="#menu">Menu</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#visit">Visit</a></li>
           <li><a href="#contact">Catering</a></li>
@@ -321,12 +439,13 @@
           <div class="hero-copy">
             <p class="hero-eyebrow">Wood-fired · Family recipes</p>
             <h1 class="hero-headline display">
-              <span class="hero-mark">Neighbourhood pizza,</span>
-              <span class="hero-mark hero-mark--line2">worth the drive</span>
+              Neighbourhood pizza,<br>
+              <em>worth the drive</em>
             </h1>
-            <p class="hero-lead">Crispy crust, slow-simmered sauce, and toppings piled high. Dine in, grab takeout, or get delivery—swap in your town, hours, and ordering links on go-live.</p>
+            <p class="hero-lead">Crispy crust and slow sauce, served for dine-in, takeout, and delivery across the neighbourhood.</p>
           </div>
           <div class="hero-actions">
+            <a class="btn btn-tomato" href="#order">Order online</a>
             <a class="btn btn-tomato" href="#menu">View menu</a>
             <a class="btn btn-ghost" href="tel:+19055550177">(905) 555-0177</a>
           </div>
@@ -338,21 +457,43 @@
       <div class="wrap">
         <div class="order-cards reveal">
           <a class="order-card" href="tel:+19055550177" style="text-decoration:none;color:inherit;">
-            <div class="icon" aria-hidden="true">📞</div>
+            <svg class="order-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1L6.6 10.8z"/></svg>
             <h3>Call &amp; order</h3>
             <p>Fastest for custom pies and large orders</p>
           </a>
           <a class="order-card" href="#visit" style="text-decoration:none;color:inherit;">
-            <div class="icon" aria-hidden="true">🥡</div>
+            <svg class="order-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4h10a2 2 0 012 2v14l-3-2-2 2-2-2-2 2-2-2-3 2V6a2 2 0 012-2zm2 4v2h6V8H9zm0 4v2h6v-2H9z"/></svg>
             <h3>Takeout</h3>
             <p>Ready in 20–35 min · curb pickup</p>
           </a>
-          <a class="order-card" href="#contact" style="text-decoration:none;color:inherit;">
-            <div class="icon" aria-hidden="true">🍕</div>
+          <a class="order-card" href="#order" style="text-decoration:none;color:inherit;">
+            <svg class="order-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/></svg>
             <h3>Delivery</h3>
-            <p>Link Uber/DoorDash or in-house zone on launch</p>
+            <p>DoorDash, Uber Eats, or Skip — link them below</p>
           </a>
         </div>
+        <div class="apps reveal" style="--d:.06s">
+          <a href="#order">Uber Eats</a>
+          <a href="#order">DoorDash</a>
+          <a href="#order">Skip</a>
+        </div>
+        <p class="apps-note">Connect your live ordering links at launch.</p>
+        <div class="trust-bar reveal" style="--d:.1s" aria-label="What we offer">
+          <span class="trust-chip">Wood-fired</span>
+          <span class="trust-chip">Family-owned</span>
+          <span class="trust-chip">Fresh dough daily</span>
+          <span class="trust-chip">Catering available</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="specials" aria-label="Weekly specials">
+      <div class="wrap specials-inner">
+        <div>
+          <h2 class="display">This week at the hearth</h2>
+          <p>Tuesday two-for-one slices · Friday family feast box · Sunday lunch combo</p>
+        </div>
+        <a class="btn" href="#menu">See the menu</a>
       </div>
     </section>
 
@@ -360,17 +501,49 @@
       <div class="wrap">
         <div class="section-head center reveal">
           <p class="eyebrow">Menu highlights</p>
-          <h2>Fan favourites <em>(demo)</em></h2>
-          <p class="lead">Sample items for layout—replace with your full menu or PDF on launch.</p>
+          <h2>Fan <em>favourites</em></h2>
+          <p class="lead">Popular pies and pastas—your real menu and PDF plug in here.</p>
         </div>
-        <div class="menu-tabs reveal" role="group" aria-label="Menu category">
-          <button type="button" data-cat="pizza" aria-pressed="true">Pizza</button>
-          <button type="button" data-cat="pasta" aria-pressed="false">Pasta</button>
-          <button type="button" data-cat="sides" aria-pressed="false">Wings &amp; sides</button>
+        <div class="featured-grid">
+          <a class="featured-card reveal" href="#menu">
+            <img src="https://images.pexels.com/photos/1653877/pexels-photo-1653877.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Wood-fired pepperoni pizza" loading="lazy" />
+            <div>
+              <h3>Lunch combo</h3>
+              <p>Slice, side salad, and a drink — weekday 11 to 3.</p>
+              <div class="price">$14.50</div>
+            </div>
+          </a>
+          <a class="featured-card reveal" href="tel:+19055550177" style="--d:.06s">
+            <img src="https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Large pizza for a family table" loading="lazy" />
+            <div>
+              <h3>Family feast</h3>
+              <p>Two large pies, garlic bread, and a litre of pop.</p>
+              <div class="price">$54.00</div>
+            </div>
+          </a>
+          <a class="featured-card reveal" href="#contact" style="--d:.12s">
+            <img src="https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pizza pulled from a hot oven" loading="lazy" />
+            <div>
+              <h3>Party trays</h3>
+              <p>Half-sheet pizzas and wings for teams and offices.</p>
+              <div class="price">Ask us</div>
+            </div>
+          </a>
+        </div>
+        <div class="menu-tools">
+          <div class="menu-tabs reveal" role="group" aria-label="Menu category">
+            <button type="button" data-cat="pizza" aria-pressed="true">Pizza</button>
+            <button type="button" data-cat="pasta" aria-pressed="false">Pasta</button>
+            <button type="button" data-cat="sides" aria-pressed="false">Wings &amp; sides</button>
+          </div>
+          <div class="menu-download">
+            <a class="btn btn-tomato" href="mailto:hello@altrudigitech.com?subject=Nonna%27s%20Hearth%20menu%20PDF">Download menu</a>
+            <p class="hint">PDF goes live with your real menu.</p>
+          </div>
         </div>
         <div class="menu-grid" id="menu-grid">
           <article class="menu-item reveal" data-cat="pizza">
-            <img src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Margherita pizza" loading="lazy" width="200" height="160" />
+            <img src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Margherita pizza" loading="lazy" />
             <div>
               <h3>Margherita</h3>
               <p>San Marzano-style sauce, fresh mozzarella, basil, olive oil.</p>
@@ -378,7 +551,7 @@
             </div>
           </article>
           <article class="menu-item reveal" data-cat="pizza" style="--d:.05s">
-            <img src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Pepperoni pizza" loading="lazy" />
+            <img src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pepperoni pizza" loading="lazy" />
             <div>
               <h3>Classic pepperoni</h3>
               <p>Double pepperoni, mozzarella, light garlic butter edge.</p>
@@ -386,7 +559,7 @@
             </div>
           </article>
           <article class="menu-item reveal" data-cat="pizza" style="--d:.1s">
-            <img src="https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Vegetarian pizza" loading="lazy" />
+            <img src="https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Vegetarian pizza" loading="lazy" />
             <div>
               <h3>Garden veggie</h3>
               <p>Peppers, mushrooms, onions, olives, feta.</p>
@@ -394,15 +567,23 @@
             </div>
           </article>
           <article class="menu-item reveal" data-cat="pizza" style="--d:.15s">
-            <img src="https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Cheesy pizza slice" loading="lazy" />
+            <img src="https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Cheesy pizza slice" loading="lazy" />
             <div>
               <h3>Four-cheese</h3>
               <p>Mozzarella, provolone, parmesan, ricotta pearls.</p>
               <div class="price">From $19.49</div>
             </div>
           </article>
+          <article class="menu-item reveal" data-cat="pizza" style="--d:.2s">
+            <img src="https://images.pexels.com/photos/2619967/pexels-photo-2619967.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Meat lover pizza with sausage and pepperoni" loading="lazy" />
+            <div>
+              <h3>The hearth special</h3>
+              <p>Sausage, pepperoni, mushrooms, and a honey drizzle.</p>
+              <div class="price">From $20.99</div>
+            </div>
+          </article>
           <article class="menu-item reveal" data-cat="pasta" hidden>
-            <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Pasta dish" loading="lazy" />
+            <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pasta dish" loading="lazy" />
             <div>
               <h3>Baked lasagna</h3>
               <p>Layers of meat sauce, ricotta, melted mozzarella.</p>
@@ -410,15 +591,23 @@
             </div>
           </article>
           <article class="menu-item reveal" data-cat="pasta" hidden style="--d:.05s">
-            <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Penne pasta" loading="lazy" />
+            <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Penne pasta" loading="lazy" />
             <div>
               <h3>Penne arrabbiata</h3>
               <p>Spicy tomato, garlic, parsley, parmesan.</p>
               <div class="price">$13.49</div>
             </div>
           </article>
+          <article class="menu-item reveal" data-cat="pasta" hidden style="--d:.1s">
+            <img src="https://images.pexels.com/photos/803290/pexels-photo-803290.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Creamy pasta in a bowl" loading="lazy" />
+            <div>
+              <h3>Fettuccine alfredo</h3>
+              <p>Butter, parmesan, cracked pepper, parsley.</p>
+              <div class="price">$15.49</div>
+            </div>
+          </article>
           <article class="menu-item reveal" data-cat="sides" hidden>
-            <img src="https://images.pexels.com/photos/60616/pexels-photo-60616.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Garlic bread" loading="lazy" />
+            <img src="https://images.pexels.com/photos/60616/pexels-photo-60616.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Garlic bread" loading="lazy" />
             <div>
               <h3>Cheesy garlic bread</h3>
               <p>Toasted loaf, garlic butter, melted mozzarella.</p>
@@ -426,11 +615,19 @@
             </div>
           </article>
           <article class="menu-item reveal" data-cat="sides" hidden style="--d:.05s">
-            <img src="https://images.pexels.com/photos/1059943/pexels-photo-1059943.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400" alt="Chicken wings" loading="lazy" />
+            <img src="https://images.pexels.com/photos/1059943/pexels-photo-1059943.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Chicken wings" loading="lazy" />
             <div>
               <h3>Hot wings (1 lb)</h3>
               <p>Medium, hot, or honey garlic · celery &amp; dip.</p>
               <div class="price">$15.99</div>
+            </div>
+          </article>
+          <article class="menu-item reveal" data-cat="sides" hidden style="--d:.1s">
+            <img src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Caesar salad" loading="lazy" />
+            <div>
+              <h3>House caesar</h3>
+              <p>Romaine, parmesan, croutons, lemon dressing.</p>
+              <div class="price">$9.49</div>
             </div>
           </article>
         </div>
@@ -445,8 +642,49 @@
         <div class="reveal" style="--d:.08s">
           <p class="eyebrow">Our story</p>
           <h2>Dough raised here, <em>served hot</em></h2>
-          <p class="lead" style="margin-bottom:1rem;">A template story for family-run pizzerias: morning dough, evening rush, regulars who know your name. Replace with your founding year, neighbourhood, and what makes your oven special.</p>
-          <p style="color:var(--muted);font-size:0.95rem;">Catering trays, school nights, and Friday family boxes—add your real copy when this becomes a client site.</p>
+          <p class="lead" style="margin-bottom:1rem;">Morning dough, evening rush, and regulars who know the oven by sound. Swap in your year, neighbourhood, and what makes the crust yours.</p>
+          <p style="color:var(--muted);font-size:0.95rem;">Catering trays, school nights, and Friday family boxes—ready when you are.</p>
+          <div class="about-stats">
+            <div><strong>Daily</strong><span>Fresh dough</span></div>
+            <div><strong>900°</strong><span>Wood-fired oven</span></div>
+            <div><strong>Local</strong><span>Family recipes</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">From our oven</p>
+          <h2>Hot out of the <em>hearth</em></h2>
+          <p class="lead">A look at the pies, the room, and the rush—swap these for your own photos anytime.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item reveal">
+            <img src="https://images.pexels.com/photos/1049626/pexels-photo-1049626.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Pizza with melted cheese and basil" loading="lazy" />
+            <figcaption>Cheese pull</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" style="--d:.05s">
+            <img src="https://images.pexels.com/photos/2619970/pexels-photo-2619970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Whole pizza on a wooden peel" loading="lazy" />
+            <figcaption>On the peel</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" style="--d:.1s">
+            <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Guests dining in a warm restaurant" loading="lazy" />
+            <figcaption>The dining room</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" style="--d:.05s">
+            <img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Friends sharing a meal at a table" loading="lazy" />
+            <figcaption>Shared tables</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" style="--d:.1s">
+            <img src="https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Close-up of a cheesy pizza slice" loading="lazy" />
+            <figcaption>Slice night</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" style="--d:.15s">
+            <img src="https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Baker sliding pizza into an oven" loading="lazy" />
+            <figcaption>Into the oven</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -482,16 +720,38 @@
         <div class="reveal">
           <p class="eyebrow">Visit us</p>
           <h2>Find the <em>hearth</em></h2>
-          <p class="lead">Swap address, lot parking notes, and map embed for your location.</p>
+          <p class="lead">123 Main Street below is placeholder copy—replace with your storefront, lot parking, and map pin on go-live.</p>
           <ul class="visit-list">
             <li>123 Main Street · Your Town, ON</li>
-            <li>Mon–Thu 11 AM – 9 PM · Fri–Sat till 10 PM</li>
             <li>Free parking · wheelchair-accessible entrance</li>
             <li><a href="tel:+19055550177" style="color:var(--crust);">(905) 555-0177</a></li>
           </ul>
+          <table class="hours-table" aria-label="Opening hours">
+            <tbody id="hours-body">
+              <tr data-day="0"><td>Sunday</td><td>11 AM – 9 PM</td></tr>
+              <tr data-day="1"><td>Monday</td><td>11 AM – 9 PM</td></tr>
+              <tr data-day="2"><td>Tuesday</td><td>11 AM – 9 PM</td></tr>
+              <tr data-day="3"><td>Wednesday</td><td>11 AM – 9 PM</td></tr>
+              <tr data-day="4"><td>Thursday</td><td>11 AM – 9 PM</td></tr>
+              <tr data-day="5"><td>Friday</td><td>11 AM – 10 PM</td></tr>
+              <tr data-day="6"><td>Saturday</td><td>11 AM – 10 PM</td></tr>
+            </tbody>
+          </table>
+          <a
+            class="btn btn-directions"
+            href="https://www.google.com/maps/search/?api=1&amp;query=123+Main+Street,+Your+Town,+ON"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Get directions</a>
         </div>
-        <div class="visit-map reveal" style="--d:.1s">
-          <img src="https://images.pexels.com/photos/696218/pexels-photo-696218.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="Restaurant interior with warm lighting" loading="lazy" />
+        <div class="map-embed reveal" style="--d:.1s">
+          <iframe
+            title="Map — 123 Main Street, Your Town, ON (demo address)"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            src="https://maps.google.com/maps?q=123+Main+Street,+Your+Town,+ON&amp;hl=en&amp;z=15&amp;output=embed"
+          ></iframe>
         </div>
       </div>
     </section>
@@ -501,7 +761,7 @@
         <div class="reveal">
           <p class="eyebrow">Catering &amp; events</p>
           <h2>Feeding a <em>team</em> or party?</h2>
-          <p class="lead">Lunch meetings, birthdays, sports teams—tell us headcount and date. Demo form routes to AltruDigiTech until your inbox is wired.</p>
+          <p class="lead">Lunch meetings, birthdays, sports teams—tell us headcount and date. We reply within one business day.</p>
         </div>
         <div class="contact-form reveal" style="--d:.08s">
           <h3>Catering inquiry</h3>
@@ -541,12 +801,13 @@
       <div class="foot-cols">
         <div>
           <p class="display" style="color:#fff;font-size:1.2rem;">Nonna's Hearth</p>
-          <p style="margin-top:0.5rem;max-width:20rem;">Local pizzeria template — fictional name and menu for studio demos.</p>
+          <p style="margin-top:0.5rem;max-width:20rem;">Neighbourhood pizza, pasta, and wings. Dine in, take out, or call for delivery.</p>
         </div>
         <div>
           <h4>Explore</h4>
           <ul>
             <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#visit">Hours &amp; location</a></li>
             <li><a href="#contact">Catering</a></li>
           </ul>
@@ -571,14 +832,23 @@
         <a href="https://www.pexels.com/photo/bread-on-white-ceramic-plate-60616/" target="_blank" rel="noopener noreferrer">Pixabay</a>,
         <a href="https://www.pexels.com/photo/fried-chicken-1059943/" target="_blank" rel="noopener noreferrer">malidate jack</a>,
         <a href="https://www.pexels.com/photo/man-standing-behind-white-counter-1267320/" target="_blank" rel="noopener noreferrer">Vinícius Caricatte</a>,
-        <a href="https://www.pexels.com/photo/brown-wooden-table-with-chairs-696218/" target="_blank" rel="noopener noreferrer">Marcin Rogozinski</a>.
-        Menu, prices, and reviews are sample content. Layout by <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>.
+        <a href="https://www.pexels.com/photo/pizza-on-a-black-plate-1653877/" target="_blank" rel="noopener noreferrer">Pexels</a> (lunch combo),
+        <a href="https://www.pexels.com/photo/pizza-with-tomatoes-1146760/" target="_blank" rel="noopener noreferrer">Pexels</a> (family feast),
+        <a href="https://www.pexels.com/photo/man-in-white-shirt-holding-pizza-905847/" target="_blank" rel="noopener noreferrer">Pexels</a> (oven),
+        <a href="https://www.pexels.com/photo/pizza-on-brown-wooden-table-2619967/" target="_blank" rel="noopener noreferrer">Pexels</a> (hearth special),
+        <a href="https://www.pexels.com/photo/pasta-with-tomato-and-basil-803290/" target="_blank" rel="noopener noreferrer">Pexels</a> (alfredo),
+        <a href="https://www.pexels.com/photo/vegetable-salad-on-white-ceramic-plate-410648/" target="_blank" rel="noopener noreferrer">Pexels</a> (caesar),
+        <a href="https://www.pexels.com/photo/pizza-1049626/" target="_blank" rel="noopener noreferrer">Pexels</a>,
+        <a href="https://www.pexels.com/photo/baked-pizza-on-wooden-cutting-board-2619970/" target="_blank" rel="noopener noreferrer">Pexels</a> (peel),
+        <a href="https://www.pexels.com/photo/photo-of-dining-table-and-chairs-262978/" target="_blank" rel="noopener noreferrer">Pexels</a>,
+        <a href="https://www.pexels.com/photo/people-sitting-in-front-of-table-941861/" target="_blank" rel="noopener noreferrer">Pexels</a> (gallery).
+        Menu, prices, reviews, and photos are sample content for this studio layout. Layout by <a href="https://altrudigitech.com" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>.
       </div>
     </div>
   </footer>
 
   <div class="studio-footer">
-    Local Pizzeria template · <a href="https://altrudigitech.com/templates" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>
+    Local Pizzeria layout demo · sample menu &amp; photos · <a href="https://altrudigitech.com/templates" target="_blank" rel="noopener noreferrer">AltruDigiTech</a>
   </div>
 
   <script src="assets/lead-form/altru-lead.js"></script>
@@ -614,16 +884,34 @@
 
       var tabs = document.querySelectorAll('.menu-tabs button');
       var items = document.querySelectorAll('.menu-item[data-cat]');
+      var menuGrid = document.getElementById('menu-grid');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function setMenuCategory(cat) {
+        items.forEach(function (item) {
+          item.hidden = item.getAttribute('data-cat') !== cat;
+          if (!item.hidden) item.classList.add('in');
+        });
+      }
+
       tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
           var cat = tab.getAttribute('data-cat');
           tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
-          items.forEach(function (item) {
-            item.hidden = item.getAttribute('data-cat') !== cat;
-            if (!item.hidden) item.classList.add('in');
-          });
+          if (!menuGrid || reduceMotion) {
+            setMenuCategory(cat);
+            return;
+          }
+          menuGrid.classList.add('menu-fade');
+          window.setTimeout(function () {
+            setMenuCategory(cat);
+            menuGrid.classList.remove('menu-fade');
+          }, 160);
         });
       });
+
+      var todayRow = document.querySelector('#hours-body tr[data-day="' + new Date().getDay() + '"]');
+      if (todayRow) todayRow.classList.add('hours-today');
 
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         var reveal = document.querySelectorAll('.reveal');
